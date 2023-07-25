@@ -1,0 +1,38 @@
+.header {
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #425465;
+    color: #ffffff;
+}
+.nav-hamburger {
+    display: flex;
+    flex-direction: column;     
+    align-items: flex-start;      
+    justify-content: center;
+    margin: 15px;
+    width: 100%;
+}
+
+.nav-hamburger span{
+    width: 30px;
+    height: 4px;
+    background: black;
+    margin-bottom: 5px;
+    border-radius: 2px;             
+    transform-origin: 5px 0px;
+    transition: all 0.2s linear;
+}
+
+.nav-hamburger:hover .-top{
+	-webkit-transform:translateY(-100%);
+	-ms-transform:translateY(-100%);
+	transform:translateY(-100%);
+}
+.nav-hamburger:hover .-bottom{
+	-webkit-transform:translateY(100%);
+	-ms-transform:translateY(100%);
+	transform:translateY(100%);
+	}

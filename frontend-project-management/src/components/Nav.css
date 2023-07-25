@@ -1,0 +1,18 @@
+.nav {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+.btn-nav {
+    background: none;
+    border: none;
+    color: #ffffff;
+}
+
+.active {
+    border-bottom: 1px #478ac9 solid;
+    color: #478ac9;
+}
