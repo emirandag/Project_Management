@@ -18,7 +18,8 @@ export const Projects = () => {
 
             const customFormData = {
                 ...formData,
-                users: [newUserId]
+                users: [newUserId],
+                owner: newUserId
             }
             setSend(true)
             setRes(await createProject(customFormData))
