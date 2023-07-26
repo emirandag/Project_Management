@@ -137,6 +137,53 @@ const deleteProject = async (req, res, next) => {
 
 
 /**
+ * ------------------------------ ADD MEMBERS IN PROJECT -----------------------------
+ */
+const addMemberProject = async (req, res, next) => {
+  try {
+    const projectId = req.params.id
+    const { email } = req.body
+
+    console.log(projectId);
+    console.log(email);
+
+    const foundProject = await Project.findById(projectId)
+    const foundUser = await User.findOne({ email })
+
+    console.log(foundProject);
+    console.log(foundUser);
+
+
+    if (foundUser) {
+      if (!foundProject.users.includes(foundUser._id)) {
+        try {
+          await Project.findByIdAndUpdate(projectId, { $push: { users: foundUser._id } })
+  
+          try {
+            await User.findByIdAndUpdate(foundUser._id , { $push: { projects: foundProject._id } })
+          } catch (error) {
+            return res.status(404).json(error.message)
+          }
+        } catch (error) {
+          return res.status(404).json(error.message)
+        }
+      } else {
+        return res.status(404).json("This user already in project")
+      }
+      
+      
+    } else {
+      return res.status(404).json("This email not exist")
+    }
+
+  } catch (error) {
+    return next(setError(error.code || 500, error.message || 'General error to add member'));
+  }
+}
+
+
+
+/**
  * -------------------------- GET ALL PROJECTS -----------------------------
  */
 const getAllProjects = async (req, res, next) => {
@@ -192,7 +239,8 @@ const getOpenProjects = async (req, res, next) => {
 module.exports = { 
   createProject, 
   updateProject, 
-  deleteProject, 
+  deleteProject,
+  addMemberProject, 
   getAllProjects, 
   getProject, 
   getOpenProjects 
