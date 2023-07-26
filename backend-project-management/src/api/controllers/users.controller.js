@@ -533,28 +533,37 @@ const addUserProject = async(req, res, next) => {
     if (!isOpenProject) {
       return res.status(404).json("There isn't open project.")
     } else {
-
-      if (!findUser.projects.includes(isOpenProject._id)) {
+      if (!isOpenProject.users.includes(findUser._id)) {
         try {
           //Pusheamos el ID del proyecto en el array de proyectos en el usuario
           //Pusheamos el ID del usuario en el array de usuarios en Projectos
           await Project.findByIdAndUpdate(projectId, { $push: { users: id } })
-      
-          const testUser = await User.findById(id).populate("projects")
 
-          if (testUser) {
-            return res.status(201).json(
-              {
-                testUser,
-                results: `Added user in the project '${isOpenProject.title}'`
-              }
-            )
-          } else {
-            return res.status(404).json("Error add user in project")
+          const testProject = await Project.findById(projectId).populate("users")
+
+          if (testProject) {
+            
+            try {
+              await User.findByIdAndUpdate(id, { $push: { projects: projectId } })
+              const testUser = await User.findById(id).populate("projects")
+
+              if (testUser) {
+                return res.status(201).json(
+                  {
+                    testUser,
+                    testProject,
+                    results: `Added '${testUser.email}' in the project '${testProject.title}'`
+                  }
+                )
+              } 
+            } catch (error) {
+              return res.status(404).json("Error add project in user")
+            }
           }
           
+          
         } catch (error) {
-          return res.status(404).json("Error add user")
+          return res.status(404).json("Error add user in project")
         }
       } else {
           return res.status(404).json("User exist in project")
