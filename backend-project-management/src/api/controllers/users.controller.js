@@ -422,7 +422,7 @@ const update = async (req, res, next) => {
     // estas cosas no quiero que me cambien por lo cual lo cojo del req.user gracias a que esto es con auth
     patchUser._id = req.user._id;
     patchUser.password = req.user.password;
-    patchUser.rol = req.user.rol;
+    //patchUser.rol = req.user.rol;
     patchUser.confirmationCode = req.user.confirmationCode;
     patchUser.check = req.user.check;
     patchUser.email = req.user.email;
@@ -840,6 +840,48 @@ const checkNewEmail = async (req, res, next) => {
   }
 }
 
+/**
+ * ------------------- CHANGE ROL BY ADMIN ---------------------
+ */
+const changeRol = async (req, res, next) => {
+  try {
+    const { email, rol } = req.body
+
+    console.log(req.body);
+    
+    const foundUser = await User.findOne({ email })
+
+    //console.log(foundUser);
+    if (foundUser) {
+      //console.log("encontrado");
+      try {
+        await User.findByIdAndUpdate(foundUser._id, { rol })
+
+        const testRolUser = await User.findById(foundUser._id)
+        if (testRolUser.rol == rol) {
+          return res.status(200).json({
+            testRolUser,
+            message: `The user with mail ${testRolUser.email} has been updated your rol to ${testRolUser.rol}`
+          })
+        } else {
+          return res.status(404).json("The rol is not updated") 
+        }
+      } catch (error) {
+        return res.status(404).json(error.message) 
+      }
+    } else {
+      return res.status(404).json('User not found') 
+    }
+  } catch (error) {
+    return next(
+      setError(
+        error.code || 500,
+        error.message || 'General error to change rol'
+      )
+    );
+  }
+}
+
 
 module.exports = { 
   register, 
@@ -857,5 +899,6 @@ module.exports = {
   getAllUsers,
   getUser,
   changeEmail,
-  checkNewEmail
+  checkNewEmail,
+  changeRol
 };
