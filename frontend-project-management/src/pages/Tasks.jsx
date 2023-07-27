@@ -1,54 +1,35 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createProject } from "../services/API_user/project.service";
-import { useCreateProjectError } from "../hooks/useCreateProjectError";
-import { useAuth } from "../context/authContext";
-import { addUserProject } from "../services/API_user/user.service";
-import { Navigate } from "react-router-dom";
+import { createTask } from "../services/API_user/task.service";
 
 
-export const Projects = () => {
+export const Tasks = () => {
     const { register, handleSubmit } = useForm();
     const [res, setRes] = useState({})
     const [send, setSend] = useState(false)
-    const { user } = useAuth()
-    const [confirmProjectOk, setConfirmProjectOk] = useState(false)
 
     const formSubmit = async (formData) => {
-        if (user) {
-
-            const newUserId = user._id
-
-            const customFormData = {
-                ...formData,
-                //users: [newUserId],
-                owner: newUserId
-            }
-            setSend(true)
-            setRes(await createProject(customFormData))
-            //setRes(await addUserProject(customFormData))
-            setSend(false)
+        const projectId = "64c02c68c4dceefea715143d"
+        const customFormData = {
+            ...formData,
+            projectId
         }
+        setSend(true)
+        setRes(await createTask(customFormData))
+        setSend(false)
     }
 
     useEffect(() => {
         console.log(res);
-        useCreateProjectError(res, setRes, setConfirmProjectOk)
     }, [res])
-
-    if (confirmProjectOk) {
-      console.log(res);
-      return <Navigate to={`/projects/${res.data._id}`} />
-    }
-    
   return (
-    <>
+<>
       <div className="form-wrap-register">
         <span className="span-avatar">
           <img src="/images/login_avatar_white.png" />
         </span>
 
-        <h1>Create Project</h1>
+        <h1>Create Task</h1>
         <form onSubmit={handleSubmit(formSubmit)}>
           <div className="project_container form-group">
             <label htmlFor="custom-input" className="custom-placeholder">
@@ -64,7 +45,7 @@ export const Projects = () => {
               {...register("title", { required: true })}
             />
           </div>
-          <div className="project_container form-group">
+          {/* <div className="project_container form-group">
             <label htmlFor="custom-input" className="custom-placeholder">
               Description
             </label>
@@ -77,7 +58,7 @@ export const Projects = () => {
               placeholder="Enter the description"
               {...register("description", { required: true })}
             />
-            </div>
+            </div> */}
           <div className="btn_container">
             <button
               className="btn"

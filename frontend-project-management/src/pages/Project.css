@@ -1,0 +1,29 @@
+.project-container {
+    width: 90%;
+    min-height: 100%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    && .project-top {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    && .project-middle {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    && .project-container-tasks {
+        width: 95%;
+        display: flex;
+    }
+}
+

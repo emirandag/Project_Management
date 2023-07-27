@@ -19,8 +19,11 @@ export const Nav = () => {
         {/* <NavLink to='/gallery'><button className='btn-nav'>GALLERY</button></NavLink>
         <NavLink to='/details'><button className='btn-nav'>DETAILS</button></NavLink> */}
         {user !== null ? (
-        <NavLink to='/projects'><button className='btn-nav'>PROJECTS</button></NavLink>
-        ) : null}
+          <>
+          <NavLink to='/projects'><button className='btn-nav'>PROJECTS</button></NavLink>
+          <NavLink to='/tasks'><button className='btn-nav'>TASKS</button></NavLink>
+          </>
+         ) : null}
         {user !== null ? (
         <NavLink to='/profile'><button className='btn-nav'>PROFILE</button></NavLink>
         ) : null}

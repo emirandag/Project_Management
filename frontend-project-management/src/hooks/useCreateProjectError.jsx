@@ -1,16 +1,15 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js"
 
-export const useCreateProjectError = (res, setRes) => {
+export const useCreateProjectError = (res, setRes, setConfirmProjectOk) => {
     if (res?.status == 201) {
-        //setRegisterOk(() => true)
-        
+        setConfirmProjectOk(() => true)  
         Swal.fire({
           icon: "success",
           title: "Project created!",
           showConfirmButton: false,
           timer: 1500,
         })
-        setRes({})
+        //setRes({})
     }
 
     
