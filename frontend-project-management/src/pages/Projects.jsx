@@ -50,7 +50,7 @@ export const Projects = () => {
 
         <h1>Create Project</h1>
         <form onSubmit={handleSubmit(formSubmit)}>
-          <div className="project_container form-group">
+          <div className="projects_container form-group">
             <label htmlFor="custom-input" className="custom-placeholder">
               Title
             </label>
@@ -64,7 +64,7 @@ export const Projects = () => {
               {...register("title", { required: true })}
             />
           </div>
-          <div className="project_container form-group">
+          <div className="projects_container form-group">
             <label htmlFor="custom-input" className="custom-placeholder">
               Description
             </label>
