@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createTask } from "../services/API_user/task.service";
+import { createTask } from "../services/API/task.service";
+import { useParams } from "react-router-dom";
 
 
 export const Tasks = () => {
     const { register, handleSubmit } = useForm();
     const [res, setRes] = useState({})
     const [send, setSend] = useState(false)
-
+    const { id } = useParams()
+    console.log(id);
     const formSubmit = async (formData) => {
-        const projectId = "64c02c68c4dceefea715143d"
+      
+        const projectId = id
         const customFormData = {
             ...formData,
             projectId

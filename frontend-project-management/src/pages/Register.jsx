@@ -2,7 +2,7 @@ import "./Register.css"
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 
-import { registerUser } from "../services/API_user/user.service";
+import { registerUser } from "../services/API/user.service";
 import { Link, Navigate } from "react-router-dom";
 import { useRegisterError } from "../hooks";
 import { useAuth } from "../context/authContext";

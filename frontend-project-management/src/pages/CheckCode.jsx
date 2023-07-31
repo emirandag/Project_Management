@@ -1,7 +1,7 @@
 import "./CheckCode.css"
 import { useAuth } from "../context/authContext"
 import { useForm } from "react-hook-form"
-import { checkCodeConfirmationUser } from "../services/API_user/user.service"
+import { checkCodeConfirmationUser } from "../services/API/user.service"
 import { useEffect, useState } from "react"
 import { useAutoLogin, useCheckCodeError } from "../hooks"
 import { Navigate } from "react-router-dom"

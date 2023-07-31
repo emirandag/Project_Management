@@ -2,21 +2,24 @@ import { useState } from "react";
 import "./Project.css"
 import { Navigate, useParams } from "react-router-dom";
 import Modal from "../components/UI/Modal/Modal";
+import { useDeleteProjectError } from "../hooks";
+
 
 
 export const Project = () => {
     const { id } = useParams();
-    const [renderPage, setRenderPage] = useState(false);
+    const [renderPageAddMember, setRenderPageAddMember] = useState(false);
+    const [renderPageTask, setRenderTask] = useState(false);
+    const [deleteProjectOk, setDeleteProjectOk] = useState(false)
 
-
-    // const renderPage = (id) => {
-    //     console.log("Entro");
-    //     console.log(id);
-    //     return <Navigate to={`/projects/${id}/addmember`} />
-    // }
-
-    if (renderPage) {
+    if (renderPageAddMember) {
         return <Navigate to={`/projects/${id}/addmember`} />
+    }
+    if (renderPageTask) {
+      return <Navigate to={`/projects/${id}/tasks`} />
+    } 
+    if (deleteProjectOk) {
+      return <Navigate to={`/dashboard`} />
     }
 
   return (
@@ -27,11 +30,11 @@ export const Project = () => {
             <img src="j" alt="avatar" />
           </span>
           <h2>Project Title</h2>
-          <button>Close</button>
+          <button onClick={() => setDeleteProjectOk(true)}>Close</button>
         </div>
         <div className="project-middle">
           <div className="project-middle-left">
-            <button onClick={() => setRenderPage(true)}>Add member</button>
+            <button onClick={() => setRenderPageAddMember(true)}>Add member</button>
             {/* {render && (
               <Modal>
                 <h1>Esto es una prueba del modal</h1>
@@ -40,10 +43,10 @@ export const Project = () => {
                 <input type="text" placeholder="Enter email member"/>
               </Modal>
             )} */}
-            <button>Add task</button>
+            <button onClick={() => setRenderTask(true)}>Add task</button>
           </div>
           <div className="project-middle-right">
-            <button>Delete project</button>
+            <button onClick={() => useDeleteProjectError(id, setDeleteProjectOk)}>Delete project</button>
           </div>
         </div>
         <div className="project-container-tasks">

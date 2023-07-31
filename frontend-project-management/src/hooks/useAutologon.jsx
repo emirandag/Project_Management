@@ -1,5 +1,5 @@
 import { set } from "react-hook-form";
-import { autoLoginUser } from "../services/API_user/user.service";
+import { autoLoginUser } from "../services/API/user.service";
 import { Navigate } from "react-router-dom";
 
 export const useAutoLogin = async (allUser, userLogin, setOkCheck) => {

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { useLoginError } from '../hooks';
 import { Link, Navigate } from 'react-router-dom';
-import { loginUser } from '../services/API_user/user.service';
+import { loginUser } from '../services/API/user.service';
 import { useAuth } from '../context/authContext';
 
 export const Login = () => {

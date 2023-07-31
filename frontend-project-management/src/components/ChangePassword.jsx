@@ -1,7 +1,7 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { changePasswordUser } from "../services/API_user/user.service";
+import { changePasswordUser } from "../services/API/user.service";
 import { useChangePasswordError } from "../hooks";
 import { useAuth } from "../context/authContext";
 

@@ -57,7 +57,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <AddMember />
               </Protected>
             } />
-            <Route path="/tasks" element={
+            <Route path="/projects/:id/tasks" element={
               <Protected>
                 <Tasks />
               </Protected>

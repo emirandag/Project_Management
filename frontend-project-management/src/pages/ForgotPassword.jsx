@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
-import { forgotPasswordUser } from "../services/API_user/user.service"
+import { forgotPasswordUser } from "../services/API/user.service"
 import { useForgotPassword } from "../hooks"
 
 

@@ -1,17 +1,20 @@
 .project-container {
-    width: 90%;
-    min-height: 100%;
+    width: 50%;
+    min-height: 500px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap: 2rem;
 
     && .project-top {
         width: 95%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
+        padding-top: 1rem;
     }
 
     && .project-middle {
@@ -19,6 +22,19 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
+
+        && .project-middle-left {
+            width: 45%;
+            display: flex;
+            gap: 1rem;
+        }
+        && .project-middle-right {
+            width: 45%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
     }
     
     && .project-container-tasks {

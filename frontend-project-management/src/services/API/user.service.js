@@ -1,5 +1,5 @@
 import { updateToken } from "../../utils/updateToken";
-import { APIuser } from "./serviceApiUser.config";
+import { APIuser } from "./serviceApi.config";
 
 export const registerUser = async (formData) => {
     return APIuser.post("/users/register", formData, {

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createProject } from "../services/API_user/project.service";
+import { createProject } from "../services/API/project.service";
 import { useCreateProjectError } from "../hooks/useCreateProjectError";
 import { useAuth } from "../context/authContext";
-import { addUserProject } from "../services/API_user/user.service";
+import { addUserProject } from "../services/API/user.service";
 import { Navigate } from "react-router-dom";
 
 

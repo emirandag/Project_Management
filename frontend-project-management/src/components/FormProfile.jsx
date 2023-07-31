@@ -2,7 +2,7 @@ import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import { useForm } from "react-hook-form"
 import { useAuth } from "../context/authContext"
 import { useEffect, useState } from "react"
-import { updateUser } from "../services/API_user/user.service";
+import { updateUser } from "../services/API/user.service";
 import { useUpdateUserError } from "../hooks";
 import { Uploadfile } from "./Uploadfile";
 import { FigureUser } from "./FigureUser";

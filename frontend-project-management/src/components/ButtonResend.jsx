@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useAuth } from "../context/authContext"
-import { resendCodeConfirmationUser } from "../services/API_user/user.service"
+import { resendCodeConfirmationUser } from "../services/API/user.service"
 import { useResendCode } from "../hooks"
 
 
