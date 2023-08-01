@@ -74,7 +74,7 @@ const updateProject = async (req, res, next) => {
         const testUpdateProject = await Project.findById(id).populate('tasks');
 
         if (testUpdateProject) {
-          return res.status(201).json({
+          return res.status(200).json({
             testUpdateProject,
             result: `Updated project. The project '${testUpdateProject.title}' is closed.`,
           });
