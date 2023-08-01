@@ -1,3 +1,4 @@
+import "./Profile.css"
 import { useState } from "react"
 import { ChangePassword, FormProfile } from "../components"
 import { useAuth } from "../context/authContext"
@@ -8,6 +9,7 @@ export const Profile = () => {
 
   return (
     <>
+    <div className="profile">
     <div className="containerNavProfile">
       <img
         src="https://res.cloudinary.com/dq186ej4c/image/upload/v1686125399/pngwing.com_npd5sa.png"
@@ -31,6 +33,8 @@ export const Profile = () => {
     <div className="fluidContainerProfile">
       {changeRender ? <FormProfile /> : <ChangePassword />}
     </div>
+    </div>
+    
   </>
   )
 }

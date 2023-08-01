@@ -5,9 +5,9 @@ export const useCheckCodeError = (res, setDeleteUser, setCheckOk, setUser, setRe
     console.log(res);
     // 200 : Todo OK - testCheckOk: true
     if (res?.data?.testCheckOk?.toString() == "true") {
-        // Comprobamos que venga del login con el sessienonStorage
-        if (sessienonStorage.getItem("user")) {
-            const currentUser = sessienonStorage.getItem("user")
+        // Comprobamos que venga del login con el sessionStorage
+        if (sessionStorage.getItem("user")) {
+            const currentUser = sessionStorage.getItem("user")
             const parseCurrentUser = JSON.parse(currentUser)
             const customUser = {
                 ...parseCurrentUser,
@@ -16,7 +16,7 @@ export const useCheckCodeError = (res, setDeleteUser, setCheckOk, setUser, setRe
             // Lo volvemos a meter en el sessienonStorage
             const customUserString = JSON.stringify(customUser)
             setUser(() => customUser)
-            sessionStoragege.setItem("user", customUserString)
+            sessionStorage.setItem("user", customUserString)
         }
         setCheckOk(() => true)
 
