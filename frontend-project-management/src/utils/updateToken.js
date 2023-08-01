@@ -1,5 +1,5 @@
 export const updateToken = () => {
-    const user = localStorage.getItem("user")
+    const user = sessionStorage.getItem("user")
 
     if (user) {
         const parseUser = JSON.parse(user)

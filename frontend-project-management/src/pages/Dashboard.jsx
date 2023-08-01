@@ -36,7 +36,7 @@ export const Dashboard = () => {
 
       {res ? (
         res.data.map(project => (
-<div className='project-box' onClick={() => renderToProjectById(project._id)}>
+<div className='project-box' key={project._id} onClick={() => renderToProjectById(project._id)}>
           <div className='project-box-header'>
             <h3>{project.title}</h3>
           </div>

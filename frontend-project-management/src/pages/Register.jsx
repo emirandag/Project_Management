@@ -141,6 +141,7 @@ export const Register = () => {
                   name="rol"
                   id="admin"
                   value="admin"
+                  disabled
                   {...register("rol")}
                 />
                 <label htmlFor="admin" className="label-radio admin">
@@ -153,6 +154,7 @@ export const Register = () => {
                   name="rol"
                   id="manager"
                   value="manager"
+                  disabled
                   {...register("rol")}
                 />
                 <label htmlFor="manager" className="label-radio manager">

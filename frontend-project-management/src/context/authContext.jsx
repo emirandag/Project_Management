@@ -11,7 +11,7 @@ const AuthContext = createContext()
  */
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
-        const data = localStorage.getItem("user")
+        const data = sessionStorage.getItem("user")
         const parseUserData = JSON.parse(data)
 
         if (data) {
@@ -38,8 +38,8 @@ export const AuthContextProvider = ({ children }) => {
      * --------------- LOGIN ------------------
      */
     const userLogin = (data) => {
-        // 1.- Meto la data del usuario en el localstorage
-        localStorage.setItem("user", data)
+        // 1.- Meto la data del usuario en el sessionStorage
+        sessionStorage.setItem("user", data)
 
         // 2.- Lo parseamos y lo metemos en el estado global que setea nuestro usuario logado
         const parseUserData = JSON.parse(data)
@@ -50,7 +50,7 @@ export const AuthContextProvider = ({ children }) => {
      * ---------------- LOGOUT -----------------
      */
     const userLogout = () => {
-        localStorage.removeItem("user")
+        sessionStorage.removeItem("user")
         setUser(null)
         navigate("/login")
     }
@@ -59,13 +59,13 @@ export const AuthContextProvider = ({ children }) => {
      *  ---- FUNCIÓN PUENTE PARA CUANDO TENGAMOS PROBLEMAS DE ASINCRONÍA -----
      */
     const bridgeData = (state) => {
-        const data = localStorage.getItem("data")
+        const data = sessionStorage.getItem("data")
         const parseData = JSON.parse(data)
 
         switch (state) {
             case "ALLUSER":
                 setAllUser(parseData)
-                localStorage.removeItem("data")
+                sessionStorage.removeItem("data")
                 break
             default:
                 break

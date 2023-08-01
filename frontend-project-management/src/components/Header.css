@@ -3,7 +3,7 @@
     width: 100vw;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     background-color: #425465;
     color: #ffffff;
 }
@@ -31,8 +31,9 @@
 	-ms-transform:translateY(-100%);
 	transform:translateY(-100%);
 }
+
 .nav-hamburger:hover .-bottom{
 	-webkit-transform:translateY(100%);
 	-ms-transform:translateY(100%);
 	transform:translateY(100%);
-	}
+}

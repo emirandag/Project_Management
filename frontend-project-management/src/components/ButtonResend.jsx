@@ -14,9 +14,9 @@ export const ButtonResend = ({ setReloadPageError }) => {
      */
     const handleReSend = async () => {
         // No tenemos un formData porque sacamos la info por la parte del AllUser
-        // o del localStorage
-        const getEmailLocalStorage = () => {
-            const userLocal = localStorage.getItem("user")
+        // o del sessionStorage
+        const getEmailsessionStorage = () => {
+            const userLocal = sessionStorage.getItem("user")
             const parseUserLocal = JSON.parse(userLocal)
 
             return parseUserLocal.email
@@ -24,7 +24,7 @@ export const ButtonResend = ({ setReloadPageError }) => {
 
         setSend(true)
         setRes(await resendCodeConfirmationUser({
-            email: localStorage.getItem("user") ? getEmailLocalStorage() : allUser?.data?.user?.email
+            email: sessionStorage.getItem("user") ? getEmailsessionStorage() : allUser?.data?.user?.email
         }))
         setSend(false)
     }

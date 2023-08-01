@@ -12,6 +12,16 @@ export const createProject = async (formData) => {
       .catch((error) => error);
 };
 
+export const updateProject = async (id) => {
+  return APIuser.patch(`/projects/updateproject/${id}`, {
+      headers: {
+        Authorization: `Bearer ${updateToken()}`
+      }
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 
 export const deleteProject = async (id) => {
   return APIuser.delete(`/projects/deleteproject/${id}`, {

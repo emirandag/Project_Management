@@ -5,18 +5,18 @@ export const useCheckCodeError = (res, setDeleteUser, setCheckOk, setUser, setRe
     console.log(res);
     // 200 : Todo OK - testCheckOk: true
     if (res?.data?.testCheckOk?.toString() == "true") {
-        // Comprobamos que venga del login con el localStorage
-        if (localStorage.getItem("user")) {
-            const currentUser = localStorage.getItem("user")
+        // Comprobamos que venga del login con el sessienonStorage
+        if (sessienonStorage.getItem("user")) {
+            const currentUser = sessienonStorage.getItem("user")
             const parseCurrentUser = JSON.parse(currentUser)
             const customUser = {
                 ...parseCurrentUser,
                 check: true
             }
-            // Lo volvemos a meter en el localStorage
+            // Lo volvemos a meter en el sessienonStorage
             const customUserString = JSON.stringify(customUser)
             setUser(() => customUser)
-            localStorage.setItem("user", customUserString)
+            sessionStoragege.setItem("user", customUserString)
         }
         setCheckOk(() => true)
 

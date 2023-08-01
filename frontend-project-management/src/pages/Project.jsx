@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Project.css"
 import { Navigate, useParams } from "react-router-dom";
 import Modal from "../components/UI/Modal/Modal";
-import { useDeleteProjectError } from "../hooks";
+import { useDeleteProjectError, useUpdateProjectError } from "../hooks";
 
 
 
@@ -11,6 +11,7 @@ export const Project = () => {
     const [renderPageAddMember, setRenderPageAddMember] = useState(false);
     const [renderPageTask, setRenderTask] = useState(false);
     const [deleteProjectOk, setDeleteProjectOk] = useState(false)
+    const [updateProjectOk, setUpdateProjectOk] = useState(false)
 
     if (renderPageAddMember) {
         return <Navigate to={`/projects/${id}/addmember`} />
@@ -30,7 +31,7 @@ export const Project = () => {
             <img src="j" alt="avatar" />
           </span>
           <h2>Project Title</h2>
-          <button onClick={() => setDeleteProjectOk(true)}>Close</button>
+          <button disabled={updateProjectOk} onClick={() => useUpdateProjectError(id, setUpdateProjectOk)}>Close Project</button>
         </div>
         <div className="project-middle">
           <div className="project-middle-left">

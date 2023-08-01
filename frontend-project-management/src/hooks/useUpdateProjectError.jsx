@@ -1,9 +1,9 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
-import { deleteUser } from "../services/API/user.service";
+import { updateProject } from "../services/API/project.service";
 
-export const useDeleteUserError = (setUser) => {
+export const useUpdateProjectError = (id, setUpdateProjectOk) => {
     Swal.fire({
-        title: "Are you sure you want to delete your profile?",
+        title: "Are you sure you want to close this project?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "rgb(73, 193, 162)",
@@ -11,24 +11,23 @@ export const useDeleteUserError = (setUser) => {
         confirmButtonText: "Confirm",
     }).then(async (result) => {
         if (result.isConfirmed) {
-            const res = await deleteUser()
+            const res = await updateProject(id)
             switch (res.status) {
                 case 200:
                     Swal.fire({
                         icon: "success",
-                        title: "Delete User",
+                        title: "Closed Project",
                         text: "See you soon",
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    setUser(() => null)
-                    sessionStorage.removeItem("user")
+                    setUpdateProjectOk(() => true)
                     break;
             
                 default:
                     Swal.fire({
                         icon: "error",
-                        title: "No delete User ❎",
+                        title: "No delete Project ❎",
                         text: "Please, try again",
                         showConfirmButton: false,
                         timer: 1500,

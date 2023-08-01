@@ -22,7 +22,7 @@ export const CheckCode = () => {
    */
   const formSubmit = async (formData) => {
     //console.log(formData.confirmationCode);
-    const userLocal = localStorage.getItem("user")
+    const userLocal = sessionStorage.getItem("user")
 
     if (userLocal == null) {
       // Este usuario viene del registro por lo que no se ha logueado
@@ -37,7 +37,7 @@ export const CheckCode = () => {
       setRes(await checkCodeConfirmationUser(customFormData))
       setSend(false)
     } else {
-      // Este usuario viene del login, porque existe en el localStorage
+      // Este usuario viene del login, porque existe en el sessionStorage
       const customFormData = {
         email: user.email,
         confirmationCode: parseInt(formData.confirmationCode)
@@ -61,7 +61,7 @@ export const CheckCode = () => {
    * Estados de navegación o de confirmación de funcionalidades
    */
   if (checkOk) {
-    if (!localStorage.getItem("user")) {
+    if (!sessionStorage.getItem("user")) {
       //autologin
       setCheckOk(() => false)
       useAutoLogin(allUser, userLogin, setCheckOk);

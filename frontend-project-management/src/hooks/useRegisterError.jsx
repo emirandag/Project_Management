@@ -5,7 +5,7 @@ export const useRegisterError = (res, setRegisterOk, setRes, setAllUser) => {
   // 200 --->  respuesta ok register ok
   if (res?.status == 201) {
     const dataToString = JSON.stringify(res);
-    localStorage.setItem("data", dataToString)
+    sessionStorage.setItem("data", dataToString)
     setRegisterOk(() => true)
     
     Swal.fire({
