@@ -14,13 +14,13 @@ export const AddMember = () => {
         </div>
         <div className="info-members">
             <div className="members owner" >
-                <input type="text" value="" />
+                <input type="text" value="" disabled/>
                 <label>Project Owner</label>
             </div>
             <div className="members member" >
-                <input type="text" value="" />
+                <input type="text" value="" disabled/>
                 <label>Member</label>
-                <button>Delete</button>
+                <button><i className="fa fa-trash fa-2xs"></i></button>
             </div> </div>
       </div>
     </>

@@ -43,3 +43,13 @@ export const showProjects = async () => {
       .then((res) => res)
       .catch((error) => error);
 };
+
+export const showProjectById = async (id) => {
+  return APIuser.get(`/projects/${id}`, {
+      headers: {
+        Authorization: `Bearer ${updateToken()}`
+      }
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};

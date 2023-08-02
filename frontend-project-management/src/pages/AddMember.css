@@ -1,6 +1,7 @@
 .container-addmember {
-    width: 80%;
-    height: 70%;
+    width: 50%;
+    min-height: 400px;
+    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -12,6 +13,28 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+
+        && input {
+            width: 50%;
+            height: 36px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        && button {
+            width: 20%;
+            height: 36px;
+            background-color: #478ac9;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-radius: 5px;
+            border: none;
+          }
+        
+        && button:hover {
+            background-color: #adcce9;
+          }
     }
 
     && .info-members {
@@ -23,7 +46,41 @@
         && .members {
             width: 100%;
             display: flex;
+            justify-content: flex-start;
+            align-items: center;
             gap: 1rem;
+
+            && input {
+                width: 50%;
+                height: 36px;
+                padding: 5px;
+                font-size: 16px;
+                border: none;
+            }
+
+            && label {
+                width: 20%;
+            }
+
+            && button {
+                width: 10%;
+                height: 36px;
+                background-color: #db545a;
+                color: #ffffff;
+                /* font-size: 14px; */
+                transition: all 0.2s ease;
+                border-radius: 5px;
+                border: none;
+
+                && i.fa {
+                    font-size: 20px;
+                    margin-bottom: 0;
+                }
+              }
+            
+            && button:hover {
+                background-color: #f1b5b8;
+              }
         }
     }
 }
