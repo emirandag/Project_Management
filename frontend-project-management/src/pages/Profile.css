@@ -8,7 +8,7 @@
     gap: 2rem;
 
     && .containerNavProfile {
-        width: 60%;
+        width: 30%;
         display: flex;
         align-items: center;
         justify-content: space-around;

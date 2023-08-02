@@ -37,7 +37,7 @@ export const Nav = () => {
       </nav>
       <div className='dropdown avatar-profile'>
         {/* <button class="dropbtn">Dropdown</button> */}
-        <img className="dropimg" src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar" />
+        <img className="dropimg" src={!user ? `https://ionicframework.com/docs/img/demos/avatar.svg` : `${user.photo}`} alt="avatar" />
         <div className="dropdown-content">
           {user == null && (
             <NavLink to='/login'><button className='btn-dropdown'>LOGIN</button></NavLink>

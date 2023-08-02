@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import "./Dashboard.css"
 import { showProjects } from "../services/API/project.service"
 import { Navigate, useNavigate } from "react-router-dom"
+import { CardProject } from "../components"
 
 export const Dashboard = () => {
   const [res, setRes] = useState(null)
@@ -18,50 +19,21 @@ export const Dashboard = () => {
     loadPage()
     //console.log(res);
   }, [])
-  console.log(res);
+  //console.log(res);
 
-  // if (renderPageProject) {
-  //   return <Navigate to={`/projects/${res.data._id}`} />
-  // }
-
-  const renderToProjectById = (id) => {
-    return navigate(`/projects/${id}`)
-  }
   return (
     <>
     <div className='dashboard-container'>
-      {/* <button onClick={() => handleClick()}>Show Projects</button> */}
-
+      <div className="project-btn">
+          <button onClick={() => navigate("/projects")}>Add Project</button>
+      </div>
       <div className='projects-container'>
+        
 
       {res ? (
         res.data.map(project => (
-<div className='project-box' key={project._id} onClick={() => renderToProjectById(project._id)}>
-          <div className='project-box-header'>
-            <h3>{project.title}</h3>
-          </div>
-          
-          <div className='tasks-box'>
-            {project.tasks.length > 0 ? (
-              <div className="task-box">
-                Task
-              </div>
-            ) : (
-              <div className="task-box">
-                No hay tareas
-              </div>
-            )
-            }
-            {/* <div className="task-box">
-              Task
-            </div> */}
-            {/* <div className="task-box">
-              <h4>Title</h4>
-              <h4>User</h4>
-              <p>Completed</p>
-            </div> */}
-          </div>
-        </div>
+          <CardProject key={project._id} project={project}/>
+
         ))
         
       ) : <h1>Loading ...</h1>}

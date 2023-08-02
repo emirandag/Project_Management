@@ -1,3 +1,32 @@
+.dashboard-container {
+    display: flex;
+    width: 80vw;
+    flex-direction: column;
+
+}
+
+.project-btn {
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 3rem;
+
+    && button {
+        width: 20%;
+        height: 40px;
+        background-color: #478ac9;
+        color: #ffffff;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        border-radius: 5px;
+    }
+
+    && button:hover {
+        background-color: #adcce9;
+    }
+}
+
 .projects-container {
     display: flex;
     flex-wrap: wrap;

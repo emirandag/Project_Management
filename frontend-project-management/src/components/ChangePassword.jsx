@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { changePasswordUser } from "../services/API/user.service";
 import { useChangePasswordError } from "../hooks";
 import { useAuth } from "../context/authContext";
+import { FigureUser } from "./FigureUser";
 
 export const ChangePassword = () => {
-    const { setUser } = useAuth()
+    const { user, setUser, logout } = useAuth()
     const { handleSubmit, register } = useForm()
     const [res, setRes] = useState({})
     const [send, setSend] = useState(false)
@@ -54,6 +55,10 @@ export const ChangePassword = () => {
 
   return (
     <>
+          <div className="containerProfile">
+        <div className="containerDataNoChange">
+          <FigureUser user={user} />
+        </div>
       <div className="form-wrap">
         <h1>Change your password ♻</h1>
         <p>Please, enter your old and new passwords</p>
@@ -68,6 +73,7 @@ export const ChangePassword = () => {
               id="password"
               name="password"
               autoComplete="false"
+              placeholder="Enter old password"
               {...register("password", { required: true })}
             />
           </div>
@@ -82,6 +88,7 @@ export const ChangePassword = () => {
               id="newPassword"
               name="newPassword"
               autoComplete="false"
+              placeholder="Enter new password"
               {...register("newPassword", { required: true })}
             />
           </div>
@@ -95,6 +102,7 @@ export const ChangePassword = () => {
               id="confirmPassword"
               name="confirmPassword"
               autoComplete="false"
+              placeholder="Confirm old password"
               {...register("confirmPassword", { required: true })}
             />
           </div>
@@ -109,6 +117,7 @@ export const ChangePassword = () => {
             </button>
           </div>
         </form>
+      </div>
       </div>
     </>
   )

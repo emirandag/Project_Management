@@ -73,6 +73,9 @@ export const FormProfile = () => {
           <p>Please, enter your new data profile</p>
           <form onSubmit={handleSubmit(formSubmit)}>
             <div className="user_container form-group">
+            <label htmlFor="custom-input" className="custom-placeholder">
+              Name
+              </label>
               <input
                 className="input_user"
                 type="text"
@@ -82,9 +85,7 @@ export const FormProfile = () => {
                 defaultValue={defaultData?.name}
                 {...register("name")}
               />
-              <label htmlFor="custom-input" className="custom-placeholder">
-                username
-              </label>
+
             </div>
             <Uploadfile />
             <div className="btn_container">
