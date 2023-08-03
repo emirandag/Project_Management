@@ -14,27 +14,35 @@
         align-items: center;
         gap: 1rem;
 
-        && input {
-            width: 50%;
-            height: 36px;
-            padding: 5px;
-            font-size: 16px;
+        && form {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            
+            && input {
+                width: 50%;
+                height: 36px;
+                padding: 5px;
+                font-size: 16px;
+            }
+            && button {
+                width: 20%;
+                height: 36px;
+                background-color: #478ac9;
+                color: #ffffff;
+                font-size: 14px;
+                transition: all 0.2s ease;
+                border-radius: 5px;
+                border: none;
+              }
+            
+            && button:hover {
+                background-color: #adcce9;
+              }
         }
-
-        && button {
-            width: 20%;
-            height: 36px;
-            background-color: #478ac9;
-            color: #ffffff;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            border-radius: 5px;
-            border: none;
-          }
         
-        && button:hover {
-            background-color: #adcce9;
-          }
+        
     }
 
     && .info-members {

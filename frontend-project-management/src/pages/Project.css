@@ -16,12 +16,22 @@
         gap: 1rem;
         padding-top: 1rem;
 
-        && span {
+        && .project-avatar {
             width: 20%;
+            display: flex;
+            gap: 0.2rem;
+                
 
             && img {
-                width: 3rem;
+                width: 2.3rem;
+                height: 2.3rem;
+                border-radius: 2.5rem;
             }
+
+            && .avatar-owner {
+                outline: 2px solid red;
+            }
+            
         }
 
         && button {
@@ -78,8 +88,10 @@
     && .project-container-tasks {
         width: 95%;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 1.5rem;
 
         && .project-task{
             width: 100%;
@@ -92,9 +104,10 @@
             padding: 10px 0;
 
             && h3 {
+                width: 90%;
                 display: flex;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-start;
             }
 
             && div {

@@ -19,7 +19,7 @@ export const Dashboard = () => {
     loadPage()
     //console.log(res);
   }, [])
-  //console.log(res);
+  console.log(res);
 
   return (
     <>
@@ -31,7 +31,7 @@ export const Dashboard = () => {
         
 
       {res ? (
-        res.data.map(project => (
+        res?.data?.map(project => (
           <CardProject key={project._id} project={project}/>
 
         ))

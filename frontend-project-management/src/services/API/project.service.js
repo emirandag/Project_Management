@@ -53,3 +53,15 @@ export const showProjectById = async (id) => {
     .then((res) => res)
     .catch((error) => error);
 };
+
+export const addMemberProject = async (projectId, formData) => {
+  console.log(projectId, formData);
+  return APIuser.post(`/projects/addmemberproject/${projectId}`, formData, {
+      headers: {
+        Authorization: `Bearer ${updateToken()}`
+      }
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
