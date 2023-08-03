@@ -144,23 +144,37 @@ const addMemberProject = async (req, res, next) => {
     const projectId = req.params.id
     const { email } = req.body
 
-    console.log(projectId);
-    console.log(email);
+    // console.log(projectId);
+    // console.log(email);
 
     const foundProject = await Project.findById(projectId)
     const foundUser = await User.findOne({ email })
 
-    console.log(foundProject);
-    console.log(foundUser);
+    // console.log(foundProject);
+    // console.log(foundUser);
 
 
     if (foundUser) {
       if (!foundProject.users.includes(foundUser._id)) {
         try {
           await Project.findByIdAndUpdate(projectId, { $push: { users: foundUser._id } })
-  
+          
           try {
             await User.findByIdAndUpdate(foundUser._id , { $push: { projects: foundProject._id } })
+            const testProject = await Project.findById(projectId).populate("users")
+
+            const userUpdated = testProject.users.map(user => user._id)
+
+            if (userUpdated.toString().includes(foundUser._id.toString())) {
+         
+              return res.status(200).json({
+                userUpdated,
+                results: `Added '${userUpdated.email}' in the project '${testProject.title}'`
+              })
+            } else {
+              return res.status(404).json("The member is not add to the project")
+            }
+
           } catch (error) {
             return res.status(404).json(error.message)
           }
@@ -207,7 +221,7 @@ const getAllProjects = async (req, res, next) => {
 const getProject = async (req, res, next) => {
   try {
     const { id } = req.params
-    const getProjectById = await Project.findById(id)
+    const getProjectById = await Project.findById(id).populate("users").populate("tasks")
 
     if (getProjectById) {
       res.status(200).json(getProjectById)

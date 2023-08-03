@@ -8,7 +8,7 @@ ProjectRoutes.post("/createproject", [isAuthManager], createProject)
 ProjectRoutes.patch("/updateproject/:id", [isAuthManager], updateProject)
 ProjectRoutes.delete("/deleteproject/:id", [isAuthManager], deleteProject)
 ProjectRoutes.post("/addmemberproject/:id", [isAuthManager], addMemberProject)
-ProjectRoutes.get("/", [isAuthManager], getAllProjects)
+ProjectRoutes.get("/", [isAuth], getAllProjects)
 ProjectRoutes.get("/:id", [isAuthManager], getProject)
 ProjectRoutes.get("/openprojects/list", [isAuthManager], getOpenProjects)
 
