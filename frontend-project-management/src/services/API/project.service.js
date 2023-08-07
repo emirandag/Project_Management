@@ -34,6 +34,29 @@ export const deleteProject = async (id) => {
 };
 
 
+export const addMemberProject = async (projectId, formData) => {
+  console.log(projectId, formData);
+  return APIuser.post(`/projects/addmemberproject/${projectId}`, formData, {
+      headers: {
+        Authorization: `Bearer ${updateToken()}`
+      }
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+
+export const deleteMemberProject = async (projectId, email) => {
+  console.log(projectId, email);
+  return APIuser.delete(`/projects/deletememberproject/${projectId}&email=${email}`, email, {
+      headers: {
+        Authorization: `Bearer ${updateToken()}`
+      }
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export const showProjects = async () => {
     return APIuser.get("/projects/", {
         headers: {
@@ -54,14 +77,5 @@ export const showProjectById = async (id) => {
     .catch((error) => error);
 };
 
-export const addMemberProject = async (projectId, formData) => {
-  console.log(projectId, formData);
-  return APIuser.post(`/projects/addmemberproject/${projectId}`, formData, {
-      headers: {
-        Authorization: `Bearer ${updateToken()}`
-      }
-    })
-    .then((res) => res)
-    .catch((error) => error);
-};
+
 

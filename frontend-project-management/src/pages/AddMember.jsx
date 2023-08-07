@@ -3,7 +3,7 @@ import "./AddMember.css"
 import { useEffect, useState } from "react";
 import { addMemberProject, showProjectById } from "../services/API/project.service";
 import { useForm } from "react-hook-form";
-import { useAddMemberProjectError } from "../hooks";
+import { useAddMemberProjectError, useDeleteMemberProjectError } from "../hooks";
 export const AddMember = () => {
   const { id } = useParams();
   const { register, handleSubmit } = useForm();
@@ -12,6 +12,7 @@ export const AddMember = () => {
   const [resPage, setResPage] = useState({})
   const [projectId, setProjectId] = useState({})
   const [addMemberOk, setAddMemberOk] = useState(false)
+  const [deleteMemberOk, setDeleteMemberOk] = useState(false)
   
   const loadPage = async (id) => {
     const dataProject = await showProjectById(id)
@@ -35,7 +36,9 @@ export const AddMember = () => {
     loadPage(id)
   }, [])
 
-  
+  if (addMemberOk || deleteMemberOk) {
+    loadPage(id)
+  }
   //console.log(res);
   return (
     <>
@@ -80,9 +83,9 @@ export const AddMember = () => {
                   <div className="members member" key={user._id}>
                     <input type="text" value={`${user?.email}`} disabled />
                     <label>Member</label>
-                    <button>
+                    <button onClick={() => useDeleteMemberProjectError(id, user?.email, setDeleteMemberOk)}>
                       <i className="fa fa-trash fa-2xs"></i>
-                    </button>
+                    </button> 
                   </div>
                 )
             )}

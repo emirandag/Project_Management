@@ -17,7 +17,7 @@ export const CardProject = ({project}) => {
           <div className='tasks-box'>
             {project.tasks.length > 0 ? (
                 project.tasks.map(task => (
-                    <div className="task-box">
+                    <div className="task-box" key={task._id}>
                         {task.title}
                     </div>
                 )) 

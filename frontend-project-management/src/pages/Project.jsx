@@ -53,6 +53,7 @@ export const Project = () => {
                   className="avatar-owner"
                   src={user.photo}
                   alt={user.name}
+                  key={user._id}
                 />
                   
 
@@ -60,6 +61,7 @@ export const Project = () => {
                 <img
                   src={user.photo}
                   alt={user.name}
+                  key={user._id}
                 />
  
                 )
