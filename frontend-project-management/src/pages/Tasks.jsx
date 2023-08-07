@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createTask } from "../services/API/task.service";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import { useCreateTaskError } from "../hooks";
 
 
 export const Tasks = () => {
+    const { id } = useParams()
     const { register, handleSubmit } = useForm();
     const [res, setRes] = useState({})
     const [send, setSend] = useState(false)
-    const { id } = useParams()
-    console.log(id);
+    const [confirmTaskOk, setConfirmTaskOk] = useState(false)
+
+    //console.log(id);
     const formSubmit = async (formData) => {
       
         const projectId = id
@@ -24,7 +27,14 @@ export const Tasks = () => {
 
     useEffect(() => {
         console.log(res);
+        useCreateTaskError(res, setRes, setConfirmTaskOk)
     }, [res])
+
+
+    if (confirmTaskOk) {
+      return <Navigate to={`/projects/${id}/tasks/${res?.data?.newTask?._id}`} />
+    }
+
   return (
 <>
       <div className="form-wrap-register">

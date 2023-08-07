@@ -4,11 +4,13 @@ import { Navigate, useParams } from "react-router-dom";
 import Modal from "../components/UI/Modal/Modal";
 import { useDeleteProjectError, useUpdateProjectError } from "../hooks";
 import { showProjectById } from "../services/API/project.service";
+import { useAuth } from "../context/authContext";
 
 
 
 export const Project = () => {
     const { id } = useParams();
+    const { user } = useAuth()
     const [res, setRes] = useState({})
     const [renderPageAddMember, setRenderPageAddMember] = useState(false);
     const [renderPageTask, setRenderTask] = useState(false);
@@ -69,11 +71,13 @@ export const Project = () => {
               </div>
               <h2>{res?.data?.title}</h2>
               <button
-                disabled={updateProjectOk}
-                onClick={() => useUpdateProjectError(id, setUpdateProjectOk)}
-              >
-                Close Project
+              disabled={res?.data?.isClosed == true}
+              onClick={() => useUpdateProjectError(id, setUpdateProjectOk)}
+            >
+              Close Project
               </button>
+              
+                
             </div>
             <div className="project-middle">
               <div className="project-middle-left">
@@ -91,7 +95,7 @@ export const Project = () => {
                 <button onClick={() => setRenderTask(true)}>Add task</button>
               </div>
               <div className="project-middle-right">
-                <button
+                <button 
                   onClick={() => useDeleteProjectError(id, setDeleteProjectOk)}
                 >
                   Delete project
@@ -103,7 +107,7 @@ export const Project = () => {
                 <div className="project-task">
                   <h3>{task.title}</h3>
                   <div>
-                    <span>{task?.assignedTo}</span>
+                    <span>{task?.assignedTo == user._id && user.email}</span>
                     <span>{task?.isCompleted ? "Completada" : "Abierta"}</span>
                   </div>
                 </div>

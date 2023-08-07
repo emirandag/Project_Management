@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Dashboard, Home, Gallery, Details, CheckCode, Register, Login, ForgotPassword, Profile, Projects, Tasks, Project, AddMember } from './pages'
+import { Dashboard, Home, Gallery, Details, CheckCode, Register, Login, ForgotPassword, Profile, Projects, Tasks, Project, AddMember, Task } from './pages'
 import { AuthContextProvider } from './context/authContext.jsx'
 import { Protected, ProtectedCheckChildren } from './components/index.js'
 
@@ -60,6 +60,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/projects/:id/tasks" element={
               <Protected>
                 <Tasks />
+              </Protected>
+            } />
+            <Route path="/projects/:id/tasks/:id" element={
+              <Protected>
+                <Task />
               </Protected>
             } />
         </Route>

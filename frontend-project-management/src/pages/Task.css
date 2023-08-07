@@ -1,0 +1,108 @@
+.task-container {
+    width: 50%;
+    min-height: 500px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+
+    && .task-top {
+        width: 95%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 1rem;
+        padding-top: 1rem;
+
+        && .task-avatar {
+            width: 80%;
+            display: flex;
+            gap: 0.2rem;
+                
+
+            && img {
+                width: 2.3rem;
+                height: 2.3rem;
+                border-radius: 2.5rem;
+            }
+
+            && button {
+                width: 8rem;
+                height: 40px;
+                background-color: #478ac9;
+                color: #ffffff;
+                font-size: 14px;
+                transition: all 0.2s ease;
+                border-radius: 5px;
+                border: none;
+            }
+
+            && button:hover {
+                background-color: #adcce9;
+                cursor: pointer;
+              }
+            
+        }
+
+        && button {
+            width: 8rem;
+            height: 40px;
+            background-color: #478ac9;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-radius: 5px;
+            border: none;
+          }
+        
+        && button:hover {
+            background-color: #adcce9;
+            cursor: pointer;
+          }
+    }
+
+    && .project-middle {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    && .project-container-tasks {
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+
+        && .project-task{
+            width: 100%;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 10px 0;
+
+            && h3 {
+                width: 90%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            && div {
+                width: 90%;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                gap: 1rem;
+            }
+        }
+    }
+}
