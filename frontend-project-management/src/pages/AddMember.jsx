@@ -33,6 +33,7 @@ export const AddMember = () => {
   }, [res])
 
   useEffect(() => {
+    console.log(id);
     loadPage(id)
   }, [])
 

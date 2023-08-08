@@ -23,6 +23,16 @@ export const updateTask = async (id) => {
     .catch((error) => error);
 };
 
+export const deleteTask = async (id) => {
+  return APIuser.delete(`/tasks/deletetask/${id}`, {
+      headers: {
+        Authorization: `Bearer ${updateToken()}`
+      }
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 
 export const showTaskById = async (id) => {
   return APIuser.get(`/tasks/${id}`, {

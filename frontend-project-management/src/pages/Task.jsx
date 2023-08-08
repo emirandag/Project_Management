@@ -1,8 +1,8 @@
 import "./Task.css"
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { addUserTask, showTaskById } from "../services/API/task.service";
-import { useAddUserTaskError, useUpdateTaskError } from "../hooks";
+import { useAddUserTaskError, useDeleteTaskError, useUpdateTaskError } from "../hooks";
 import { useAuth } from "../context/authContext";
 
 
@@ -11,8 +11,9 @@ export const Task = () => {
     const { user } = useAuth()
     const [res, setRes] = useState({})
     const [updateTaskOk, setUpdateTaskOk] = useState(false)
-    const [completedTaskOk, setCompletedTaskOk] = useState(false)
-    const [dataTask, setDataTask] = useState({})
+    const [deleteTaskOk, setDeleteTaskOk] = useState(false)
+    const [addUserOk, setAddUserOk] = useState(false)
+    
 
     const loadPage = async (id) => {
         console.log(id);
@@ -22,9 +23,21 @@ export const Task = () => {
     
       useEffect(() => {
         loadPage(id)
-      }, [])
+      }, [updateTaskOk, addUserOk])
 
 
+      if (deleteTaskOk) {
+        return <Navigate to={`/projects/${res?.data?.project}`} />
+      }
+    //   if (updateTaskOk) {
+    //     loadPage(id)
+    //     setUpdateTaskOk(false)
+    //   }
+
+    //   if (addUser) {
+    //     loadPage(id)
+    //     setAddUser(false)
+    //   }
 
 
   return (
@@ -35,21 +48,25 @@ export const Task = () => {
             <div className="task-top">
               <div className="task-avatar">
                 {res?.data?.assignedTo ? (
+                    <>
                   <img
                     className="avatar-user"
                     src={user.photo}
                     alt={user.name}
                     key={user._id}
                   />
+                  <h4>{user.email}</h4>
+                  </>
                 ) : (
                   <button 
-                    onClick={() => useAddUserTaskError(id, user?.email, res, setCompletedTaskOk, setRes)}
+                    onClick={() => useAddUserTaskError(id, user?.email, setAddUserOk)}
                     // onClick={() => useUpdateTaskError(id, setUpdateTaskOk)}
                   >
                     Assigned to me
                   </button>
                 )}
               </div>
+              <button onClick={() => useDeleteTaskError(id, setDeleteTaskOk)}>Delete task</button>
               {res?.data?.isCompleted == false ? (
               <button
                 onClick={() => useUpdateTaskError(id, setUpdateTaskOk)}

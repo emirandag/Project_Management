@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Project.css"
 import { Navigate, useParams } from "react-router-dom";
 import Modal from "../components/UI/Modal/Modal";
-import { useDeleteProjectError, useUpdateProjectError } from "../hooks";
+import { useDeleteProjectError, useDeleteTaskError, useUpdateProjectError } from "../hooks";
 import { showProjectById } from "../services/API/project.service";
 import { useAuth } from "../context/authContext";
 
@@ -16,6 +16,7 @@ export const Project = () => {
     const [renderPageTask, setRenderTask] = useState(false);
     const [deleteProjectOk, setDeleteProjectOk] = useState(false)
     const [updateProjectOk, setUpdateProjectOk] = useState(false)
+    const [deleteTaskOk, setDeleteTaskOk] = useState(false)
 
     console.log(id);
     const loadPage = async (id) => {
@@ -26,7 +27,7 @@ export const Project = () => {
     useEffect(() => {
       loadPage(id)
       //console.log(res);
-    }, [])
+    }, [deleteTaskOk])
     console.log(res);
 
     if (renderPageAddMember) {
@@ -51,7 +52,7 @@ export const Project = () => {
               {res?.data?.users?.map(
               (user) =>
                 user._id.includes(res?.data?.owner) ? (
-                  <img
+                  <img 
                   className="avatar-owner"
                   src={user.photo}
                   alt={user.name}
@@ -104,11 +105,12 @@ export const Project = () => {
             </div>
             <div className="project-container-tasks">
               {res?.data?.tasks?.map((task) => (
-                <div className="project-task">
+                <div className="project-task" key={task._id}>
                   <h3>{task.title}</h3>
                   <div>
                     <span>{task?.assignedTo == user._id && user.email}</span>
                     <span>{task?.isCompleted ? "Completada" : "Abierta"}</span>
+                    <button onClick={() => useDeleteTaskError(task._id, setDeleteTaskOk)}>Delete task</button>
                   </div>
                 </div>
               ))}
