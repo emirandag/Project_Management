@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./AddMember.css"
 import { useEffect, useState } from "react";
 import { addMemberProject, showProjectById } from "../services/API/project.service";
@@ -13,6 +13,7 @@ export const AddMember = () => {
   const [projectId, setProjectId] = useState({})
   const [addMemberOk, setAddMemberOk] = useState(false)
   const [deleteMemberOk, setDeleteMemberOk] = useState(false)
+  const navigate = useNavigate()
   
   const loadPage = async (id) => {
     const dataProject = await showProjectById(id)
@@ -92,6 +93,7 @@ export const AddMember = () => {
             )}
           
         </div>
+        <button onClick={() => navigate(`/projects/${id}`)}>Close</button>
       </div>
     </>
   );

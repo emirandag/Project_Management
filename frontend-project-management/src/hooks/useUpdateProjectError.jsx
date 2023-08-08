@@ -12,28 +12,45 @@ export const useUpdateProjectError = (id, setUpdateProjectOk) => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             const res = await updateProject(id)
-            switch (res.status) {
-                case 200:
-                    Swal.fire({
-                        icon: "success",
-                        title: "Closed Project",
-                        text: "See you soon",
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    setUpdateProjectOk(() => true)
-                    break;
+            console.log(res);
             
-                default:
-                    Swal.fire({
-                        icon: "error",
-                        title: "No closed Project ❎",
-                        text: "Please, try again",
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-                    break;
+               
+            if (res?.status == 200) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Closed Project",
+                    text: "See you soon",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                setUpdateProjectOk(() => true)
             }
+                    
+                
+            if (res?.response?.data?.includes("Error - In the project, there are still open tasks")) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Is not closed the project. There are open tasks",
+                    text: "See you soon",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                        //setUpdateProjectOk(() => true)
+                    }
+                    
+
+                    if (res?.response?.status == 500) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Upss, error internal",
+                            text: "See you soon",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        
+                    }
+
+                    
         }
     })
 }

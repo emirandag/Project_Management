@@ -27,7 +27,7 @@ export const Project = () => {
     useEffect(() => {
       loadPage(id)
       //console.log(res);
-    }, [deleteTaskOk])
+    }, [deleteTaskOk, updateProjectOk])
     console.log(res);
 
     if (renderPageAddMember) {
@@ -75,7 +75,7 @@ export const Project = () => {
               disabled={res?.data?.isClosed == true}
               onClick={() => useUpdateProjectError(id, setUpdateProjectOk)}
             >
-              Close Project
+              {res?.data?.isClosed ? "Closed" : "Close Project"}
               </button>
               
                 

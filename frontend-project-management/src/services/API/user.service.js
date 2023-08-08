@@ -71,8 +71,9 @@ export const resendCodeConfirmationUser = async (formData) => {
 }
 
 
-export const addUserProject = async (formData) => {
-  return APIuser.post("/users/adduserproject/:id", formData, {
+export const addUserProject = async (id, projectId) => {
+  console.log(id, projectId);
+  return APIuser.patch(`/users/adduserproject/${id}&projectId=${projectId}`, {
   headers: {
     Authorization: `Bearer ${updateToken()}`
   }

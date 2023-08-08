@@ -1,4 +1,4 @@
-import React from 'react'
+import "./CardProject.css"
 import { useNavigate } from 'react-router-dom';
 
 export const CardProject = ({project}) => {
@@ -12,6 +12,7 @@ export const CardProject = ({project}) => {
     <div className='project-box' onClick={() => renderToProjectById(project._id)} >
           <div className='project-box-header'>
             <h3>{project.title}</h3>
+            <p>{project.description}</p>
           </div>
           
           <div className='tasks-box'>

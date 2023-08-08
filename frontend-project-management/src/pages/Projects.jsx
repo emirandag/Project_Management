@@ -1,18 +1,22 @@
+import "./Projects.css"
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createProject } from "../services/API/project.service";
 import { useCreateProjectError } from "../hooks/useCreateProjectError";
 import { useAuth } from "../context/authContext";
-import { addUserProject } from "../services/API/user.service";
 import { Navigate } from "react-router-dom";
+import { addUserProject } from "../services/API/user.service";
+import { useAddUserProjectError } from "../hooks";
 
 
 export const Projects = () => {
     const { register, handleSubmit } = useForm();
     const [res, setRes] = useState({})
+    const [resUser, setResUser] = useState({})
     const [send, setSend] = useState(false)
     const { user } = useAuth()
     const [confirmProjectOk, setConfirmProjectOk] = useState(false)
+    const [confirmUserProjectOk, setConfirmUserProjectOk] = useState(false)
 
     const formSubmit = async (formData) => {
         if (user) {
@@ -31,19 +35,22 @@ export const Projects = () => {
         }
     }
 
+
     useEffect(() => {
-        console.log(res);
-        useCreateProjectError(res, setRes, setConfirmProjectOk)
+        //console.log(res);
+        useCreateProjectError(res, setRes, setConfirmProjectOk, setConfirmUserProjectOk)
+        //useAddUserProjectError(res, setRes, setConfirmUserProjectOk)
     }, [res])
 
-    if (confirmProjectOk) {
+    if (confirmProjectOk && confirmUserProjectOk) {
       console.log(res);
       return <Navigate to={`/projects/${res.data._id}`} />
+      
     }
-    
+
   return (
     <>
-      <div className="form-wrap-register">
+      <div className="form-wrap-projects">
         <span className="span-avatar">
           <img src="/images/login_avatar_white.png" />
         </span>

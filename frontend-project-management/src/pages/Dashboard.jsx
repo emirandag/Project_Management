@@ -28,6 +28,7 @@ export const Dashboard = () => {
           <button onClick={() => navigate("/projects")}>Add Project</button>
       </div>
       <div className='projects-container'>
+        {/* <div className='project-box-wrapper'> */}
         
 
       {res ? (
@@ -54,8 +55,8 @@ export const Dashboard = () => {
           <button>Add</button>
         </div> */}
       </div>
-        
       </div>
+      {/* </div> */}
     </>
   )
 }
