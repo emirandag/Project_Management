@@ -1,10 +1,11 @@
 import './Header.css'
-import React from 'react'
+import React, { useState } from 'react'
 import { Nav } from './Nav'
 import { useResize } from '../hooks'
 
 export const Header = () => {
     const { ancho } = useResize()
+    const [isOpen, setIsOpen] = useState(false);
     return (
         <header className='header'>
             {
@@ -12,7 +13,8 @@ export const Header = () => {
                     ?
                     <Nav />
                     :
-                    <div className='nav-hamburger'>
+                    <div className={`nav-hamburger ${isOpen && 'open'}`}
+                    onClick={() => setIsOpen(!isOpen)}>
                         <span></span>
                         <span></span>
                         <span></span>

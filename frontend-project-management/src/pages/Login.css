@@ -92,4 +92,11 @@
     color: #478ac9 !important;
     text-decoration: none;
   }
-  
+
+
+
+@media only screen and (max-width: 600px) {
+    .form-wrap-login {
+        width: 90%;
+    }
+}

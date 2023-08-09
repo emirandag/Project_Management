@@ -24,9 +24,27 @@ export const Dashboard = () => {
   return (
     <>
     <div className='dashboard-container'>
-      <div className="project-btn">
-          <button onClick={() => navigate("/projects")}>Add Project</button>
+      <div className="project-header">
+      
+        <div className="project-status">
+          <div className="project-info">
+            <p className="project-info-text">{res?.data?.length}</p>
+            <p>Total Projects</p>
+          </div>
+          <div className="project-info">
+            <p className="project-info-text">{res?.data?.filter(project => project.isClosed == false).length}</p>
+            <p>Open Projects</p>
+          </div>
+          <div className="project-info">
+            <p className="project-info-text">{res?.data?.filter(project => project.isClosed == true).length}</p>
+            <p>Closed Projects</p>
+          </div>
+        </div>
+        <div className="project-btn-add">
+          <button onClick={() => navigate("/projects")}><i class="fa fa-plus" aria-hidden="true"></i></button>
       </div>
+      </div>
+      
       <div className='projects-container'>
         {/* <div className='project-box-wrapper'> */}
         
