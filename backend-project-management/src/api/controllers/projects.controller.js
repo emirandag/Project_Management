@@ -44,7 +44,7 @@ const updateProject = async (req, res, next) => {
     await Project.syncIndexes();
     //Recuperamos el ID que ponemos por parámetro
     const { id } = req.params;
-
+    console.log(id);
     const updateProjectById = await Project.findById(id).populate('tasks');
 
     // Filtramos por las tareas que todavía no se encuentran completadas
@@ -198,11 +198,74 @@ const addMemberProject = async (req, res, next) => {
 
 
 /**
+ * ------------------------------ DELETE MEMBER IN PROJECT -----------------------------
+ */
+const deleteMemberProject = async (req, res, next) => {
+  try {
+    const { id, email } = req.params
+    //const { email } = req.body
+    const projectId = id
+    // console.log(projectId);
+    // console.log(req.body);
+    // console.log(req.query);
+    console.log(req.params);
+
+    const foundProject = await Project.findById(projectId)
+    const foundUser = await User.findOne({ email })
+
+    console.log(foundProject);
+    console.log(foundUser);
+
+
+    if (foundUser) {
+      if (foundProject.users.includes(foundUser._id)) {
+        
+        try {
+          await Project.findByIdAndUpdate(projectId, { $pull: { users: foundUser._id } })
+          
+          try {
+            await User.findByIdAndUpdate(foundUser._id , { $pull: { projects: foundProject._id } })
+            const testProject = await Project.findById(projectId).populate("users")
+
+            const userUpdated = testProject.users.map(user => user._id)
+
+            if (!userUpdated.toString().includes(foundUser._id.toString())) {
+         console.log("Entrrroooooooo");
+              return res.status(200).json({
+                userUpdated,
+                results: `Deleted '${userUpdated.email}' in the project '${testProject.title}'`
+              })
+            } else {
+              return res.status(404).json("The member is not deleted to the project")
+            }
+
+          } catch (error) {
+            return res.status(404).json(error.message)
+          }
+        } catch (error) {
+          return res.status(404).json(error.message)
+        }
+      } else {
+        return res.status(404).json("This user already in project")
+      }
+      
+      
+    } else {
+      return res.status(404).json("This email not exist")
+    }
+
+  } catch (error) {
+    return next(setError(error.code || 500, error.message || 'General error to add member'));
+  }
+}
+
+
+/**
  * -------------------------- GET ALL PROJECTS -----------------------------
  */
 const getAllProjects = async (req, res, next) => {
   try {
-    const getProjects = await Project.find().populate("tasks")
+    const getProjects = await Project.find().populate("tasks").populate("users")
 
     if (getProjects) {
       res.status(200).json(getProjects)
@@ -254,7 +317,8 @@ module.exports = {
   createProject, 
   updateProject, 
   deleteProject,
-  addMemberProject, 
+  addMemberProject,
+  deleteMemberProject, 
   getAllProjects, 
   getProject, 
   getOpenProjects 

@@ -524,8 +524,10 @@ const deleteUser = async (req, res, next) => {
  */
 const addUserProject = async(req, res, next) => {
   try {
-    const { id } = req.params
-    const { projectId } = req.body
+    console.log(req.params);
+    const { id, projectId } = req.params
+    
+    //const { projectId } = req.body
 
     const findUser = await User.findById(id).populate("projects")
     const isOpenProject = await Project.findOne({ _id: projectId, isClosed: false})

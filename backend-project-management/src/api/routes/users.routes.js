@@ -32,8 +32,8 @@ UserRoutes.post('/forgotpassword', forgotPassword);
 UserRoutes.patch('/changepassword', [isAuth], modifyPassword);
 UserRoutes.patch('/update/update', [isAuth], upload.single('image'), update);
 UserRoutes.delete('/', [isAuth], deleteUser);
-UserRoutes.patch('/adduserproject/:id', [isAuthManager], addUserProject);
-UserRoutes.patch('/addusertask/:id', [isAuthManager], addUserTask);
+UserRoutes.patch('/adduserproject/:id&projectId=:projectId', [isAuthManager], addUserProject);
+//UserRoutes.patch('/addusertask/:id', [isAuth], addUserTask);
 UserRoutes.get("/", [isAuthManager], getAllUsers)
 UserRoutes.get("/:id", [isAuthManager], getUser)
 UserRoutes.post("/changeemail", [isAuth], changeEmail)

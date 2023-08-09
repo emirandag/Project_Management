@@ -180,7 +180,7 @@ const getAllTasks = async (req, res, next) => {
     try {
       const { id } = req.params
       const getTaskById = await Task.findById(id)
-  
+      console.log(getTaskById);
       if (getTaskById) {
         res.status(200).json(getTaskById)
       } else {
@@ -208,11 +208,75 @@ const getAllTasks = async (req, res, next) => {
     }
   }
 
+
+  const addUserTask = async (req, res, next) => {
+    try {
+      const { id, email } = req.params
+      //const { taskId } = req.body
+  
+      //const foundUser = await User.findById(id)
+      //const foundTask = await Task.findById({ _id: taskId})
+      const foundTask = await Task.findById(id)
+      const foundUser = await User.findOne({email})
+      //console.log(foundTask);
+      //console.log(foundUser);
+  
+      if (!foundTask) { // Validamos si la tarea existe
+        console.log("The task not exist");
+        return res.status(404).json("The task not exist")
+      } else if (foundTask.isCompleted == true) { // Validamos si la tarea está completada
+        console.log("The task is not open");
+        return res.status(404).json("The task is not open")
+      } else if (foundTask.assignedTo) { // Comprobamos si la tarea ya está asignada a un usuario
+        console.log("There is already a user in this task");
+        return res.status(404).json("There is already a user in this task")
+      } else {
+        console.log("HAY TAREA");
+        if (!foundUser) { // Validamos si el usuario existe o no
+          console.log("The user not exist");
+          return res.status(404).json("The user not exist")
+        } else if (!foundUser.projects.toString().includes(foundTask.project.toString())) { // Comprobamos si el usuario está dentro de los usuarios del proyecto asociado a la tarea.
+          console.log(foundUser.projects.toString());
+          console.log(foundTask.project);
+          console.log("The user is not in the project associated with the task");
+          return res.status(404).json("The user is not in the project associated with the task")
+        } else {
+          try {
+            foundTask.assignedTo = foundUser._id
+            await foundTask.save()
+            await User.findByIdAndUpdate(foundUser._id, { $push: { tasks: foundTask._id } })
+            try {
+              const testUser = await User.findById(foundUser._id).populate("tasks")
+              const testUserTask = testUser.tasks.some(task => task._id == id)
+  
+                if (testUserTask) {
+              
+                  return res.status(200).json(
+                    {
+                      testUser,
+                      results: `Added user '${testUser.email}' in the task '${foundTask.title}'`
+                    }
+                  )
+              }
+            } catch (error) {
+              return "Error to find the user"
+            }
+          } catch (error) {
+            return next(error)
+          }
+        } 
+      }
+    } catch (error) {
+      return next(error)
+    }
+  }
+
 module.exports = { 
   createTask, 
   updateTask,  
   deleteTask, 
   getAllTasks,  
   getTask, 
-  getOpenTasks 
+  getOpenTasks,
+  addUserTask
 }
