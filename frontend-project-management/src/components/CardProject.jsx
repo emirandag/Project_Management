@@ -33,16 +33,16 @@ export const CardProject = ({ project }) => {
             </progress>
             { project.tasks.length > 0 
             ? 
-            (project.tasks.filter((task) => task.isCompleted == true).length*100)/project.tasks.length 
+            parseInt((project.tasks.filter((task) => task.isCompleted == true).length*100)/project.tasks.length)
             :
             "0"
             }%
           </div>
           <div className="project-box-members">
             {project?.users?.map((user) => (
-              <>
+
                 <img src={user.photo} alt={user.email} key={user._id} />
-              </>
+
             ))}
           </div>
         </div>

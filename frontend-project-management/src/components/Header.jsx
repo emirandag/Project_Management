@@ -13,6 +13,7 @@ export const Header = () => {
                     ?
                     <Nav />
                     :
+                    
                     <div className={`nav-hamburger ${isOpen && 'open'}`}
                     onClick={() => setIsOpen(!isOpen)}>
                         <span></span>

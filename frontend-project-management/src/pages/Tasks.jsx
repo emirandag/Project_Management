@@ -1,3 +1,4 @@
+import "./Tasks.css"
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createTask } from "../services/API/task.service";
@@ -37,9 +38,10 @@ export const Tasks = () => {
 
   return (
 <>
-      <div className="form-wrap-register">
+      <div className="form-wrap-task">
         <span className="span-avatar">
           <img src="/images/login_avatar_white.png" />
+          
         </span>
 
         <h1>Create Task</h1>

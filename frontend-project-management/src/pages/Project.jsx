@@ -71,19 +71,22 @@ export const Project = () => {
               )}
               </div>
               <h2>{res?.data?.title}</h2>
+              <div className="project-close">
               <button
               disabled={res?.data?.isClosed == true}
               onClick={() => useUpdateProjectError(id, setUpdateProjectOk)}
             >
               {res?.data?.isClosed ? "Closed" : "Close Project"}
               </button>
+              </div>
+              
               
                 
             </div>
             <div className="project-middle">
               <div className="project-middle-left">
                 <button onClick={() => setRenderPageAddMember(true)}>
-                  Add member
+                <i class="fa fa-user-plus" aria-hidden="true"></i> Add member
                 </button>
                 {/* {render && (
               <Modal>
@@ -107,10 +110,10 @@ export const Project = () => {
               {res?.data?.tasks?.map((task) => (
                 <div className="project-task" key={task._id}>
                   <h3>{task.title}</h3>
-                  <div>
+                  <div className="task-info">
                     <span>{task?.assignedTo == user._id && user.email}</span>
                     <span>{task?.isCompleted ? "Completada" : "Abierta"}</span>
-                    <button onClick={() => useDeleteTaskError(task._id, setDeleteTaskOk)}>Delete task</button>
+                    <button disabled={task?.isCompleted} onClick={() => useDeleteTaskError(task._id, setDeleteTaskOk)}><i className="fa fa-trash fa-2xs"></i></button>
                   </div>
                 </div>
               ))}

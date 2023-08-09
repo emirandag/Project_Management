@@ -39,11 +39,14 @@ console.log(res);
 
   return (
     <>
-      <div className="form-wrap">
+      <div className="form-wrap-password">
         <h1>Change your password 💱</h1>
 
         <form onSubmit={handleSubmit(formSubmit)}>
           <div className="user_container form-group">
+          <label htmlFor="custom-input" className="custom-placeholder">
+              Email
+            </label>
             <input
               className="input_user"
               type="text"
@@ -52,9 +55,6 @@ console.log(res);
               autoComplete="false"
               {...register("email", { required: true })}
             />
-            <label htmlFor="custom-input" className="custom-placeholder">
-              Email
-            </label>
           </div>
 
           <div className="btn_container">
@@ -62,7 +62,6 @@ console.log(res);
               className="btn"
               type="submit"
               disabled={send}
-              style={{ background: send ? "#49c1a388" : "#49c1a2" }}
             >
               Change password
             </button>

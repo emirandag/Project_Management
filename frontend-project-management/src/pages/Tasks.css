@@ -1,4 +1,4 @@
-.form-wrap-password {
+.form-wrap-task {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,11 +6,17 @@
     background-color: #b9c1cc;
     gap: 1rem;
     border-radius: 5px;
-    padding: 10px;
+    padding: 2rem;
     width: 500px;
-    height: 300px;
+    height: 320px;
     font-family: 'Roboto', sans-serif;
     background-image: linear-gradient(#b9c1cc, #999999);
+
+    && .span-avatar {
+        border-radius: 50%;
+        
+    }
+    
 
     && h1 {
         color: #478ac9;
@@ -58,10 +64,6 @@
             display: flex;
             width: 100%;
         }
-      }
-
-    
-
-        
+      }   
     }
 }

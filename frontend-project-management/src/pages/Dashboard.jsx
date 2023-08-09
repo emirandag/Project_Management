@@ -41,7 +41,7 @@ export const Dashboard = () => {
           </div>
         </div>
         <div className="project-btn-add">
-          <button onClick={() => navigate("/projects")}><i class="fa fa-plus" aria-hidden="true"></i></button>
+          <button onClick={() => navigate("/projects")}><i className="fa fa-plus" aria-hidden="true"></i></button>
       </div>
       </div>
       
