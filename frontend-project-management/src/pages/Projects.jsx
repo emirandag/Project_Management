@@ -52,7 +52,7 @@ export const Projects = () => {
     <>
       <div className="form-wrap-projects">
         <span className="span-avatar">
-          <img src="/images/login_avatar_white.png" />
+          <img src="/images/project.png" />
         </span>
 
         <h1>Create Project</h1>

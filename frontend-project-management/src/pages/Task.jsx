@@ -1,6 +1,6 @@
 import "./Task.css"
 import { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
 import { addUserTask, showTaskById } from "../services/API/task.service";
 import { useAddUserTaskError, useDeleteTaskError, useUpdateTaskError } from "../hooks";
 import { useAuth } from "../context/authContext";
@@ -13,7 +13,17 @@ export const Task = () => {
     const [updateTaskOk, setUpdateTaskOk] = useState(false)
     const [deleteTaskOk, setDeleteTaskOk] = useState(false)
     const [addUserOk, setAddUserOk] = useState(false)
+
+    const location = useLocation();
+    const projectTitle = location?.state
+    // if (location.pathname == "/tasks") {
+      
+    // } else {
+    //   const projectTitle = location?.state?.title
+    //   return projectTitle
+    // }
     
+    console.log(location);
 
     const loadPage = async (id) => {
         console.log(id);
@@ -42,6 +52,9 @@ export const Task = () => {
 
   return (
     <>
+    <div className="task-dashboard">
+      {console.log(projectTitle)}
+    <h2>{projectTitle}</h2>
       <div className="task-container">
         {res ? (
           <>
@@ -59,6 +72,7 @@ export const Task = () => {
                   </>
                 ) : (
                   <button 
+                  disabled={res?.data?.isCompleted}
                     onClick={() => useAddUserTaskError(id, user?.email, setAddUserOk)}
                     // onClick={() => useUpdateTaskError(id, setUpdateTaskOk)}
                   >
@@ -66,7 +80,9 @@ export const Task = () => {
                   </button>
                 )}
               </div>
-              <button onClick={() => useDeleteTaskError(id, setDeleteTaskOk)}>Delete task</button>
+              <button 
+              disabled={res?.data?.isCompleted}
+              onClick={() => useDeleteTaskError(id, setDeleteTaskOk)}>Delete task</button>
               {res?.data?.isCompleted == false ? (
               <button
                 onClick={() => useUpdateTaskError(id, setUpdateTaskOk)}
@@ -85,23 +101,14 @@ export const Task = () => {
             <div className="task-middle">
               <h2>{res?.data?.title}</h2>
             </div>
-            {/* <div className="project-container-tasks">
-              {res?.data?.tasks?.map((task) => (
-                <div className="project-task">
-                  <h3>{task.title}</h3>
-                  <div>
-                    <span>{task?.assignedTo}</span>
-                    <span>{task?.isCompleted ? "Completada" : "Abierta"}</span>
-                  </div>
-                </div>
-              ))}
-            </div> */}
 
           </>
         ) : (
           <h1>Loading ...</h1>
         )}
       </div>
+    
+    </div>
     </>
   );
 

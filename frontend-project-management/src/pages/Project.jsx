@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Project.css"
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Modal from "../components/UI/Modal/Modal";
 import { useDeleteProjectError, useDeleteTaskError, useUpdateProjectError } from "../hooks";
 import { showProjectById } from "../services/API/project.service";
 import { useAuth } from "../context/authContext";
+import { CardTask } from "../components";
 
 
 
@@ -17,8 +18,8 @@ export const Project = () => {
     const [deleteProjectOk, setDeleteProjectOk] = useState(false)
     const [updateProjectOk, setUpdateProjectOk] = useState(false)
     const [deleteTaskOk, setDeleteTaskOk] = useState(false)
-
-    console.log(id);
+    // const navigate = useNavigate()
+    // console.log(id);
     const loadPage = async (id) => {
       const dataProject = await showProjectById(id)
       setRes(dataProject)
@@ -28,13 +29,15 @@ export const Project = () => {
       loadPage(id)
       //console.log(res);
     }, [deleteTaskOk, updateProjectOk])
-    console.log(res);
+    // console.log(res);
 
     if (renderPageAddMember) {
         return <Navigate to={`/projects/${id}/addmember`}/>
     }
     if (renderPageTask) {
       return <Navigate to={`/projects/${id}/tasks`} />
+      // const project = res?.data
+      // return navigate('/tasks', {state: project})
     } 
     if (deleteProjectOk) {
       return <Navigate to={`/dashboard`} />
@@ -42,8 +45,9 @@ export const Project = () => {
 
   return (
     <>
+    {res?.data ? (
       <div className="project-container">
-        {res ? (
+        
           <>
             <div className="project-top">
               <div className="project-avatar">
@@ -73,7 +77,7 @@ export const Project = () => {
               <h2>{res?.data?.title}</h2>
               <div className="project-close">
               <button
-              disabled={res?.data?.isClosed == true}
+              disabled={res?.data?.isClosed}
               onClick={() => useUpdateProjectError(id, setUpdateProjectOk)}
             >
               {res?.data?.isClosed ? "Closed" : "Close Project"}
@@ -85,8 +89,10 @@ export const Project = () => {
             </div>
             <div className="project-middle">
               <div className="project-middle-left">
-                <button onClick={() => setRenderPageAddMember(true)}>
-                <i class="fa fa-user-plus" aria-hidden="true"></i> Add member
+                <button 
+                disabled={res?.data?.isClosed}
+                onClick={() => setRenderPageAddMember(true)}>
+                <i className="fa fa-user-plus" aria-hidden="true"></i> Add member
                 </button>
                 {/* {render && (
               <Modal>
@@ -96,10 +102,13 @@ export const Project = () => {
                 <input type="text" placeholder="Enter email member"/>
               </Modal>
             )} */}
-                <button onClick={() => setRenderTask(true)}>Add task</button>
+                <button 
+                disabled={res?.data?.isClosed}
+                onClick={() => setRenderTask(true)}>Add task</button>
               </div>
               <div className="project-middle-right">
                 <button 
+                  disabled={res?.data?.isClosed}
                   onClick={() => useDeleteProjectError(id, setDeleteProjectOk)}
                 >
                   Delete project
@@ -108,21 +117,23 @@ export const Project = () => {
             </div>
             <div className="project-container-tasks">
               {res?.data?.tasks?.map((task) => (
-                <div className="project-task" key={task._id}>
-                  <h3>{task.title}</h3>
-                  <div className="task-info">
-                    <span>{task?.assignedTo == user._id && user.email}</span>
-                    <span>{task?.isCompleted ? "Completada" : "Abierta"}</span>
-                    <button disabled={task?.isCompleted} onClick={() => useDeleteTaskError(task._id, setDeleteTaskOk)}><i className="fa fa-trash fa-2xs"></i></button>
-                  </div>
-                </div>
+                <CardTask project={res?.data} task={task} key={task._id}/>
+                // <div className="project-task" key={task._id}>
+                //   <h3>{task.title}</h3>
+                //   <div className="task-info">
+                //     <span>{task?.assignedTo == user._id && user.email}</span>
+                //     <span>{task?.isCompleted ? "Completada" : "Abierta"}</span>
+                //     <button disabled={task?.isCompleted} onClick={() => useDeleteTaskError(task._id, setDeleteTaskOk)}><i className="fa fa-trash fa-2xs"></i></button>
+                //   </div>
+                // </div>
               ))}
             </div>
           </>
-        ) : (
-          <h1>Loading ...</h1>
-        )}
+        
       </div>
+      ) : (
+        <h1>Loading ...</h1>
+      )}
     </>
   );
 }

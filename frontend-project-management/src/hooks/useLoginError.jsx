@@ -9,7 +9,7 @@ export const useLoginError = (res, setLoginOk, userLogin, setRes) => {
       email: res.data.user.email,
       _id: res.data.user._id,
       photo: res.data.user.photo,
-      check: res.data.user.check
+      check: res.data.user.check,
     }
 
     const dataString = JSON.stringify(dataCustom)

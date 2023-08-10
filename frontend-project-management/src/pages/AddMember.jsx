@@ -93,7 +93,7 @@ export const AddMember = () => {
             )}
           
         </div>
-        <button onClick={() => navigate(`/projects/${id}`)}>Close</button>
+        <button onClick={() => navigate(`/projects/${id}`)}>Go to project</button>
       </div>
     </>
   );
