@@ -26,7 +26,7 @@ export const Task = () => {
     console.log(location);
 
     const loadPage = async (id) => {
-        console.log(id);
+        // console.log(id);
         const data = await showTaskById(id)
         setRes(data)
       }

@@ -43,6 +43,8 @@ export const Project = () => {
       return <Navigate to={`/dashboard`} />
     }
 
+    console.log(deleteTaskOk);
+
   return (
     <>
     {res?.data ? (
@@ -117,7 +119,7 @@ export const Project = () => {
             </div>
             <div className="project-container-tasks">
               {res?.data?.tasks?.map((task) => (
-                <CardTask project={res?.data} task={task} key={task._id}/>
+                <CardTask project={res?.data} task={task} key={task._id} setDeleteTaskOk={setDeleteTaskOk} />
                 // <div className="project-task" key={task._id}>
                 //   <h3>{task.title}</h3>
                 //   <div className="task-info">

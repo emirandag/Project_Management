@@ -9,18 +9,54 @@
     gap: 1rem;
     padding: 10px 0;
 
-    && h3 {
+    && .task-header {
         width: 90%;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
+
+        && h3 {
+            
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        && button {
+            width: 8rem;
+            height: 40px;
+            background-color: #478ac9;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-radius: 5px;
+            border: none;
+            
+          }
+
+          && i.fa {
+            font-size: 20px;
+            margin-bottom: 0;
+        }
+        
+        && button:hover {
+            background-color: #adcce9;
+          }
+        
+        && button:disabled {
+            background-color: #adcce9;
+        }
     }
+
+    
+
+    
 
     && .task-info {
         width: 90%;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         gap: 1rem;
 
         && span {

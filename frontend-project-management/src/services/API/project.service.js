@@ -34,17 +34,6 @@ export const deleteProject = async (id) => {
 };
 
 
-// export const addOwnerProject = async (id, email) => {
-//     return APIuser.post(`/users/addownerproject/${id}&email=${email}`, {
-//     headers: {
-//       Authorization: `Bearer ${updateToken()}`
-//     }
-//   })
-//     .then((res) => res)
-//     .catch((error) => error)
-//   }
-
-
 export const addMemberProject = async (projectId, formData) => {
   console.log(projectId, formData);
   return APIuser.post(`/projects/addmemberproject/${projectId}`, formData, {
@@ -88,5 +77,15 @@ export const showProjectById = async (id) => {
     .catch((error) => error);
 };
 
+
+export const openProjects= async () => {
+  return APIuser.get("/projects/openprojects/list", {
+      headers: {
+        Authorization: `Bearer ${updateToken()}`
+      }
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
 
 

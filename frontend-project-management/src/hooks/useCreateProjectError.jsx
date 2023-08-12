@@ -10,7 +10,7 @@ export const useCreateProjectError = (res, setRes, setConfirmProjectOk, setConfi
           icon: "success",
           title: "Project created!",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2000,
         }).then(async () => {
           const resUser = await addUserProject(res?.data?.owner, res?.data?._id)
           //const response = resUser

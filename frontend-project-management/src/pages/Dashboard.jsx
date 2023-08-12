@@ -3,11 +3,18 @@ import "./Dashboard.css"
 import { showProjects } from "../services/API/project.service"
 import { Navigate, useNavigate } from "react-router-dom"
 import { CardProject } from "../components"
+import { useAuth } from "../context/authContext"
+import jwtDecode from "jwt-decode";
 
 export const Dashboard = () => {
   const [res, setRes] = useState(null)
-  const [renderPageProject, setRenderPageProject] = useState(false)
+  // const [renderPageProject, setRenderPageProject] = useState(false)
   const navigate = useNavigate()
+  const { user } = useAuth()
+  console.log(user.token);
+
+  const decodedToken = jwtDecode(user.token);
+  console.log("Token: ", decodedToken);
 
   const loadPage = async () => {
     const dataProject = await showProjects()

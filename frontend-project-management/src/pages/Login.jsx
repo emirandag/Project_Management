@@ -6,6 +6,8 @@ import { Link, Navigate } from 'react-router-dom';
 import { loginUser } from '../services/API/user.service';
 import { useAuth } from '../context/authContext';
 
+
+
 export const Login = () => {
   const { register, handleSubmit } = useForm();
   const [res, setRes] = useState({});
@@ -13,6 +15,7 @@ export const Login = () => {
   const [loginOk, setLoginOk] = useState(false);
   const { userLogin, setUser } = useAuth();
 
+  
   /**
    * 1.- Función que gestiona el formulario
    */
