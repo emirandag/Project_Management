@@ -1,4 +1,5 @@
 .dataProfile {
+    /* position: relative; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,11 +9,28 @@
 
     && .imageUser {
         width: 100px;
+        height: 100px;
+        box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 50%;
+        object-position: center;
+        object-fit: cover;
         /* border: 1px solid #478ac9; */
+
+        /* .card-avatar {
+            width: 100px;
+            height: 100px;
+            box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            object-position: center;
+            object-fit: cover;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(-64px);
+          } */
+          
         
     }
 
-    && .emailUser {
 
-    }
 }

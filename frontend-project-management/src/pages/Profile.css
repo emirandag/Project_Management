@@ -1,23 +1,110 @@
-.profile {
-    width: 90%;
-    min-height: 70%;
+.profile-container {
+    width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 2rem;
-
-    && .containerNavProfile {
-        width: 30%;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
+    justify-content: center;
+    padding: 2rem;
     
-        && .iconNav {
-            width: 50px;
+
+    && .profile-card {
+        width: 40%;
+        min-height: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background-image: linear-gradient(#b9c1cc, #999999);
+        border-radius: 5px;
+    
+        && .containerNavProfile {
+            width: 100%;
             display: flex;
+            align-items: center;
+            justify-content: space-around;
+        
+            && .profile-nav {
+                width: 33.33%;
+                height: 4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: none;
+                border-bottom: 1px solid #478ac9;
+                gap: 0.5rem;
+                
+                && i.fa {
+                    font-size: 1.5rem;
+                    margin-bottom: 0;
+                }
+
+                
+            }
+
+            && .profile-nav.active {
+                background-color: #478ac9;
+                color: #000000;
+            }
+
+            && .profile-nav:hover {
+                background-color: #adcce9;
+                cursor: pointer;
+            }
+
+            && .profile-nav:nth-child(2) {
+                border-right: 1px solid #478ac9;
+                border-left: 1px solid #478ac9;
+            }
+            /* && .profile-nav:nth-child(3) {
+                border: 1px solid red;
+            } */
+            
+            
+        }
+
+        && .fluidContainerProfile {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            && .profile-delete {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding: 0.5rem;
+
+                && button {
+                    width: 2rem;
+                    height: 2rem;
+                    background-color: #db545a;
+                    color: #ffffff;
+                    transition: all 0.2s ease;
+                    border-radius: 5px;
+                    border: none;
+
+                    && i.fa {
+                        font-size: 1rem;
+                        margin-bottom: 0;
+                    }
+
+                    
+                }
+
+                && :hover {
+                    background-color: #f1b5b8;
+                    cursor: pointer;
+                }
+                && :disabled {
+                    background-color: #f1b5b8;
+                }
+            }
+            
         }
     }
 }
+
+
 
 

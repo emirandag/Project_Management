@@ -64,12 +64,12 @@ export const FormProfile = () => {
 
   return (
     <>
-      <div className="containerProfile">
+      {/* <div className="containerProfile">
         <div className="containerDataNoChange">
           <FigureUser user={user} />
-        </div>
+        </div> */}
         <div className="form-wrap formProfile">
-          <h1>Change your data profile ♻</h1>
+          <h1>Change your data profile <i className="fa fa-user" aria-hidden="true"></i></h1>
           <p>Please, enter your new data profile</p>
           <form onSubmit={handleSubmit(formSubmit)}>
             <div className="user_container form-group">
@@ -100,7 +100,7 @@ export const FormProfile = () => {
             </div>
           </form>
         </div>
-      </div>
+      {/* </div> */}
     </>
   )
 }

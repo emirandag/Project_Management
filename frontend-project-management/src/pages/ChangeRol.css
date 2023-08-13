@@ -1,0 +1,71 @@
+.change-rol-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    && .change-rol-search {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        && input {
+            width: 25%;
+            height: 36px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        && button {
+            width: 10%;
+            height: 36px;
+            background-color: #478ac9;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-radius: 5px;
+        }
+    }
+
+    && .change-rol-form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        && form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            width: 40%;
+
+            && .input_rol {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                && button {
+                    background-color: #478ac9;
+
+
+                    && :hover {
+                        background-color: #adcce9;
+                    }
+                    && button:disabled {
+                        background-color: #adcce9;
+                    }
+                }
+
+                
+
+                
+            }
+        }
+    }
+}

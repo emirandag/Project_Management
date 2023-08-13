@@ -1,40 +1,62 @@
-import "./Profile.css"
-import { useState } from "react"
-import { ChangePassword, FormProfile } from "../components"
-import { useAuth } from "../context/authContext"
-import { useDeleteUserError } from "../hooks"
+import "./Profile.css";
+import { useState } from "react";
+import { ChangeEmail, ChangePassword, FigureUser, FormProfile } from "../components";
+import { useAuth } from "../context/authContext";
+import { useDeleteUserError } from "../hooks";
+
 export const Profile = () => {
-    const [changeRender, setChangeRender] = useState(true)
-    const { setUser } = useAuth()
+  const { user, setUser, logout } = useAuth()
+  const [changeRender, setChangeRender] = useState("profile");
+
+  const renderizarComponente = (componente) => {
+    setChangeRender(componente);
+  };
 
   return (
-    <>
-    <div className="profile">
-    <div className="containerNavProfile">
-      <img
-        src="https://res.cloudinary.com/dq186ej4c/image/upload/v1686125399/pngwing.com_npd5sa.png"
-        alt="go to ChangePassword"
-        className="iconNav"
-        onClick={() => setChangeRender(false)}
-      />
-      <img
-        src="https://res.cloudinary.com/dq186ej4c/image/upload/v1686125391/Change_User_icon-icons.com_55946_lypx2c.png"
-        alt="go to change data profile"
-        className="iconNav iconChangeProfile"
-        onClick={() => setChangeRender(true)}
-      />
-      <img
-        src="https://res.cloudinary.com/dq186ej4c/image/upload/v1686140226/eliminar_user_rmwoeg.png"
-        alt="user delete button"
-        className="iconNav iconDeleteUser"
-        onClick={() => useDeleteUserError(setUser)}
-      />
+    <div className="profile-container">
+      <div className="profile-card">
+        <div className="containerNavProfile">
+          <div
+            className={`profile-nav ${changeRender == "profile" && "active"}`}
+            onClick={() => renderizarComponente("profile")}
+          >
+            <i className="fa fa-user" aria-hidden="true"></i>
+            <p>Profile</p>
+          </div>
+          <div
+            className={`profile-nav ${changeRender == "password" && "active"}`}
+            onClick={() => renderizarComponente("password")}
+          >
+            <i className="fa fa-unlock-alt" aria-hidden="true"></i>
+            <p>Password</p>
+          </div>
+          <div
+            className={`profile-nav ${changeRender == "email" && "active"}`}
+            onClick={() => renderizarComponente("email")}
+          >
+            <i className="fa fa-envelope" aria-hidden="true"></i>
+            <p>Email</p>
+          </div>
+        </div>
+        <div className="fluidContainerProfile">
+          <div className="profile-delete">
+            <button onClick={() => useDeleteUserError(setUser)}>
+              <i className="fa fa-user-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div className="containerProfile">
+            <div className="containerDataNoChange">
+              <FigureUser user={user} />
+            </div>
+            
+          </div>
+          <>
+            {changeRender == "profile" && <FormProfile />}
+            {changeRender == "password" && <ChangePassword />}
+            {changeRender == "email" && <ChangeEmail />}
+          </>
+        </div>
+      </div>
     </div>
-    <div className="fluidContainerProfile">
-      {changeRender ? <FormProfile /> : <ChangePassword />}
-    </div>
-    </div>
-    
-  </>
-  )
-}
+  );
+};

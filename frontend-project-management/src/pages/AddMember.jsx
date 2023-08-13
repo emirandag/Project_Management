@@ -61,7 +61,7 @@ export const AddMember = () => {
                 disabled={send}
                 {...register("email", { required: true })}
               />
-          <button><i class="fa fa-user-plus" aria-hidden="true"></i> Add</button>
+          <button><i className="fa fa-user-plus" aria-hidden="true"></i> Add</button>
         
         </form>
         </div>

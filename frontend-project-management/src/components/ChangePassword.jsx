@@ -55,12 +55,12 @@ export const ChangePassword = () => {
 
   return (
     <>
-          <div className="containerProfile">
+          {/* <div className="containerProfile">
         <div className="containerDataNoChange">
           <FigureUser user={user} />
-        </div>
+        </div> */}
       <div className="form-wrap">
-        <h1>Change your password ♻</h1>
+        <h1>Change your password <i className="fa fa-unlock-alt" aria-hidden="true"></i></h1>
         <p>Please, enter your old and new passwords</p>
         <form onSubmit={handleSubmit(formSubmit)}>
           <div className="password_container form-group">
@@ -118,7 +118,7 @@ export const ChangePassword = () => {
           </div>
         </form>
       </div>
-      </div>
+      {/* </div> */}
     </>
   )
 }

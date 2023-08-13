@@ -83,6 +83,17 @@ export const addUserProject = async (id, projectId) => {
 }
 
 
+export const changeRol = async (formData) => {
+  return APIuser.patch("/users/changerol", formData, {
+    headers: {
+      Authorization: `Bearer ${updateToken()}`
+    }
+  })
+    .then((res) => res)
+    .catch((error) => error)
+}
+
+
 // export const addUserTask = async (formData) => {
 //   return APIuser.post("/users/addusertask/:id", formData, {
 //   headers: {
