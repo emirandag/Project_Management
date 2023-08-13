@@ -7,12 +7,13 @@ const createTask = async (req, res, next) => {
     try {
         await Task.syncIndexes();
         
+      
         const { title, projectId } = req.body
 
         // Buscamos el proyecto por el ID que hemos desestructurado por el body
         const foundProject = await Project.findById(projectId)
         //const isOpenProject = await Project.findOne({ _id: projectId, isClosed: false})
-        
+      
 
         if (!foundProject) { // Comprobamos si el proyecto existe
             return res.status(404).json("The project not exist")

@@ -2,11 +2,11 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const generateToken = (id, email) => {
-  if (!id || !email) {
+const generateToken = (id, email, rol) => {
+  if (!id || !email || !rol) {
     throw new Error('Email or id are missing');
   }
-  return jwt.sign({ id, email }, process.env.JWT_SECRET, { expiresIn: '1d' });
+  return jwt.sign({ id, email, rol }, process.env.JWT_SECRET, { expiresIn: '1d' });
 };
 
 const verifyToken = (token) => {

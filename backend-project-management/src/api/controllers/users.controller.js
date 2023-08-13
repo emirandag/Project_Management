@@ -207,7 +207,7 @@ const login = async (req, res, next) => {
     const { email, password } = req.body
 
     //Buscamos el usuario en la base de datos
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email }).populate("projects")
 
     //Comprobamos si hay o no usuario
     if (!user) {
@@ -216,7 +216,7 @@ const login = async (req, res, next) => {
       //Comparamos la contraseña introducida por el body y la existente en la base de datos
       if (bcrypt.compareSync(password, user.password)) {
         //Si es igual, generaos un token
-        const token = generateToken(user._id, email)
+        const token = generateToken(user._id, email, user.rol)
 
         //devolvemos el usuario y el token
         return res.status(200).json({
@@ -254,7 +254,7 @@ const autoLogin = async (req, res, next) => {
 
       if (passwordMatch) {
         // Si es igual, generamos un token
-        const token = generateToken(user._id, email)
+        const token = generateToken(user._id, email, user.rol)
 
         // Devolvemos el usuario y el token
         return res.status(200).json({

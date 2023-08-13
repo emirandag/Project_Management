@@ -10,7 +10,7 @@ ProjectRoutes.delete("/deleteproject/:id", [isAuthManager], deleteProject)
 ProjectRoutes.post("/addmemberproject/:id", [isAuthManager], addMemberProject)
 ProjectRoutes.delete("/deletememberproject/:id&email=:email", [isAuthManager], deleteMemberProject)
 ProjectRoutes.get("/", [isAuth], getAllProjects)
-ProjectRoutes.get("/:id", [isAuthManager], getProject)
-ProjectRoutes.get("/openprojects/list", [isAuthManager], getOpenProjects)
+ProjectRoutes.get("/:id", [isAuth], getProject)
+ProjectRoutes.get("/openprojects/list", [isAuth], getOpenProjects)
 
 module.exports = ProjectRoutes
