@@ -1,7 +1,7 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import { deleteUser } from "../services/API/user.service";
 
-export const useDeleteUserError = (setUser) => {
+export const useDeleteUserError = (userLogout) => {
     Swal.fire({
         title: "Are you sure you want to delete your profile?",
         icon: "warning",
@@ -21,8 +21,7 @@ export const useDeleteUserError = (setUser) => {
                         showConfirmButton: false,
                         timer: 1500,
                     });
-                    setUser(() => null)
-                    sessionStorage.removeItem("user")
+                    userLogout()
                     break;
             
                 default:

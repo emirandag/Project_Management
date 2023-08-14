@@ -5,12 +5,14 @@ import { useAuth } from "../context/authContext";
 import { useDeleteUserError } from "../hooks";
 
 export const Profile = () => {
-  const { user, setUser, logout } = useAuth()
+  const { user, userLogout } = useAuth()
   const [changeRender, setChangeRender] = useState("profile");
+
 
   const renderizarComponente = (componente) => {
     setChangeRender(componente);
   };
+
 
   return (
     <div className="profile-container">
@@ -40,7 +42,7 @@ export const Profile = () => {
         </div>
         <div className="fluidContainerProfile">
           <div className="profile-delete">
-            <button onClick={() => useDeleteUserError(setUser)}>
+            <button onClick={() => useDeleteUserError(userLogout)}>
               <i className="fa fa-user-times" aria-hidden="true"></i>
             </button>
           </div>
