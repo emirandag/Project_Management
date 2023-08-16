@@ -4,6 +4,7 @@ import { Navigate, useLocation, useParams } from "react-router-dom";
 import { addUserTask, showTaskById } from "../services/API/task.service";
 import { useAddUserTaskError, useDeleteTaskError, useUpdateTaskError } from "../hooks";
 import { useAuth } from "../context/authContext";
+import { Comments } from "../components";
 
 
 export const Task = () => {
@@ -100,6 +101,9 @@ export const Task = () => {
             </div>
             <div className="task-middle">
               <h2>{res?.data?.title}</h2>
+            </div>
+            <div className="task-bottom">
+                <Comments />
             </div>
 
           </>

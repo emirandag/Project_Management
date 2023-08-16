@@ -54,3 +54,14 @@ export const addUserTask = async (taskId, email) => {
   .then((res) => res)
   .catch((error) => error)
 }
+
+
+export const createComment = async (formData) => {
+  return APIuser.post(`/comments/createcomment`, formData, {
+    headers: {
+      Authorization: `Bearer ${updateToken()}`
+    }
+  })
+    .then((res) => res)
+    .catch((error) => error)
+}
