@@ -25,6 +25,7 @@ const UserSchema = new Schema(
     check: { type: Boolean, default: false },
     projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
     tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   },
   {
     timestamps: true,

@@ -9,7 +9,7 @@ const TaskSchema = new Schema(
         assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         isCompleted: { type: Boolean, default: false },
         createdDate: { type: Date, default: Date.now },
-        // comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+        comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
     },
     {
         timestamps: true

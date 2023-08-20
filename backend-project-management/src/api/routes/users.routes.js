@@ -37,7 +37,7 @@ UserRoutes.patch('/adduserproject/:id&projectId=:projectId', [isAuthManager], ad
 UserRoutes.get("/", [isAuthManager], getAllUsers)
 UserRoutes.get("/:id", [isAuthManager], getUser)
 UserRoutes.post("/changeemail", [isAuth], changeEmail)
-UserRoutes.patch("/checkemail", [isAuth], checkNewEmail)
+UserRoutes.post("/checkemail", [isAuth], checkNewEmail)
 UserRoutes.patch("/changerol", [isAuthAdmin], changeRol)
 
 // -------REDIRECT --------------------

@@ -12,4 +12,6 @@ TaskRoutes.get("/:id", [isAuth], getTask)
 TaskRoutes.get("/opentasks/list", [isAuth], getOpenTasks)
 TaskRoutes.patch('/addusertask/:id&email=:email', [isAuth], addUserTask);
 
+// TaskRoutes.post('/:id', [isAuth], createComment);
+
 module.exports = TaskRoutes

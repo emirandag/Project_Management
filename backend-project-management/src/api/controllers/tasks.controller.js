@@ -1,6 +1,7 @@
 const Task = require("../models/task.model")
 const Project = require("../models/project.model")
 const User = require("../models/user.model")
+const Comment = require("../models/comment.model")
 const setError = require('../../helpers/handle-error');
 
 const createTask = async (req, res, next) => {
@@ -137,6 +138,13 @@ const deleteTask = async (req, res, next) => {
             return res.status(404).json(error.message)
           }
           
+          try {
+            // Borramos todos los comentarios asociados a esa tarea
+            await Comment.deleteMany({ task: id })
+
+          } catch (error) {
+            return res.status(404).json(error.message)
+          }
           
           const isDeletedTask = await Task.findById(id)
           if (!isDeletedTask) {
@@ -180,7 +188,7 @@ const getAllTasks = async (req, res, next) => {
   const getTask = async (req, res, next) => {
     try {
       const { id } = req.params
-      const getTaskById = await Task.findById(id)
+      const getTaskById = await Task.findById(id).populate("comments")
       console.log(getTaskById);
       if (getTaskById) {
         res.status(200).json(getTaskById)
@@ -271,6 +279,71 @@ const getAllTasks = async (req, res, next) => {
       return next(error)
     }
   }
+
+
+
+  // const createComment = async (req, res, next) => {
+  //   try {
+  //     //console.log(req.user);
+  //     console.log(req.params);
+  //     console.log(req.body);
+  //     const { _id } = req.user
+  //     const { id } = req.params
+  //     const { text } = req.body
+  //     const foundTask = await Task.findById(id)
+  //     const foundUser = await User.findById(_id)
+
+
+  //     if (foundTask) {
+  //       try {
+  //         //await 
+  //         //await Task.findByIdAndUpdate(foundTask._id, { $push: { comments: foundTask._id } })
+  //         const newComment = new Comment({
+  //           text,
+  //           task: foundTask._id,
+  //           user: foundUser._id
+  //         })
+
+    
+  //       //Guardamos el comentario en la base de datos
+  //       await newComment.save()
+
+  //       if (newComment) {
+  //         try {
+  //           await Task.findByIdAndUpdate(foundTask._id, {$push: { comments: newComment._id }})
+  //         } catch (error) {
+  //           return res.status(404).json("Error to update task" || error.message)
+  //         }
+
+  //         try {
+  //           await User.findByIdAndUpdate(foundUser._id, {$push: { comments: newComment._id }})
+  //         } catch (error) {
+  //           return res.status(404).json("Error to update user" || error.message)
+  //         }
+          
+  //         const testComment = await Comment.findById(newComment._id)
+
+  //         if (testComment) {
+  //           res.status(201).json({
+  //             testComment,
+  //             result: "The comment is created"
+  //           })
+  //         }
+  //       } else {
+  //         return res.status(404).json("Error to create comment")
+  //       }
+        
+  //       } catch (error) {
+  //         return res.status(404).json(error.message)
+  //       }
+  //     } else {
+        
+  //     }
+     
+  //   } catch (error) {
+  //     return next(error)
+  //   }
+  // }
 
 module.exports = { 
   createTask, 

@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const Project = require('../models/project.model');
 const Task = require('../models/task.model');
+const Comment = require('../models/comment.model');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
@@ -497,13 +498,24 @@ const deleteUser = async (req, res, next) => {
             { assignedTo: _id },
             { $unset: { assignedTo: 1 } }
           );
+        
+          try {
+            await Comment.deleteMany(
+              { user: _id },
+              //{ $unset: { user: 1 } }
+            );
+          
 
-          if (await User.findById(_id)) {
-            return res.status(404).json("Don't delete");
-          } else {
-            deleteImgCloudinary(req.user.photo);
-            return res.status(200).json('Ok delete');
-          }
+            if (await User.findById(_id)) {
+              return res.status(404).json("Don't delete");
+            } else {
+              deleteImgCloudinary(req.user.photo);
+              return res.status(200).json('Ok delete');
+            }
+} catch (error) {
+          return res.status(404).json(error.message);
+        }
+          
         } catch (error) {
           return res.status(404).json(error.message);
         }
@@ -737,7 +749,7 @@ const getUser = async (req, res, next) => {
  */
 const changeEmail = async (req, res, next) => {
   try {
-    // Traemos el ID de los params
+    // Traemos el ID
     const { _id } = req.user
 
     // Nos traemos el email del body
@@ -771,6 +783,7 @@ const changeEmail = async (req, res, next) => {
           res.status(200).json({
             updateUserCode,
             confirmationCode: newCode,
+            newEmail,
             message: `The confirmation code has been sent to the email ${newEmail}`
           })
         } else {
@@ -883,7 +896,6 @@ const changeRol = async (req, res, next) => {
     );
   }
 }
-
 
 module.exports = { 
   register, 
