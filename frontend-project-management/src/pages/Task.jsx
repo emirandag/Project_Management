@@ -103,7 +103,7 @@ export const Task = () => {
               <h2>{res?.data?.title}</h2>
             </div>
             <div className="task-bottom">
-                <Comments />
+                <Comments comments={res?.data?.comments}/>
             </div>
 
           </>

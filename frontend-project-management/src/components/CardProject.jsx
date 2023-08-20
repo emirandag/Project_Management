@@ -1,7 +1,7 @@
 import "./CardProject.css"
 import { useNavigate } from 'react-router-dom';
 
-export const CardProject = ({ project }) => {
+export const CardProject = ({ project, backgroundColor, backgroundColorProgress }) => {
   const navigate = useNavigate();
   const renderToProjectById = (id) => {
     console.log(id);
@@ -11,6 +11,7 @@ export const CardProject = ({ project }) => {
     <>
       <div
         className="project-box"
+        style={{backgroundColor: backgroundColor}}
         onClick={() => renderToProjectById(project._id)}
       >
         <div className="project-box-header">
@@ -24,13 +25,34 @@ export const CardProject = ({ project }) => {
             </div>
           <div className="project-box-progress">
             <h4>Progress:</h4>
-             <progress     
+             {/* <progress     
               max={project.tasks.length}
               value={
                 project.tasks.filter((task) => task.isCompleted == true).length
               }
+              
+              style={{ 
+                
+                '--webkit-progress-value': 'red',
+                
+                
+              }}
             >
-            </progress>
+            </progress> */}
+            <div className="progress-container">
+        {/* <div class="skill html">80%</div> */}
+              <div 
+                className="progress bar" 
+
+                style={{
+                  backgroundColor: project.tasks.filter(task => task.isCompleted).length > 0 ? backgroundColorProgress : '#ffffff',
+                  //padding: project.tasks.filter(task => task.isCompleted).length > 0 ? '2%' : '0',
+                  width: `${(project.tasks.filter(task => task.isCompleted).length / project.tasks.length) * 100}%`
+                }}
+                ></div>
+            </div>
+              
+            
             { project.tasks.length > 0 
             ? 
             parseInt((project.tasks.filter((task) => task.isCompleted == true).length*100)/project.tasks.length)
@@ -65,7 +87,7 @@ export const CardProject = ({ project }) => {
             </div>
             <div className="project-tasks">
               <p>{project.tasks.filter((task) => !task.assignedTo).length}</p>
-              <h5>NoAssigned</h5>
+              <h5>NoUser</h5>
             </div>
           </div>
         </div>

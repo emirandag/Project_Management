@@ -6,6 +6,9 @@ import { CardProject } from "../components"
 import { useAuth } from "../context/authContext"
 import jwtDecode from "jwt-decode";
 
+const colorPalette = ['#ffd3e2', '#d5deff', '#DBF6FD', '#fee4cb', '#c8f7dc', '#e9e7fd'];
+const progressBarPalette = ['#DF3670', '#4067F9', '#096C86', '#FF942E', '#34C471', '#4F3FF0'];
+
 export const Dashboard = () => {
   const [res, setRes] = useState(null)
   // const [renderPageProject, setRenderPageProject] = useState(false)
@@ -57,31 +60,26 @@ export const Dashboard = () => {
         
 
       {res ? (
-        res?.data?.map(project => (
-          <CardProject key={project._id} project={project}/>
+        res?.data?.map((project, index) => {
+          
+          const colorIndex = index % colorPalette.length;
+          const colorProgressIndex = index % progressBarPalette.length;
+          const backgroundColor = colorPalette[colorIndex];
+          const backgroundColorProgress = progressBarPalette[colorProgressIndex];
+          console.log(backgroundColor)
+          return (<CardProject 
+            key={project._id} 
+            project={project} 
+            backgroundColor={backgroundColor}
+            backgroundColorProgress={backgroundColorProgress} 
+            />)
 
-        ))
+})
         
       ) : <h1>Loading ...</h1>}
       
-        {/* <div className='project-add'>
-          <button>Add</button>
-        </div>
-        <div className='project-add'>
-          <button>Add</button>
-        </div>
-        <div className='project-add'>
-          <button>Add</button>
-        </div>
-        <div className='project-add'>
-          <button>Add</button>
-        </div>
-        <div className='project-add'>
-          <button>Add</button>
-        </div> */}
       </div>
       </div>
-      {/* </div> */}
     </>
   )
 }
