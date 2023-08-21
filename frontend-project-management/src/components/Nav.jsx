@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { useAuth } from '../context/authContext';
 
 export const Nav = () => {
-  const { user, userLogout } = useAuth();
+  const { user, userLogout, rol } = useAuth();
   return (
     <>
       <div>
@@ -24,8 +24,15 @@ export const Nav = () => {
           <NavLink to='/details'><button className='btn-nav'>DETAILS</button></NavLink> */}
           {user !== null ? (
             <>
-            <NavLink to='/projects'><button className='btn-nav'>PROJECTS</button></NavLink>
-            <NavLink to='/tasks'><button className='btn-nav'>TASKS</button></NavLink>
+            {rol != "user" && (
+              <>
+              <NavLink to='/projects'><button className='btn-nav'>PROJECTS</button></NavLink>
+              <NavLink to='/newtasks'><button className='btn-nav'>TASKS</button></NavLink>
+              </>
+            )}
+            {rol == "admin" && (
+            <NavLink to='/changerol'><button className='btn-nav'>CHANGE ROL</button></NavLink>
+            )}
             </>
            ) : null}
           {/* {user !== null ? (

@@ -1,7 +1,7 @@
 .project-container {
     width: 80%;
     min-height: 100%;
-    border: 0.5rem solid gainsboro;
+    /* border: 0.5rem solid gainsboro; */
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -127,3 +127,74 @@
     }
 }
 
+@media only screen and (max-width: 920px) {
+    .project-container {
+        width: 80%;
+        min-height: 100%;
+        /* border: 0.5rem solid gainsboro; */
+        border-radius: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+    }
+}
+
+
+@media only screen and (max-width: 450px) {
+    .project-container {
+        width: 100%;
+
+        && .project-top {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            && .project-avatar {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            && h2 {
+                width: 100%;
+                text-align: center;
+            }
+    
+            && .project-close {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        && .project-middle {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+    
+            && .project-middle-left {
+                width: 66%;
+                display: flex;
+                gap: 1rem;
+            }
+            && .project-middle-right {
+                width: 33%;
+                display: flex;
+                justify-content: flex-end;
+                gap: 1rem;
+            }
+        }
+
+        && .project-container-tasks {
+            width: 100%;
+        }
+    }
+}

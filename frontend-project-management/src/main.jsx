@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Dashboard, Home, Gallery, Details, CheckCode, Register, Login, ForgotPassword, Profile, Projects, Tasks, Project, AddMember, Task, NewTasks, ChangeRol } from './pages'
+import { Dashboard, Home, Details, CheckCode, Register, Login, ForgotPassword, Profile, Projects, Tasks, Project, AddMember, Task, NewTasks, ChangeRol, NewTaskDetails } from './pages'
 import { AuthContextProvider } from './context/authContext.jsx'
 import { Protected, ProtectedCheckChildren } from './components/index.js'
 
@@ -27,15 +27,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </ProtectedCheckChildren>
           
           } />
-          {/* <Route path='/gallery' element={
-            <Protected>
-              <Gallery />
-            </Protected>} /> */}
-          <Route path='/details' element={
+          {/* <Route path='/details' element={
             <Protected>
               <Details />
             </Protected>
-            } />
+            } /> */}
             <Route path='/profile' element={
               <Protected>
                 <Profile />
@@ -67,22 +63,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Task />
               </Protected>
             } />
-            <Route path="tasks" element={
+            <Route path="/newtasks" element={
               <Protected>
-                <Tasks />
+                <NewTasks />
               </Protected>
             } />
-            {/* <Route path="/projects/:id/tasks/:id" element={
+
+            <Route path="/newtasks/:id" element={
               <Protected>
-                <Task />
-              </Protected>
-            } /> */}
-            <Route path="tasks/:id" element={
-              <Protected>
-                <Task />
+                <NewTaskDetails />
               </Protected>
             } />
-            <Route path="changerol" element={
+            <Route path="/changerol" element={
               <Protected>
                 <ChangeRol />
               </Protected>

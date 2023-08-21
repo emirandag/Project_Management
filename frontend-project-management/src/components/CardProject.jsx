@@ -1,18 +1,18 @@
 import "./CardProject.css"
 import { useNavigate } from 'react-router-dom';
 
-export const CardProject = ({ project, backgroundColor, backgroundColorProgress }) => {
+export const CardProject = ({ project, backgroundColor, backgroundColorProgress, backgroundColorTask }) => {
   const navigate = useNavigate();
-  const renderToProjectById = (id) => {
+  const renderToProjectById = (id, backgroundColor, backgroundColorProgress, backgroundColorTask) => {
     console.log(id);
-    return navigate(`/projects/${id}`);
+    return navigate(`/projects/${id}`, {state: {backgroundColor, backgroundColorProgress, backgroundColorTask}});
   };
   return (
     <>
       <div
         className="project-box"
         style={{backgroundColor: backgroundColor}}
-        onClick={() => renderToProjectById(project._id)}
+        onClick={() => renderToProjectById(project._id, backgroundColor, backgroundColorProgress, backgroundColorTask)}
       >
         <div className="project-box-header">
           <h3>{project.title}</h3>

@@ -1,23 +1,30 @@
 import "./CardTask.css"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { useDeleteTaskError } from "../hooks";
 import { useState } from "react";
 
-export const CardTask = ({ project, task, setDeleteTaskOk }) => {
+
+export const CardTask = ({ task, setDeleteTaskOk, projectColor, taskColor }) => {
     const { user } = useAuth()
+    const { id } = useParams()
     const navigate = useNavigate();
-    // const [deleteTaskOk, setDeleteTaskOk] = useState(false)
     
-    const renderToTaskById = (id, project) => {
-    //   console.log(id);
-    //   console.log(project);
-      return navigate(`/tasks/${id}`, {state: project?.title});
+    const renderToTaskById = (idTask) => {
+
+      return navigate(`/projects/${id}/tasks/${idTask}`);
     };
 
   return (
     <>
-      <div className="task-box" onClick={() => renderToTaskById(task._id, project)}>
+      <div 
+        className="task-box" 
+        style={{
+          backgroundColor: projectColor,
+          
+          boxShadow: `1px 2px 5px ${taskColor}`
+        }}
+        onClick={() => renderToTaskById(task._id)}>
         <div className="task-header">
             <h3>{task.title}</h3>
         </div>

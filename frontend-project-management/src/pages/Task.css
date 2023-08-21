@@ -146,3 +146,106 @@
     
 }
 
+@media only screen and (max-width: 920px) {
+    .task-dashboard { 
+        width: 100%;
+
+        && .task-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            && .task-top {
+                width: 100%;
+                display: flex;
+                /* flex-direction: column-reverse; */
+                gap: 0.5rem;
+
+                && .task-avatar {
+                    width: 33%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.2rem;
+
+                    && button {
+                        width: 100%;
+                    }
+                }
+
+                && button {
+                    width: 33%;
+                }
+            }
+
+            && .project-middle {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        && .task-middle {
+            width: 100%;
+        }
+
+        && .task-bottom {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .task-dashboard { 
+        width: 100%;
+
+        && .task-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            && .task-top {
+                width: 100%;
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 0.5rem;
+
+                && .task-avatar {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.2rem;
+
+                    && button {
+                        width: 100%;
+                    }
+                }
+
+                && button {
+                    width: 100%;
+                }
+            }
+
+            && .project-middle {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        && .task-middle {
+            width: 100%;
+        }
+
+        && .task-bottom {
+            width: 100%;
+        }
+    }
+}

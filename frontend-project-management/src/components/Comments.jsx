@@ -21,7 +21,7 @@ export const Comments = () => {
     const [editCommentId, setEditCommentId] = useState({});
     const [commentText, setCommentText] = useState("");
     
-  console.log(id);
+  //console.log(id);
     const formSubmit = async (formData) => {
         const customFormData = {
             ...formData,
@@ -35,10 +35,10 @@ export const Comments = () => {
     }
 
     const loadPage = async (id) => {
-        console.log(id);
+        //console.log(id);
         const dataComments = await getCommentsByTask(id);
         setResComments(dataComments);
-        
+        console.log(res);
       };
     
 
@@ -78,8 +78,14 @@ export const Comments = () => {
           // rows="4"
           // cols="66"
         />
-        
-            <button disabled={send}>Add comment</button>
+        {
+            resComments?.data?.foundTask?.isCompleted == true ? (
+                <button disabled={true}>Add comment</button>
+            ) : (
+                <button disabled={send}>Add comment</button>
+            )
+        }
+            
             
         
         {/* <button disabled={send}>Add comment</button> */}

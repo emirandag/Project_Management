@@ -1,5 +1,5 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
-export const useLoginError = (res, setLoginOk, userLogin, setRes) => {
+export const useLoginError = (res, setLoginOk, userLogin, setRes, setRol) => {
 
   // ---------- 200 - Todo OK ----------
   if (res?.status == 200) {
@@ -15,6 +15,7 @@ export const useLoginError = (res, setLoginOk, userLogin, setRes) => {
     const dataString = JSON.stringify(dataCustom)
     userLogin(dataString)
     setLoginOk(() => true)
+    setRol(res.data.user.rol)
 
     Swal.fire({
       icon: "success",

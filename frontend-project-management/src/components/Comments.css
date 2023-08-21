@@ -129,3 +129,19 @@
         }
     }
 }
+
+
+@media only screen and (max-width: 920px) { 
+    .form-comment {
+        width: 100%;
+
+        && textarea {
+            width: 100%;
+            box-shadow: 1px 1px 2px black;
+        }
+
+        && button {
+            width: 33%;
+        }
+    }
+}

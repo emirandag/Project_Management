@@ -2,7 +2,7 @@ import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import { deleteTask } from "../services/API/task.service";
 
 export const useDeleteTaskError = (id, setDeleteTaskOk) => {
-    console.log(id);
+    //console.log(id);
     Swal.fire({
         title: "Are you sure you want to delete this task?",
         icon: "warning",

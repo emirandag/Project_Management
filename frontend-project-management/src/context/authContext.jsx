@@ -31,7 +31,10 @@ export const AuthContextProvider = ({ children }) => {
             }
         }
     })
+
+    const [rol, setRol] = useState(null)
     
+    console.log(rol);
     const navigate = useNavigate()
 
     /**
@@ -52,6 +55,7 @@ export const AuthContextProvider = ({ children }) => {
     const userLogout = () => {
         sessionStorage.removeItem("user")
         setUser(null)
+        setRol(null)
         navigate("/login")
     }
 
@@ -76,7 +80,7 @@ export const AuthContextProvider = ({ children }) => {
      * ------ UseMemo memoriza el return de una funcion -------------
      */
     const value = useMemo(() => ({
-            user, setUser, userLogin, userLogout, allUser, setAllUser, bridgeData
+            user, setUser, userLogin, userLogout, allUser, setAllUser, bridgeData, rol, setRol
         }),
         [user, allUser]
     )

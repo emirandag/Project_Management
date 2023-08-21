@@ -24,52 +24,27 @@ export const Tasks = () => {
   const [confirmTaskOk, setConfirmTaskOk] = useState(false);
 
   const formSubmit = async (formData) => {
-    console.log(formData);
-
-    if (id) {
-      const projectId = id;
-      const customFormData = {
-        ...formData,
-        projectId,
-      };
-      setSend(true);
-      setRes(await createTask(customFormData));
-      setSend(false);
-    } else {
-      setSend(true);
-      setRes(await createTask(formData));
-      setSend(false);
+    const projectId = id
+    const customFormData = {
+      ...formData,
+      projectId
     }
-  };
 
-  const loadPage = async () => {
-    const dataProject = await openProjects();
-    setResProjects(dataProject);
+    setSend(true);
+    setRes(await createTask(customFormData));
+    setSend(false);
+    
   };
 
   useEffect(() => {
-    //console.log(res.data[0].title);
-    loadPage();
-    //console.log(res);
-  }, []);
-
-  useEffect(() => {
-    console.log(res);
+  
     useCreateTaskError(res, setRes, setConfirmTaskOk);
   }, [res]);
 
   if (confirmTaskOk) {
-    // return <Navigate to={`/tasks/${res?.data?.newTask?._id}`} />
-    if (id) {
-      return navigate(`/projects/${id}/tasks/${res?.data?.newTask?._id}`, {
-        state: res?.data?.updateProject?.title,
-      });
-    } else {
-      console.log("Ddddddddddddddddddd");
-      return navigate(`/tasks/${res?.data?.newTask?._id}`, {
-        state: res?.data?.updateProject?.title,
-      });
-    }
+    return <Navigate to={`/projects/${id}/tasks/${res?.data?.newTask?._id}`} />
+
+    //return navigate(`/projects/${id}/tasks/${res?.data?.newTask?._id}`);
   }
 
   return (
@@ -94,7 +69,7 @@ export const Tasks = () => {
               placeholder="Enter the title"
               {...register("title", { required: true })}
             />
-            {!id && (
+            {/* {!id && (
               <>
                 <label htmlFor="projectId">Choose a car:</label>
                 <select className="projects-select" {...register("projectId")}>
@@ -105,7 +80,7 @@ export const Tasks = () => {
                   ))}
                 </select>
               </>
-            )}
+            )} */}
           </div>
           <div className="btn_container">
             <button className="btn" type="submit" disabled={send}>

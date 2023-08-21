@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Project.css"
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
 import Modal from "../components/UI/Modal/Modal";
 import { useDeleteProjectError, useDeleteTaskError, useUpdateProjectError } from "../hooks";
 import { showProjectById } from "../services/API/project.service";
@@ -14,12 +14,18 @@ export const Project = () => {
     const { user } = useAuth()
     const [res, setRes] = useState({})
     const [renderPageAddMember, setRenderPageAddMember] = useState(false);
-    const [renderPageTask, setRenderTask] = useState(false);
+    const [renderPageTask, setRenderPageTask] = useState(false);
     const [deleteProjectOk, setDeleteProjectOk] = useState(false)
     const [updateProjectOk, setUpdateProjectOk] = useState(false)
     const [deleteTaskOk, setDeleteTaskOk] = useState(false)
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     // console.log(id);
+    const location = useLocation();
+    const projectColor = location?.state?.backgroundColor
+    const taskColor = location?.state?.backgroundColorProgress
+    const dataColor = location?.state?.backgroundColorTask
+
+    //console.log(location?.state);
     const loadPage = async (id) => {
       const dataProject = await showProjectById(id)
       setRes(dataProject)
@@ -27,28 +33,40 @@ export const Project = () => {
   
     useEffect(() => {
       loadPage(id)
+      
       //console.log(res);
-    }, [deleteTaskOk, updateProjectOk])
+    }, [updateProjectOk])
+
+
+    useEffect(() => {
+      loadPage(id)
+      setDeleteTaskOk(false)
+   
+    }, [deleteTaskOk])
     // console.log(res);
 
     if (renderPageAddMember) {
         return <Navigate to={`/projects/${id}/addmember`}/>
     }
     if (renderPageTask) {
-      return <Navigate to={`/projects/${id}/tasks`} />
-      // const project = res?.data
-      // return navigate('/tasks', {state: project})
+      return navigate(`/projects/${id}/tasks`, {state: taskColor})
     } 
     if (deleteProjectOk) {
       return <Navigate to={`/dashboard`} />
     }
 
-    console.log(deleteTaskOk);
+    //console.log(deleteTaskOk);
 
   return (
     <>
     {res?.data ? (
-      <div className="project-container">
+      <div 
+        className="project-container"
+        style={{ 
+          backgroundColor: dataColor,
+          boxShadow: `1px 5px 5px ${projectColor}`
+        }}
+      >
         
           <>
             <div className="project-top">
@@ -106,7 +124,7 @@ export const Project = () => {
             )} */}
                 <button 
                 disabled={res?.data?.isClosed}
-                onClick={() => setRenderTask(true)}>Add task</button>
+                onClick={() => setRenderPageTask(true)}>Add task</button>
               </div>
               <div className="project-middle-right">
                 <button 
@@ -119,7 +137,7 @@ export const Project = () => {
             </div>
             <div className="project-container-tasks">
               {res?.data?.tasks?.map((task) => (
-                <CardTask project={res?.data} task={task} key={task._id} setDeleteTaskOk={setDeleteTaskOk} />
+                <CardTask project={res?.data} task={task} key={task._id} setDeleteTaskOk={setDeleteTaskOk} projectColor={projectColor} taskColor={taskColor} />
                 // <div className="project-task" key={task._id}>
                 //   <h3>{task.title}</h3>
                 //   <div className="task-info">

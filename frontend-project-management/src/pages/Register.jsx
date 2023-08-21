@@ -188,16 +188,7 @@ export const Register = () => {
             </div>
             <div className="footerForm">
               <Link to="/login">Already have an account?</Link>
-              {/* <Link to="/forgotpassword" className="anchorCustom">
-                Forgot password?
-              </Link> */}
-              {/* <small>
 
-              Have you forgotten the password?
-              <Link to="/forgotpassword" className="anchorCustom">
-                Change password
-              </Link>
-            </small> */}
             </div>
           </form>
         </div>

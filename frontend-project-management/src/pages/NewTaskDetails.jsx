@@ -1,13 +1,13 @@
 import "./Task.css"
 import { useEffect, useState } from "react";
 import { Navigate, useLocation, useParams } from "react-router-dom";
-import { addUserTask, showTaskById } from "../services/API/task.service";
+import { showTaskById } from "../services/API/task.service";
 import { useAddUserTaskError, useDeleteTaskError, useUpdateTaskError } from "../hooks";
 import { useAuth } from "../context/authContext";
 import { Comments } from "../components";
 
 
-export const Task = () => {
+export const NewTaskDetails = () => {
     const { id } = useParams();
     const { user } = useAuth()
     const [res, setRes] = useState({})
@@ -15,25 +15,19 @@ export const Task = () => {
     const [deleteTaskOk, setDeleteTaskOk] = useState(false)
     const [addUserOk, setAddUserOk] = useState(false)
 
-    //const location = useLocation();
-    //const projectTitle = location?.state
-    // if (location.pathname == "/tasks") {
-      
-    // } else {
-    //   const projectTitle = location?.state?.title
-    //   return projectTitle
-    // }
+
     
     //console.log(location);
 
     const loadPage = async (id) => {
-        // console.log(id);
         const data = await showTaskById(id)
         setRes(data)
       }
     
       useEffect(() => {
+        
         loadPage(id)
+      
       }, [updateTaskOk, addUserOk])
 
 
@@ -46,9 +40,10 @@ export const Task = () => {
   return (
     <>
     <div className="task-dashboard">
-     
-    <h2>{res?.data?.getTaskById?.getProject}</h2>
+      
+    <h2>{res?.data?.getProject?.title}</h2>
       <div className="task-container">
+        {console.log(res)}
         {res ? (
           <>
             <div className="task-top">
