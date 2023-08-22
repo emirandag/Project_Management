@@ -82,62 +82,69 @@
 
 
 @media only screen and (max-width: 600px) {
-    .project-header {
+    .dashboard-container { 
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
 
-        && .project-status {
-            width: 100% !important;
+        &&  .project-header {
+            width: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-
-            && .project-info {
-                
-
-                && .project-info-text{
-                    font-size: 2rem;
-                    text-align: center;
-                }
-                && p {
-                    text-align: center;
+            gap: 1rem;
+    
+            && .project-status {
+                width: 100% !important;
+                display: flex;
+                /* flex-direction: column; */
+                align-items: center;
+                justify-content: center !important;
+    
+                && .project-info {
+                    width: 33%;
+                    padding: 0;
+    
+                    && .project-info-text{
+                        font-size: 2rem;
+                        text-align: center;
+                    }
+                    && p {
+                        text-align: center;
+                    }
                 }
             }
-        }
-
-        && .project-btn-add {
-            width: 100% !important;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            
-            && button {
-                    width: 100% !important;
-                    height: 3rem;
-                    background-color: #478ac9;
-                    color: #ffffff;
-                    font-size: 14px;
-                    transition: all 0.2s ease;
-                    border-radius: 5px;
-                    border: none;
-
-
-                    && i.fa {
-                        font-size: 24px;
-                        margin-bottom: 0;
-                    }
     
-                    &&:hover {
-                        background-color: #adcce9;
-                        cursor: pointer;
-                      }
+            && .project-btn-add {
+                width: 100% !important;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                
+                && button {
+                        width: 100% !important;
+                        height: 3rem;
+                        background-color: #478ac9;
+                        color: #ffffff;
+                        font-size: 14px;
+                        transition: all 0.2s ease;
+                        border-radius: 5px;
+                        border: none;
+    
+    
+                        && i.fa {
+                            font-size: 24px;
+                            margin-bottom: 0;
+                        }
+        
+                        &&:hover {
+                            background-color: #adcce9;
+                            cursor: pointer;
+                          }
+                }
             }
         }
     }
+
   }
 
 

@@ -3,14 +3,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #b9c1cc;
+    background-color: #DDDDDD;
+    box-shadow: 1px 5px 10px #999999;
     gap: 1rem;
     border-radius: 5px;
     padding: 2rem;
     width: 500px;
     height: 400px;
     font-family: 'Roboto', sans-serif;
-    background-image: linear-gradient(#b9c1cc, #999999);
 
     && .span-avatar {
         width: 60px;

@@ -30,11 +30,12 @@ export const ChangeRol = () => {
 
   return (
     <div className='change-rol-container'>
-        {/* <div className='change-rol-search'>
-            <input type="text" />
-            <button>Buscar</button>
-        </div> */}
+        
         <div className='change-rol-form'>
+        <span className="span-avatar">
+          <img src="https://cdn-icons-png.flaticon.com/512/584/584594.png" />
+        </span>
+        <h1>Change rol</h1>
         <form onSubmit={handleSubmit(formSubmit)}>
           <div className="user_container form-group">
           <label htmlFor="custom-input" className="custom-placeholder">

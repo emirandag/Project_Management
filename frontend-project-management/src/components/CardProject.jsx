@@ -1,7 +1,10 @@
 import "./CardProject.css"
 import { useNavigate } from 'react-router-dom';
 
+import { colorPalette } from "../utils/colorPalette";
+
 export const CardProject = ({ project, backgroundColor, backgroundColorProgress, backgroundColorTask }) => {
+  const color = colorPalette() 
   const navigate = useNavigate();
   const renderToProjectById = (id, backgroundColor, backgroundColorProgress, backgroundColorTask) => {
     console.log(id);
@@ -11,7 +14,11 @@ export const CardProject = ({ project, backgroundColor, backgroundColorProgress,
     <>
       <div
         className="project-box"
-        style={{backgroundColor: backgroundColor}}
+        style={{
+          backgroundColor: `${project.isClosed ? color.colorProject.colorClosed : color.colorProject.colorOpen }`,
+          boxShadow: `1px 2px 5px ${project.isClosed ? color.colorTask.colorClosed : color.colorTask.colorOpen}`
+          
+        }}
         onClick={() => renderToProjectById(project._id, backgroundColor, backgroundColorProgress, backgroundColorTask)}
       >
         <div className="project-box-header">
@@ -25,28 +32,14 @@ export const CardProject = ({ project, backgroundColor, backgroundColorProgress,
             </div>
           <div className="project-box-progress">
             <h4>Progress:</h4>
-             {/* <progress     
-              max={project.tasks.length}
-              value={
-                project.tasks.filter((task) => task.isCompleted == true).length
-              }
-              
-              style={{ 
-                
-                '--webkit-progress-value': 'red',
-                
-                
-              }}
-            >
-            </progress> */}
             <div className="progress-container">
         {/* <div class="skill html">80%</div> */}
               <div 
                 className="progress bar" 
 
                 style={{
-                  backgroundColor: project.tasks.filter(task => task.isCompleted).length > 0 ? backgroundColorProgress : '#ffffff',
-                  //padding: project.tasks.filter(task => task.isCompleted).length > 0 ? '2%' : '0',
+                  backgroundColor: project.tasks.filter(task => task.isCompleted).length > 0 ? (project.isClosed ? color.colorProgressBar.colorClosed : color.colorProgressBar.colorOpen ) : '#ffffff',
+                  
                   width: `${(project.tasks.filter(task => task.isCompleted).length / project.tasks.length) * 100}%`
                 }}
                 ></div>

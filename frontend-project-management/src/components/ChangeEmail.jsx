@@ -47,7 +47,7 @@ export const ChangeEmail = () => {
         
         {!changeEmailOk ? (
           <>
-          <h1>Change your email <i className="fa fa-envelope" aria-hidden="true"></i></h1>
+          <h2>Change your email <i className="fa fa-envelope" aria-hidden="true"></i></h2>
         <p>Please, enter your old and new passwords</p>
         <form onSubmit={handleSubmit(formSubmit)}>
           <div className="email_container form-group">

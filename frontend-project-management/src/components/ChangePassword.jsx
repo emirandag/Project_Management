@@ -60,7 +60,7 @@ export const ChangePassword = () => {
           <FigureUser user={user} />
         </div> */}
       <div className="form-wrap">
-        <h1>Change your password <i className="fa fa-unlock-alt" aria-hidden="true"></i></h1>
+        <h2>Change your password <i className="fa fa-unlock-alt" aria-hidden="true"></i></h2>
         <p>Please, enter your old and new passwords</p>
         <form onSubmit={handleSubmit(formSubmit)}>
           <div className="password_container form-group">

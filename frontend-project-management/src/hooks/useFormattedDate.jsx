@@ -9,7 +9,8 @@ export const useFormattedDate = () => {
         const min = parsedDate.getUTCMinutes();
     
         // Ponemos la fecha en el formato escogido "d/m/aaaa h:m"
-        const newFormattedDate = `${day}/${month}/${year} ${hour}:${min}`;
+        const newFormattedDate = `
+            ${day < 10 ? "0"+day : day}/${month < 10 ? "0"+month : month}/${year} ${hour < 10 ? "0"+hour : hour}:${min < 10 ? "0"+min : min}`;
         return newFormattedDate
     }
     

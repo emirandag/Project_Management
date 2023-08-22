@@ -4,11 +4,6 @@ import { openProjects, showProjects } from "../services/API/project.service"
 import { Navigate, useNavigate } from "react-router-dom"
 import { CardProject } from "../components"
 import { useAuth } from "../context/authContext"
-import jwtDecode from "jwt-decode";
-
-const colorPalette = ['#ffd3e2', '#d5deff', '#DBF6FD', '#fee4cb', '#c8f7dc', '#e9e7fd'];
-const progressBarPalette = ['#DF3670', '#4067F9', '#096C86', '#FF942E', '#34C471', '#4F3FF0'];
-const taskPalette = ['#fff1f6', '#f2f5ff', '#f4fcfe', '#fef6ef', '#eefcf4', '#f8f7fe'];
 
 export const Dashboard = () => {
   const [res, setRes] = useState(null)
@@ -20,8 +15,6 @@ export const Dashboard = () => {
   
 
   
-  // const decodedToken = jwtDecode(user.token);
-  // console.log("Token: ", decodedToken);
 
   const loadPage = async () => {
     const dataProject = await showProjects()
@@ -50,7 +43,7 @@ export const Dashboard = () => {
 
           {rol != "user" && (
 <>
-<div className="project-info" onClick={(e) => {
+          <div className="project-info" onClick={(e) => {
           e.stopPropagation()
           renderizarComponente("totalProjects")
           }}>
@@ -91,21 +84,13 @@ export const Dashboard = () => {
 {console.log(res?.data?.filter(project => project.users.some(userProject => userProject._id === user._id)))}
       {res ? (
         rol != "user" && changeRender == "totalProjects"  ? (
-          res?.data?.map((project, index) => {
+          res?.data?.map((project) => {
             
-            const colorIndex = index % colorPalette.length;
-            const colorProgressIndex = index % progressBarPalette.length;
-            const colorTaskIndex = index % taskPalette.length;
-            const backgroundColor = colorPalette[colorIndex];
-            const backgroundColorProgress = progressBarPalette[colorProgressIndex];
-            const backgroundColorTask = taskPalette[colorTaskIndex];
-            console.log(backgroundColor)
+
+        
             return (<CardProject 
               key={project._id} 
               project={project} 
-              backgroundColor={backgroundColor}
-              backgroundColorProgress={backgroundColorProgress} 
-              backgroundColorTask={backgroundColorTask}
               />)
   
   })
@@ -113,38 +98,19 @@ export const Dashboard = () => {
         ) : rol != "user" && changeRender == "openProjects" ? (
           res?.data?.filter(project => project.isClosed == false).map((project, index) => {
             
-            const colorIndex = index % colorPalette.length;
-            const colorProgressIndex = index % progressBarPalette.length;
-            const colorTaskIndex = index % taskPalette.length;
-            const backgroundColor = colorPalette[colorIndex];
-            const backgroundColorProgress = progressBarPalette[colorProgressIndex];
-            const backgroundColorTask = taskPalette[colorTaskIndex];
-            console.log(backgroundColor)
             return (<CardProject 
               key={project._id} 
               project={project} 
-              backgroundColor={backgroundColor}
-              backgroundColorProgress={backgroundColorProgress} 
-              backgroundColorTask={backgroundColorTask}
               />)
   
   })
         ) : changeRender == "myProjects" ? (
           res?.data?.filter(project => project.users.some(userProject => userProject._id === user._id)).map((project, index) => {
             
-            const colorIndex = index % colorPalette.length;
-            const colorProgressIndex = index % progressBarPalette.length;
-            const colorTaskIndex = index % taskPalette.length;
-            const backgroundColor = colorPalette[colorIndex];
-            const backgroundColorProgress = progressBarPalette[colorProgressIndex];
-            const backgroundColorTask = taskPalette[colorTaskIndex];
-            //console.log(backgroundColor)
             return (<CardProject 
               key={project._id} 
               project={project} 
-              backgroundColor={backgroundColor}
-              backgroundColorProgress={backgroundColorProgress} 
-              backgroundColorTask={backgroundColorTask}
+
               />)
              })) : (null)
       ) : (<h1>Loading ...</h1>)} 

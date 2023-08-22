@@ -20,14 +20,13 @@ export const Comments = () => {
     const [editCommentOk, setEditCommentOk] = useState(false);
     const [editCommentId, setEditCommentId] = useState({});
     const [commentText, setCommentText] = useState("");
-    
-  //console.log(id);
+
     const formSubmit = async (formData) => {
         const customFormData = {
             ...formData,
             taskId: id
         }
-        //console.log(customFormData);
+
         setSend(true)
         setRes(await createComment(customFormData))
         setSend(false)
@@ -35,7 +34,7 @@ export const Comments = () => {
     }
 
     const loadPage = async (id) => {
-        //console.log(id);
+
         const dataComments = await getCommentsByTask(id);
         setResComments(dataComments);
         console.log(res);
@@ -53,7 +52,7 @@ export const Comments = () => {
         await updateComment(editCommentId, formData)
         setEditCommentOk(false)
         setUpdateCommentOk(false)
-        //reset()
+
     }
 
     useEffect(() => {
@@ -75,8 +74,7 @@ export const Comments = () => {
           placeholder="Write a comment ..."
           defaultValue={commentText} 
           {...register("text", { required: true })}
-          // rows="4"
-          // cols="66"
+
         />
         {
             resComments?.data?.foundTask?.isCompleted == true ? (
@@ -100,8 +98,7 @@ export const Comments = () => {
           placeholder="Write a comment ..."
           defaultValue={commentText} 
           {...register("text", { required: true })}
-          // rows="4"
-          // cols="66"
+
         />
             
             <button disabled={send}>Update comment</button>
@@ -134,7 +131,7 @@ export const Comments = () => {
                     ) : (
                         <p>{comment.text}</p>
                     )}
-                    
+                    {/* <p>{comment.text}</p> */}
                 </div>
                 <div className="comment-info">
                     <p>{comment.user == user._id && user.email}</p>
@@ -143,7 +140,7 @@ export const Comments = () => {
                 <div className="comment-btn">
                     <div className="divider"></div>
                     <button 
-
+                        disabled={resComments?.data?.foundTask?.isCompleted}
                         className="edit-btn" 
                         onClick={(e) => {
                             e.stopPropagation();
@@ -157,7 +154,7 @@ export const Comments = () => {
                         <i className="fa fa-pencil-square-o fa-2xs" aria-hidden="true"></i>
                     </button>
                     <button 
-                        disabled={deleteCommentOk}
+                        disabled={resComments?.data?.foundTask?.isCompleted}
                         className="delete-btn" 
                         onClick={(e) => {
                             e.stopPropagation();

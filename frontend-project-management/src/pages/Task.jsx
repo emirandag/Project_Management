@@ -15,16 +15,6 @@ export const Task = () => {
     const [deleteTaskOk, setDeleteTaskOk] = useState(false)
     const [addUserOk, setAddUserOk] = useState(false)
 
-    //const location = useLocation();
-    //const projectTitle = location?.state
-    // if (location.pathname == "/tasks") {
-      
-    // } else {
-    //   const projectTitle = location?.state?.title
-    //   return projectTitle
-    // }
-    
-    //console.log(location);
 
     const loadPage = async (id) => {
         // console.log(id);

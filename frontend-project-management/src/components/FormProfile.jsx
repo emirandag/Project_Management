@@ -69,7 +69,7 @@ export const FormProfile = () => {
           <FigureUser user={user} />
         </div> */}
         <div className="form-wrap formProfile">
-          <h1>Change your data profile <i className="fa fa-user" aria-hidden="true"></i></h1>
+          <h2>Change your data profile <i className="fa fa-user" aria-hidden="true"></i></h2>
           <p>Please, enter your new data profile</p>
           <form onSubmit={handleSubmit(formSubmit)}>
             <div className="user_container form-group">
