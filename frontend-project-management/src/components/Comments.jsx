@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { createComment, deleteComment, getCommentsByTask, updateComment } from "../services/API/comment.service";
 import { useAddCommentError, useFormattedDate } from "../hooks";
 import { useAuth } from "../context/authContext";
+import Modal from "./UI/Modal/Modal";
 
 
 export const Comments = () => {
@@ -20,6 +21,7 @@ export const Comments = () => {
     const [editCommentOk, setEditCommentOk] = useState(false);
     const [editCommentId, setEditCommentId] = useState({});
     const [commentText, setCommentText] = useState("");
+    const [openModal, setOpenModal] = useState(false)
 
     const formSubmit = async (formData) => {
         const customFormData = {
@@ -50,15 +52,15 @@ export const Comments = () => {
     const handleUpdateComment = async (formData) => {
         setUpdateCommentOk(true)
         await updateComment(editCommentId, formData)
-        setEditCommentOk(false)
+        //setEditCommentOk(false)
         setUpdateCommentOk(false)
-
+        setOpenModal(false)
     }
 
     useEffect(() => {
         useAddCommentError(res, setRes)
         reset()
-    }, [res])
+    }, [res, openModal])
 
     useEffect(() => {
         loadPage(id);
@@ -66,13 +68,13 @@ export const Comments = () => {
 
   return (
     <>
-    {!editCommentOk ? (
+    {/* {!editCommentOk ? ( */}
         <form className="form-comment" onSubmit={handleSubmit(formSubmit)}>
         <textarea
           name="text"
           autoComplete="false"
           placeholder="Write a comment ..."
-          defaultValue={commentText} 
+          //defaultValue={commentText} 
           {...register("text", { required: true })}
 
         />
@@ -88,46 +90,33 @@ export const Comments = () => {
         
         {/* <button disabled={send}>Add comment</button> */}
       </form>
-    ) 
-      :
-        (
-            <form className="form-comment" onSubmit={handleSubmit(formSubmit)}>
-        <textarea
-          name="text"
-          autoComplete="false"
-          placeholder="Write a comment ..."
-          defaultValue={commentText} 
-          {...register("text", { required: true })}
 
-        />
-            
-            <button disabled={send}>Update comment</button>
-        
-        {/* <button disabled={send}>Add comment</button> */}
-      </form>
-        )
-    }
-      {/* {console.log(res)} */}
-      {console.log(resComments)}
       <div className="container-comments">
         {resComments?.data?.foundTask?.comments?.map(comment => (
             <div key={comment._id} className="comment-card">
                 <div className="comment-text">
-                    {editCommentId == comment._id && editCommentOk ? (
+                    {editCommentId== comment._id && openModal ? (
+                        <Modal>
+                            <button className="close" onClick={() => {
+                                setOpenModal(false)
+                                
+                                }}>X</button>
                         <form className="form-comment" onSubmit={handleSubmit(handleUpdateComment)}>
                             <textarea
                                 name="text"
                                 autoComplete="true"
-                                //placeholder={commentText}
+                                placeholder={comment.text}
                                 
-                                defaultValue={comment.text} // Use the commentText state
+                                defaultValue={editCommentId.text} // Use the commentText state
                                 
-                                {...register("text", { required: true })}
+                                {...register("text", { required: true, value: comment.text })}
                             />
                         <button disabled={send}>
                             Update comment
                         </button>
+                        
                       </form>
+                      </Modal>
                     ) : (
                         <p>{comment.text}</p>
                     )}
@@ -144,11 +133,9 @@ export const Comments = () => {
                         className="edit-btn" 
                         onClick={(e) => {
                             e.stopPropagation();
-                            // handleDeleledComment(comment._id)
-                            setEditCommentOk(true)
                             setEditCommentId(comment._id)
                             setCommentText(comment.text)
-                            console.log(comment.text)
+                            setOpenModal(true)
                         }}
                     >
                         <i className="fa fa-pencil-square-o fa-2xs" aria-hidden="true"></i>

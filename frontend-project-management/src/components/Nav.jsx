@@ -48,7 +48,10 @@ export const Nav = () => {
               user !== null ? (
                 <>
                 <NavLink to='/profile'><button className='btn-nav' onClick={() => setIsOpen(!isOpen)}>PROFILE</button></NavLink>
-                <NavLink><button className='btn-nav' onClick={() => userLogout() }>LOGOUT</button></NavLink>
+                <NavLink to='/login'><button className='btn-nav' onClick={(e) => { 
+                  userLogout() 
+                  setIsOpen(!isOpen)
+                }}>LOGOUT</button></NavLink>
                 </>
                 
                 ) : null

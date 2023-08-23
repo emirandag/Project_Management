@@ -6,5 +6,7 @@
     justify-content: space-around;
     background-color: #425465;
     color: #ffffff;
-   
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }

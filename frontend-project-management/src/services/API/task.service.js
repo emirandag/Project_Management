@@ -46,7 +46,7 @@ export const showTaskById = async (id) => {
 
 export const addUserTask = async (taskId, email) => {
   console.log(taskId, email);
-  return APIuser.patch(`/tasks/addusertask/${taskId}&email=${email}`, {
+  return APIuser.patch(`/tasks/addusertask/${taskId}`, {
   headers: {
     Authorization: `Bearer ${updateToken()}`
   }
@@ -56,12 +56,3 @@ export const addUserTask = async (taskId, email) => {
 }
 
 
-// export const createComment = async (formData) => {
-//   return APIuser.post(`/comments/createcomment`, formData, {
-//     headers: {
-//       Authorization: `Bearer ${updateToken()}`
-//     }
-//   })
-//     .then((res) => res)
-//     .catch((error) => error)
-// }

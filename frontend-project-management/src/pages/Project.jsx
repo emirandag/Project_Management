@@ -85,51 +85,50 @@ export const Project = () => {
                       key={user._id}
                       title={user.email}
                     />
-                    
                   ) : (
-                    <img src={user.photo} alt={user.name} key={user._id} title={user.email} />
+                    <img
+                      src={user.photo}
+                      alt={user.name}
+                      key={user._id}
+                      title={user.email}
+                    />
                   )
                 )}
               </div>
-
-              
             </div>
-            {
-              rol !== "user" &&
-              (
-<div className="project-action-btn">
+            {rol !== "user" && (
+              <div className="project-action-btn">
                 <button
                   disabled={res?.data?.isClosed}
                   onClick={() => setRenderPageAddMember(true)}
                 >
-                  <i className="fa fa-user-plus" aria-hidden="true"></i> 
+                  <i className="fa fa-user-plus" aria-hidden="true"></i>
                   Add member
                 </button>
                 <button
                   disabled={res?.data?.isClosed}
                   onClick={() => setRenderPageTask(true)}
                 >
-                  <i class="fa fa-plus-square" aria-hidden="true"></i>
+                  <i className="fa fa-plus-square" aria-hidden="true"></i>
                   Add task
                 </button>
                 <button
                   disabled={res?.data?.isClosed}
                   onClick={() => useDeleteProjectError(id, setDeleteProjectOk)}
                 >
-                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <i className="fa fa-trash" aria-hidden="true"></i>
                   Delete project
                 </button>
                 <button
                   disabled={res?.data?.isClosed}
                   onClick={() => useUpdateProjectError(id, setUpdateProjectOk)}
                 >
-                  <i class="fa fa-times" aria-hidden="true"></i>
+                  <i className="fa fa-times" aria-hidden="true"></i>
                   {res?.data?.isClosed ? "Closed" : "Close Project"}
                 </button>
-            </div>
-              )
-            }
-            
+              </div>
+            )}
+
             <div className="project-container-tasks">
               {res?.data?.tasks?.map((task) => (
                 <CardTask
@@ -140,14 +139,6 @@ export const Project = () => {
                   projectColor={projectColor}
                   taskColor={taskColor}
                 />
-                // <div className="project-task" key={task._id}>
-                //   <h3>{task.title}</h3>
-                //   <div className="task-info">
-                //     <span>{task?.assignedTo == user._id && user.email}</span>
-                //     <span>{task?.isCompleted ? "Completada" : "Abierta"}</span>
-                //     <button disabled={task?.isCompleted} onClick={() => useDeleteTaskError(task._id, setDeleteTaskOk)}><i className="fa fa-trash fa-2xs"></i></button>
-                //   </div>
-                // </div>
               ))}
             </div>
           </>

@@ -70,6 +70,15 @@ export const resendCodeConfirmationUser = async (formData) => {
     .catch((error) => error)
 }
 
+export const getAllUsers = async () => {
+  return APIuser.get("/users/",  {
+    headers: {
+      Authorization: `Bearer ${updateToken()}`
+    }
+  })
+    .then((res) => res)
+    .catch((error) => error)
+}
 
 export const addUserProject = async (id, projectId) => {
   console.log(id, projectId);

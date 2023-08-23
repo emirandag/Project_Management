@@ -20,7 +20,7 @@ export const Overlay = styled.div`
 `;
 export const ModalContent = styled.div`
   width: 80%;
-  height: 40%;
+  height: 30%;
   position: relative;
   background-color: white;
   border: 2px solid black;
@@ -31,12 +31,14 @@ export const ModalContent = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 3rem;
-  button {
+  .close {
     position: absolute;
     top: 1%;
     right: 0.5%;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 2rem;
+    height: 2rem;
   }
 `;

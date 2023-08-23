@@ -62,3 +62,13 @@
         }
     }
 }
+
+@media only screen and (max-width: 450px) {
+    .change-rol-container {
+        width: 90%;
+
+        && .change-rol-form {
+            width: 100%;
+        }
+    }
+}
