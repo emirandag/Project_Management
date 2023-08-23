@@ -52,7 +52,7 @@ export const Comments = () => {
     const handleUpdateComment = async (formData) => {
         setUpdateCommentOk(true)
         await updateComment(editCommentId, formData)
-        //setEditCommentOk(false)
+        setEditCommentOk(false)
         setUpdateCommentOk(false)
         setOpenModal(false)
     }
@@ -60,7 +60,7 @@ export const Comments = () => {
     useEffect(() => {
         useAddCommentError(res, setRes)
         reset()
-    }, [res, openModal])
+    }, [res])
 
     useEffect(() => {
         loadPage(id);

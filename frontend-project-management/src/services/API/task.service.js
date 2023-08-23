@@ -44,6 +44,17 @@ export const showTaskById = async (id) => {
     .catch((error) => error);
 };
 
+
+export const showOpenTasks = async () => {
+  return APIuser.get(`/tasks/opentasks/list`, {
+      headers: {
+        Authorization: `Bearer ${updateToken()}`
+      }
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export const addUserTask = async (taskId, email) => {
   console.log(taskId, email);
   return APIuser.patch(`/tasks/addusertask/${taskId}`, {

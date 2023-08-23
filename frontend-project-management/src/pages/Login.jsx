@@ -9,7 +9,7 @@ import { useAuth } from '../context/authContext';
 
 
 export const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors }} = useForm();
   const [res, setRes] = useState({});
   const [send, setSend] = useState(false);
   const [loginOk, setLoginOk] = useState(false);
@@ -55,7 +55,7 @@ export const Login = () => {
           <img src="/images/login_avatar_white.png" />
         </span>
 
-        <h1>Sign in</h1>
+        <h2>Sign in</h2>
         {/* <p>It's free and only takes a minute.</p> */}
         <form onSubmit={handleSubmit(formSubmit)}>
           <div className="user_container form-group">
@@ -67,10 +67,11 @@ export const Login = () => {
               type="text"
               id="email"
               name="email"
-              autoComplete="false"
+              autoComplete="off"
               placeholder="Enter your email"
               {...register("email", { required: true })}
             />
+            {errors.email && <span className='form-required'>* This field is required</span>}
           </div>
           <div className="password_container form-group">
             <label htmlFor="custom-input" className="custom-placeholder">
@@ -81,17 +82,18 @@ export const Login = () => {
               type="password"
               id="password"
               name="password"
-              autoComplete="false"
+              autoComplete="off"
               placeholder="Enter your password"
               {...register("password", { required: true })}
+              
             />
+            {errors.password && <span className='form-required'>* This field is required</span>}
           </div>
           <div className="btn_container">
             <button
               className="btn"
               type="submit"
               disabled={send}
-              // style={{ background: send ? "#478ac9" : "#478ac9" }}
             >
               {send ? "Cargando ....." : "LOGIN"}
             </button>
@@ -101,22 +103,12 @@ export const Login = () => {
             <Link to="/forgotpassword" className="anchorCustom">
               Forgot password?
             </Link>
-            {/* <small>
 
-              Have you forgotten the password?
-              <Link to="/forgotpassword" className="anchorCustom">
-                Change password
-              </Link>
-            </small> */}
           </div>
+          
         </form>
       </div>
-      {/* <div className="footerForm">
-        <p className="parrafoLogin"> */}
-      {/* Are you not registered? <Link to="/register">Register Here</Link> */}
-      {/* <Link to="/register">Register Here</Link> 
-        </p> */}
-      {/* </div> */}
+
     </>
   );
 }

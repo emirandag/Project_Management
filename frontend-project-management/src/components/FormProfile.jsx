@@ -32,6 +32,7 @@ export const FormProfile = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const inputFile = document.getElementById("file-upload").files;
+        console.log(inputFile.length);
         let customFormData
 
         if (inputFile.length !== 0) {
@@ -59,7 +60,7 @@ export const FormProfile = () => {
    */
   useEffect(() => {
     console.log(res);
-    useUpdateUserError(res,setRes, setUser, logout)
+    useUpdateUserError(res,setRes, setUser)
   }, [res])
 
   return (

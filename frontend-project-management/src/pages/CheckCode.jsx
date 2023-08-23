@@ -61,13 +61,14 @@ export const CheckCode = () => {
    * Estados de navegación o de confirmación de funcionalidades
    */
   if (checkOk) {
-    if (!sessionStorage.getItem("user")) {
-      //autologin
-      setCheckOk(() => false)
-      useAutoLogin(allUser, userLogin, setCheckOk);
-    } else {
-      return <Navigate to="/dashboard" />
-    }
+    // if (!sessionStorage.getItem("user")) {
+    //   //autologin
+    //   setCheckOk(() => false)
+    //   useAutoLogin(allUser, userLogin, setCheckOk);
+    // } else {
+    //   return <Navigate to="/dashboard" />
+    // }
+    return <Navigate to="/login" />
   }
 
   if (deleteUser) {

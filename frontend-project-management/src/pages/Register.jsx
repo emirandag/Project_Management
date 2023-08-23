@@ -10,7 +10,7 @@ import { Uploadfile } from "../components";
 
 export const Register = () => {
   const { allUser, setAllUser, bridgeData } = useAuth();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [res, setRes] = useState({});
   const [send, setSend] = useState(false);
   const [registerOk, setRegisterOk] = useState(false);
@@ -56,14 +56,14 @@ export const Register = () => {
 
   return (
     <>
-      <>
+      
         <div className="form-wrap-register">
           <span className="span-avatar">
             <img src="/images/login_avatar_white.png" />
           </span>
 
-          <h1>Sign up</h1>
-          {/* <p>It's free and only takes a minute.</p> */}
+          <h2>Sign up</h2>
+          
           <form onSubmit={handleSubmit(formSubmit)}>
             <div className="user_container form-group">
               <label htmlFor="custom-input" className="custom-placeholder">
@@ -74,10 +74,11 @@ export const Register = () => {
                 type="text"
                 id="name"
                 name="name"
-                autoComplete="false"
+                autoComplete="off"
                 placeholder="Enter your name"
                 {...register("name", { required: true })}
               />
+              {errors.name && <span className='form-required'>* This field is required</span>}
             </div>
             <div className="user_container form-group">
               <label htmlFor="custom-input" className="custom-placeholder">
@@ -88,10 +89,11 @@ export const Register = () => {
                 type="text"
                 id="email"
                 name="email"
-                autoComplete="false"
+                autoComplete="off"
                 placeholder="Enter your email"
                 {...register("email", { required: true })}
               />
+              {errors.email && <span className='form-required'>* This field is required</span>}
             </div>
             <div className="password_container form-group">
               <label htmlFor="custom-input" className="custom-placeholder">
@@ -102,10 +104,11 @@ export const Register = () => {
                 type="password"
                 id="password"
                 name="password"
-                autoComplete="false"
+                autoComplete="off"
                 placeholder="Enter your password"
                 {...register("password", { required: true })}
               />
+              {errors.password && <span className='form-required'>* This field is required</span>}
             </div>
             <div className="input_sexo">
               <div className="input_sexo_male">
@@ -192,153 +195,6 @@ export const Register = () => {
             </div>
           </form>
         </div>
-        {/* <div className="footerForm">
-        <p className="parrafoLogin"> */}
-        {/* Are you not registered? <Link to="/register">Register Here</Link> */}
-        {/* <Link to="/register">Register Here</Link> 
-        </p> */}
-        {/* </div> */}
-      </>
-      {/* <>
-      <div className="form-wrap">
-        <h1>Sign Up</h1>
-        <p>It's free and only takes a minute.</p>
-        <form onSubmit={handleSubmit(formSubmit)}>
-          <div className="user_container form-group">
-            <input
-              className="input_user"
-              type="text"
-              id="name"
-              name="name"
-              autoComplete="false"
-              {...register("name", { required: true })}
-            />
-            <label htmlFor="custom-input" className="custom-placeholder">
-              username
-            </label>
-          </div>
-          <div className="email_container form-group">
-            <input
-              className="input_user"
-              type="email"
-              id="email"
-              name="email"
-              autoComplete="false"
-              {...register("email", { required: true })}
-            />
-            <label htmlFor="custom-input" className="custom-placeholder">
-              email
-            </label>
-          </div>
-          <div className="password_container form-group">
-            <input
-              className="input_user"
-              type="password"
-              id="password"
-              name="password"
-              autoComplete="false"
-              {...register("password", { required: true })}
-            />
-            <label htmlFor="custom-input" className="custom-placeholder">
-              password
-            </label>
-          </div>
-          <div className="email_container form-group">
-            <input
-              className="input_user"
-              type="email"
-              id="email"
-              name="email"
-              autoComplete="false"
-              {...register("email", { required: true })}
-            />
-            <label htmlFor="custom-input" className="custom-placeholder">
-              email
-            </label>
-          </div>
-          <div className="sexo">
-            <input
-              type="radio"
-              name="sexo"
-              id="male"
-              value="male"
-              {...register("gender")}
-            />
-            <label htmlFor="male" className="label-radio hombre">
-              Hombre
-            </label>
-            <input
-              type="radio"
-              name="sexo"
-              id="female"
-              value="female"
-              {...register("gender")}
-            />
-            <label htmlFor="female" className="label-radio mujer">
-              Mujer
-            </label>
-          </div>
-
-          <div className="rol">
-            <input
-              type="radio"
-              name="rol"
-              id="admin"
-              value="admin"
-              {...register("rol")}
-            />
-            <label htmlFor="admin" className="label-radio admin">
-              Admin
-            </label>
-            <input
-              type="radio"
-              name="rol"
-              id="manager"
-              value="manager"
-              {...register("rol")}
-            />
-            <label htmlFor="manager" className="label-radio manager">
-              Manager
-            </label>
-            <input
-              type="radio"
-              name="rol"
-              id="user"
-              value="user"
-              {...register("rol")}
-            />
-            <label htmlFor="user" className="label-radio user">
-              User
-            </label>
-          </div>
-
-          <Uploadfile />
-
-          <div className="btn_container">
-            <button
-              className="btn"
-              type="submit"
-              disabled={send}
-              style={{ background: send ? "#49c1a388" : "#49c1a2" }}
-            >
-              Register
-            </button>
-          </div>
-          <p className="bottom-text">
-            <small>
-              By clicking the Sign Up button, you agree to our{" "}
-              <a href="#">Terms & Conditions</a> and{" "}
-              <a href="#">Privacy Policy</a>.
-            </small>
-          </p>
-        </form>
-      </div>
-      <footer>
-        <p>
-          Already have an account? <a href="#">Login Here</a>
-        </p>
-      </footer>
-    </> */}
     </>
   );
 };

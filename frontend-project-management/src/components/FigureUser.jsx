@@ -1,6 +1,7 @@
 import "./FigureUser.css"
 
 export const FigureUser = (user) => {
+  console.log(user);
     return (
       <figure className="dataProfile">
         <img src={user.user.photo} alt="user image" className="imageUser" />

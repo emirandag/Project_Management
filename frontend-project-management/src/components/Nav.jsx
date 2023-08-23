@@ -31,11 +31,13 @@ export const Nav = () => {
           <NavLink to='/details'><button className='btn-nav'>DETAILS</button></NavLink> */}
           {user !== null ? (
             <>
-            {rol != "user" && (
+            {rol == "admin" || rol == "manager" ? (
               <>
               <NavLink to='/projects'><button className='btn-nav' onClick={() => setIsOpen(!isOpen)}>PROJECTS</button></NavLink>
               <NavLink to='/newtasks'><button className='btn-nav' onClick={() => setIsOpen(!isOpen)}>TASKS</button></NavLink>
               </>
+            ) : (
+              <NavLink to='/mytasks'><button className='btn-nav' onClick={() => setIsOpen(!isOpen)}>TASKS</button></NavLink>
             )}
             {rol == "admin" && (
             <NavLink to='/changerol'><button className='btn-nav' onClick={() => setIsOpen(!isOpen)}>CHANGE ROL</button></NavLink>
@@ -57,13 +59,6 @@ export const Nav = () => {
                 ) : null
             )
            }
-          {/* {user !== null ? (
-          <NavLink to='/profile'><button className='btn-nav'>PROFILE</button></NavLink>
-          ) : null}
-          {user !== null && (
-          <NavLink><button className='btn-nav' onClick={() => userLogout()}>LOGOUT</button></NavLink>
-          )} 
-                       */}    
                       
       </nav>
       
@@ -71,7 +66,7 @@ export const Nav = () => {
 
       {ancho > 600 ? 
       <div className='dropdown avatar-profile'>
-      {/* <button class="dropbtn">Dropdown</button> */}
+
       <img className="dropimg" src={!user ? `https://ionicframework.com/docs/img/demos/avatar.svg` : `${user.photo}`} alt="avatar" />
       <div className="dropdown-content">
         {user == null && (

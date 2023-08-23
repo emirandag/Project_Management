@@ -6,13 +6,14 @@ import { changePasswordUser } from "../services/API/user.service";
 import { useChangePasswordError } from "../hooks";
 import { useAuth } from "../context/authContext";
 import { FigureUser } from "./FigureUser";
+import { Navigate } from "react-router-dom";
 
 export const ChangePassword = () => {
-    const { user, setUser, logout } = useAuth()
+    const { user, setUser, userLogout } = useAuth()
     const { handleSubmit, register } = useForm()
     const [res, setRes] = useState({})
     const [send, setSend] = useState(false)
-
+    const [changePassOk, setChangePassOk] = useState(false)
     /**
      * Función que gestiona los datos del formulario
     */
@@ -50,8 +51,16 @@ export const ChangePassword = () => {
      */
     useEffect(() => {
         console.log(res);
-        useChangePasswordError(res, setRes, setUser)
+        useChangePasswordError(res, setRes, setChangePassOk)
     }, [res])
+
+    console.log(user);
+    if (changePassOk) {
+      // setUser(null)
+      // sessionStorage.removeItem("user")
+      userLogout()
+      return <Navigate to="/login" />
+    }
 
   return (
     <>

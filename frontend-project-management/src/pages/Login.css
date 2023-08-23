@@ -7,15 +7,15 @@
     box-shadow: 1px 5px 10px #999999;
     gap: 1rem;
     border-radius: 5px;
-    padding: 10px;
-    width: 500px;
-    height: 500px;
+    padding: 2rem;
+    width: 30%;
+    height: 40%;
     font-family: 'Roboto', sans-serif;
   }
   
   .span-avatar {
-    width: 60px;
-    height: 60px;
+    width: 3rem;
+    height: 3rem;
     background-image: none;
     margin: 0 auto;
     padding: 12px;
@@ -35,7 +35,7 @@
     border-style: none;
   }
   
-  .form-wrap-login h1 {
+  .form-wrap-login h2 {
     color: #478ac9;
   }
   
@@ -63,6 +63,10 @@
     height: 36px;
     padding: 5px;
     font-size: 16px;
+  }
+
+  .form-required {
+    color: #db545a;
   }
   
   .btn_container {

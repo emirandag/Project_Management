@@ -9,7 +9,7 @@ export const Dashboard = () => {
   const [res, setRes] = useState(null)
   const { user, rol } = useAuth()
   const [changeRender, setChangeRender] = useState(
-    rol != "user" ? "totalProjects" : "myProjects"
+    rol == "admin" || rol == "manager" ? "totalProjects" : "myProjects"
   );
   const navigate = useNavigate()
   
@@ -41,7 +41,7 @@ export const Dashboard = () => {
       
         <div className="project-status">
 
-          {rol != "user" && (
+          {rol == "admin" || rol == "manager" && (
 <>
           <div className="project-info" onClick={(e) => {
           e.stopPropagation()
@@ -69,7 +69,7 @@ export const Dashboard = () => {
           </div>
         </div>
         {
-          rol != "user" && (
+          rol == "admin" || rol == "manager" && (
             <div className="project-btn-add">
               <button onClick={() => navigate("/projects")}><i className="fa fa-plus" aria-hidden="true"></i></button>
             </div>
@@ -83,7 +83,7 @@ export const Dashboard = () => {
         
 {console.log(res?.data?.filter(project => project.users.some(userProject => userProject._id === user._id)))}
       {res ? (
-        rol != "user" && changeRender == "totalProjects"  ? (
+        rol == "admin" || rol == "manager" && changeRender == "totalProjects"  ? (
           res?.data?.map((project) => {
             
 
@@ -95,7 +95,7 @@ export const Dashboard = () => {
   
   })
           
-        ) : rol != "user" && changeRender == "openProjects" ? (
+        ) : rol == "admin" || rol == "manager" && changeRender == "openProjects" ? (
           res?.data?.filter(project => project.isClosed == false).map((project, index) => {
             
             return (<CardProject 

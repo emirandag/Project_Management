@@ -1,13 +1,13 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
 
-export const useChangePasswordError = (res, setRes, setUser) => {
+export const useChangePasswordError = (res, setRes, setChangePassOk) => {
 
     //console.log(res);
     
     // 200 : UpdateUser: true
     if (res?.data?.updateUser?.toString() == "true") {
-        setUser(() => null)
-        sessionStorage.removeItem("user")
+      setChangePassOk(() => true)
+        
         Swal.fire({
             icon: "success",
             title: "Change password ok ✅",
