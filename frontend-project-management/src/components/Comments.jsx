@@ -107,7 +107,7 @@ export const Comments = () => {
                                 autoComplete="true"
                                 placeholder={comment.text}
                                 
-                                defaultValue={editCommentId.text} // Use the commentText state
+                                defaultValue={editCommentId.text} 
                                 
                                 {...register("text", { required: true, value: comment.text })}
                             />
