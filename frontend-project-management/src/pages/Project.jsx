@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import "./Project.css";
 import {
   Navigate,
-  useLocation,
   useNavigate,
   useParams,
 } from "react-router-dom";
-import Modal from "../components/UI/Modal/Modal";
+
 import {
   useDeleteProjectError,
   useDeleteTaskError,
@@ -15,6 +14,7 @@ import {
 import { showProjectById } from "../services/API/project.service";
 import { useAuth } from "../context/authContext";
 import { CardTask } from "../components";
+import { colorPalette } from "../utils/colorPalette";
 
 export const Project = () => {
   const { id } = useParams();
@@ -26,13 +26,8 @@ export const Project = () => {
   const [updateProjectOk, setUpdateProjectOk] = useState(false);
   const [deleteTaskOk, setDeleteTaskOk] = useState(false);
   const navigate = useNavigate();
-  // console.log(id);
-  const location = useLocation();
-  const projectColor = location?.state?.backgroundColor;
-  const taskColor = location?.state?.backgroundColorProgress;
-  const dataColor = location?.state?.backgroundColorTask;
+  const color = colorPalette() 
 
-  //console.log(location?.state);
   const loadPage = async (id) => {
     const dataProject = await showProjectById(id);
     setRes(dataProject);
@@ -54,7 +49,7 @@ export const Project = () => {
     return <Navigate to={`/projects/${id}/addmember`} />;
   }
   if (renderPageTask) {
-    return navigate(`/projects/${id}/tasks`, { state: taskColor });
+    return <Navigate to={`/projects/${id}/tasks`} />;
   }
   if (deleteProjectOk) {
     return <Navigate to={`/dashboard`} />;
@@ -68,8 +63,9 @@ export const Project = () => {
         <div
           className="project-container"
           style={{
-            backgroundColor: dataColor,
-            boxShadow: `1px 5px 5px ${projectColor}`,
+            backgroundColor: `${res?.data?.isClosed ? color.colorProject.colorClosed : color.colorProject.colorOpen }`,
+            boxShadow: `1px 2px 5px ${res?.data?.isClosed ? color.colorTask.colorClosed : color.colorTask.colorOpen}`
+            
           }}
         >
           <>
@@ -136,8 +132,6 @@ export const Project = () => {
                   task={task}
                   key={task._id}
                   setDeleteTaskOk={setDeleteTaskOk}
-                  projectColor={projectColor}
-                  taskColor={taskColor}
                 />
               ))}
             </div>

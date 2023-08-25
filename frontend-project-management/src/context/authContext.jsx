@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import jwtDecode from 'jwt-decode';
 /**
  * 1.- PRIMERO CREAMOS EL CONTEXTO
  */
@@ -32,9 +33,20 @@ export const AuthContextProvider = ({ children }) => {
         }
     })
 
-    const [rol, setRol] = useState(null)
     
-    console.log(rol);
+
+    const getRol = () => {
+        const getUser = sessionStorage?.getItem("user")
+
+        if (getUser != null) {
+            const decodedToken = jwtDecode(getUser);
+            const rol = decodedToken?.rol
+            return rol
+        } else {
+            return null
+        }
+        
+    }
     const navigate = useNavigate()
 
     /**
@@ -55,8 +67,9 @@ export const AuthContextProvider = ({ children }) => {
     const userLogout = () => {
         sessionStorage.removeItem("user")
         setUser(null)
-        setRol(null)
+        location.reload();
         navigate("/login")
+        
     }
 
     /**
@@ -80,7 +93,7 @@ export const AuthContextProvider = ({ children }) => {
      * ------ UseMemo memoriza el return de una funcion -------------
      */
     const value = useMemo(() => ({
-            user, setUser, userLogin, userLogout, allUser, setAllUser, bridgeData, rol, setRol
+            user, setUser, userLogin, userLogout, allUser, setAllUser, bridgeData, getRol
         }),
         [user, allUser]
     )

@@ -6,9 +6,13 @@ import { useResize } from '../hooks';
 
 
 export const Nav = () => {
-  const { user, userLogout, rol } = useAuth();
+  const { user, userLogout, getRol } = useAuth(); 
   const { ancho } = useResize()
   const [isOpen, setIsOpen] = useState(false);
+
+  const rol = getRol()
+  console.log(rol);
+
   return (
     <>
 
@@ -27,9 +31,7 @@ export const Nav = () => {
           {user == null && (
           <NavLink to='/register'><button className='btn-nav' onClick={() => setIsOpen(!isOpen)}>REGISTER</button></NavLink>
           )}
-          {/* <NavLink to='/gallery'><button className='btn-nav'>GALLERY</button></NavLink>
-          <NavLink to='/details'><button className='btn-nav'>DETAILS</button></NavLink> */}
-          {user !== null ? (
+        {user !== null ? (
             <>
             {rol == "admin" || rol == "manager" ? (
               <>

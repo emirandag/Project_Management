@@ -5,15 +5,18 @@ import {
   addMemberProject,
   showProjectById,
 } from "../services/API/project.service";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import {
   useAddMemberProjectError,
   useDeleteMemberProjectError,
 } from "../hooks";
 import { getAllUsers } from "../services/API/user.service";
+import Select from "react-select";
+import { colorPalette } from "../utils/colorPalette";
+
 export const AddMember = () => {
   const { id } = useParams();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, control, reset } = useForm();
   const [res, setRes] = useState({});
   const [resUsers, setResUsers] = useState({});
 
@@ -23,9 +26,7 @@ export const AddMember = () => {
   const [addMemberOk, setAddMemberOk] = useState(false);
   const [deleteMemberOk, setDeleteMemberOk] = useState(false);
   const navigate = useNavigate();
-  const [filteredEmails, setFilteredEmails] = useState([]);
-  const [selectedEmail, setSelectedEmail] = useState("");
-  const [filterOption, setFilterOption] = useState('all');
+  const color = colorPalette();
 
   const loadPage = async (id) => {
     const dataProject = await showProjectById(id);
@@ -34,7 +35,8 @@ export const AddMember = () => {
   };
 
   const formSubmit = async (formData) => {
-    //console.log(projectId);
+    console.log();
+    const customFormData = formData.email.value;
     setSend(true);
     setRes(await addMemberProject(projectId, formData));
     setSend(false);
@@ -45,103 +47,81 @@ export const AddMember = () => {
     setResUsers(dataUsers);
   };
 
-  const handleSearchUsers = (value) => {
-    console.log(value);
-
-    console.log(resUsers?.data?.map((user) => user.email));
-    const filtered = resUsers?.data?.filter((user) =>
-      user.email.toLowerCase().includes(value.toLowerCase())
-    );
-    // const valor = filtered.map(user => user.email);
-    // console.log(valor);
-    setFilteredEmails(filtered);
-  };
-
-  const handleEmailClick = (email) => {
-    setSelectedEmail(email)
-    console.log(email);
-    console.log(selectedEmail);
-    setFilteredEmails([])
-  }
-  
-
   useEffect(() => {
-    // console.log(res);
     useAddMemberProjectError(res, setRes, setAddMemberOk);
   }, [res]);
 
   useEffect(() => {
-    // console.log(id);
     loadPage(id);
     handleUsers();
-  }, []);
+    reset(); //Cada vez que se renderice al agregar un miembro se borre el valor del input(Select)
+  }, [addMemberOk, deleteMemberOk]);
 
-  useEffect(() => {
-    console.log(resUsers);
-  }, [ resUsers]);
-
-  if (addMemberOk || deleteMemberOk) {
-    loadPage(id);
-  }
-  //console.log(res);
   return (
     <>
-      <div className="container-addmember">
+      <div
+        className="container-addmember"
+        style={{
+          backgroundColor: `${
+            res?.data?.isClosed
+              ? color.colorProject.colorClosed
+              : color.colorProject.colorOpen
+          }`,
+          boxShadow: `1px 2px 5px ${
+            res?.data?.isClosed
+              ? color.colorTask.colorClosed
+              : color.colorTask.colorOpen
+          }`,
+        }}
+      >
         <h1>{resPage?.data?.title}</h1>
         <h3>Add Member</h3>
-        {/* <button onClick={() => setRender(false)}>X</button> */}
 
         <div className="input-addmember">
-          {/* <input type="text"  onChange={e => handleSearchUsers(e.target.value)} />
-          <ul>
-        {filteredEmails?.map((user, index) => (
-          <li key={index}>{user.email}</li>
-        ))}
-      </ul> */}
-
-      
-          <form 
-          className="filter-section"
-          onSubmit={handleSubmit(formSubmit)}>
-            {console.log(selectedEmail)}
-            <input
+          <form className="filter-section" onSubmit={handleSubmit(formSubmit)}>
+            {/* <input
               className="input_user"
               type="text"
               id="email"
               name="email"
               
-              autoComplete="off"
+              autoComplete="false"
               
               list="email-user"
               placeholder="Enter email member"
               disabled={send}
               {...register("email", {
-                required: true,
-                onChange: (e) => handleSearchUsers(e.target.value),
-                value: selectedEmail
+                required: true
               
               })}
+            /> */}
+            <Controller
+              name="email"
+              render={({ field }) => (
+                <Select
+                  placeholder="Write a email ..."
+                  className="select-user"
+                  {...field}
+                  options={resUsers?.data?.map((user) => ({
+                    value: user.email,
+                    label: user.email,
+                  }))}
+                  filterOption={(option, inputValue) => {
+                    if (!inputValue) {
+                      return false; // No mostrar los correos cuando hay valor
+                    }
+                    return option.label
+                      .toLowerCase()
+                      .includes(inputValue.toLowerCase());
+                  }}
+                  onInputChange={(inputValue) => {
+                    return inputValue; // Mantener el valor de entrada para que REACT SELECT se encargue de manejarlo
+                  }}
+                />
+              )}
+              control={control}
+              defaultValue=""
             />
-            <datalist id="email-user" className="filtered-list">
-            {filteredEmails?.map((user, index) => (
-                <option key={index} value={user.email} />
-              ))}
-            </datalist>
-            {/* <select
-              value={filterOption}
-              onChange={(e) => setFilterOption(e.target.value)}
-            >
-              {filteredEmails?.map((user, index) => (
-                <option key={index} value={user.email}>{user.email}</option>
-              ))}
-            </select> */}
-            {/* <ul className="filtered-list">
-              {filteredEmails?.map((user, index) => (
-                <li key={index} onClick={(e) => { 
-              
-                  handleEmailClick(user.email)}}>{user.email}</li>
-              ))}
-            </ul> */}
             <button>
               <i className="fa fa-user-plus" aria-hidden="true"></i> Add
             </button>

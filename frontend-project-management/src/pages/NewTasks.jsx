@@ -70,7 +70,7 @@ export const NewTasks = () => {
               {...register("title", { required: true })}
             />
 
-                <label htmlFor="projectId">Choose a car:</label>
+                <label htmlFor="projectId">Choose a project:</label>
                 <select className="projects-select" {...register("projectId")}>
                   {resProjects?.data?.map((project) => (
                     <option key={project._id} value={project._id}>

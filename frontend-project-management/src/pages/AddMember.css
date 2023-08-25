@@ -1,7 +1,6 @@
 .container-addmember {
     width: 95%;
-    min-height: 100%;
-    border: 0.5rem solid gainsboro;
+    height: 100%;
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -22,11 +21,12 @@
             align-items: center;
             gap: 1rem;
             
-            && input {
+            && .select-user {
                 width: 40%;
                 height: 36px;
-                padding: 5px;
+                /* padding: 5px; */
                 font-size: 16px;
+                
             }
             && button {
                 width: 8rem;

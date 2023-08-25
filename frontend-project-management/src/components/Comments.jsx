@@ -72,8 +72,9 @@ export const Comments = () => {
         <form className="form-comment" onSubmit={handleSubmit(formSubmit)}>
         <textarea
           name="text"
-          autoComplete="false"
+          //autoComplete="false"
           placeholder="Write a comment ..."
+          disabled={resComments?.data?.foundTask?.isCompleted}
           //defaultValue={commentText} 
           {...register("text", { required: true })}
 
@@ -107,7 +108,7 @@ export const Comments = () => {
                                 autoComplete="true"
                                 placeholder={comment.text}
                                 
-                                defaultValue={editCommentId.text} 
+                                // defaultValue={editCommentId.text} 
                                 
                                 {...register("text", { required: true, value: comment.text })}
                             />

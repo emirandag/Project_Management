@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 
 import { colorPalette } from "../utils/colorPalette";
 
-export const CardProject = ({ project, backgroundColor, backgroundColorProgress, backgroundColorTask }) => {
+export const CardProject = ({ project }) => {
   const color = colorPalette() 
   const navigate = useNavigate();
-  const renderToProjectById = (id, backgroundColor, backgroundColorProgress, backgroundColorTask) => {
-    console.log(id);
-    return navigate(`/projects/${id}`, {state: {backgroundColor, backgroundColorProgress, backgroundColorTask}});
+
+  const renderToProjectById = (id) => {
+
+    return navigate(`/projects/${id}`);
   };
+
   return (
     <>
       <div
@@ -19,7 +21,7 @@ export const CardProject = ({ project, backgroundColor, backgroundColorProgress,
           boxShadow: `1px 2px 5px ${project.isClosed ? color.colorTask.colorClosed : color.colorTask.colorOpen}`
           
         }}
-        onClick={() => renderToProjectById(project._id, backgroundColor, backgroundColorProgress, backgroundColorTask)}
+        onClick={() => renderToProjectById(project._id)}
       >
         <div className="project-box-header">
           <h3>{project.title}</h3>

@@ -13,7 +13,7 @@ export const Login = () => {
   const [res, setRes] = useState({});
   const [send, setSend] = useState(false);
   const [loginOk, setLoginOk] = useState(false);
-  const { userLogin, setUser, setRol} = useAuth();
+  const { userLogin, setUser} = useAuth();
 
   
   /**
@@ -35,7 +35,7 @@ export const Login = () => {
 
   useEffect(() => {
     //console.log("Respuesta: "+res);
-    useLoginError(res, setLoginOk, userLogin, setRes, setRol);
+    useLoginError(res, setLoginOk, userLogin, setRes);
   }, [res]);
 
   /**

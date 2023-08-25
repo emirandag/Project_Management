@@ -46,7 +46,8 @@ export const ChangeRol = () => {
               type="text"
               id="email"
               name="email"
-              autoComplete="false"
+              autoComplete="off"
+              placeholder="Enter the email"
               {...register("email", { required: true })}
             />
           </div>

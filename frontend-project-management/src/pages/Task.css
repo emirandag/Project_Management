@@ -10,7 +10,6 @@
     && .task-container {
         width: 95%;
         min-height: 200px;
-        border: 0.5rem solid gainsboro;
         border-radius: 0.5rem;
         display: flex;
         flex-direction: column;

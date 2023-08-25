@@ -55,9 +55,20 @@ export const showOpenTasks = async () => {
     .catch((error) => error);
 };
 
+// export const addUserTask = async (taskId, email) => {
+//   console.log(taskId, email);
+//   return APIuser.patch(`/tasks/addusertask/${taskId}`, {
+//   headers: {
+//     Authorization: `Bearer ${updateToken()}`
+//   }
+// })
+//   .then((res) => res)
+//   .catch((error) => error)
+// }
+
 export const addUserTask = async (taskId, email) => {
   console.log(taskId, email);
-  return APIuser.patch(`/tasks/addusertask/${taskId}`, {
+  return APIuser.patch(`/tasks/addusertask/${taskId}&email=${email}`, {
   headers: {
     Authorization: `Bearer ${updateToken()}`
   }
@@ -65,5 +76,4 @@ export const addUserTask = async (taskId, email) => {
   .then((res) => res)
   .catch((error) => error)
 }
-
 
