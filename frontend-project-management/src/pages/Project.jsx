@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./Project.css";
 import {
   Navigate,
-  useNavigate,
   useParams,
 } from "react-router-dom";
 
@@ -18,15 +17,15 @@ import { colorPalette } from "../utils/colorPalette";
 
 export const Project = () => {
   const { id } = useParams();
-  const { rol } = useAuth();
+  const { getRol } = useAuth();
   const [res, setRes] = useState({});
   const [renderPageAddMember, setRenderPageAddMember] = useState(false);
   const [renderPageTask, setRenderPageTask] = useState(false);
   const [deleteProjectOk, setDeleteProjectOk] = useState(false);
   const [updateProjectOk, setUpdateProjectOk] = useState(false);
   const [deleteTaskOk, setDeleteTaskOk] = useState(false);
-  const navigate = useNavigate();
   const color = colorPalette() 
+  const rol = getRol()
 
   const loadPage = async (id) => {
     const dataProject = await showProjectById(id);
@@ -126,14 +125,17 @@ export const Project = () => {
             )}
 
             <div className="project-container-tasks">
-              {res?.data?.tasks?.map((task) => (
+              {res?.data?.tasks.length > 0 ? 
+              res?.data?.tasks?.map((task) => (
                 <CardTask
                   project={res?.data}
                   task={task}
                   key={task._id}
                   setDeleteTaskOk={setDeleteTaskOk}
                 />
-              ))}
+              ))
+              : <h3>No hay tareas asociadas</h3>}
+              
             </div>
           </>
         </div>

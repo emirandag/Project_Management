@@ -6,11 +6,12 @@ import { useDeleteTaskError } from "../hooks";
 import { colorPalette } from "../utils/colorPalette";
 
 
-export const CardTask = ({ task, setDeleteTaskOk }) => {
-    const { user } = useAuth()
+export const CardTask = ({project, task, setDeleteTaskOk }) => {
+    const { user, getRol } = useAuth()
     const { id } = useParams()
     const navigate = useNavigate();
     const color = colorPalette()
+    const rol = getRol()
 
     const renderToTaskById = (idTask) => {
 
@@ -23,7 +24,7 @@ export const CardTask = ({ task, setDeleteTaskOk }) => {
       <div 
         className="task-box" 
         style={{
-          backgroundColor: `${task.isCompleted ? color.colorTask.colorClosed : color.colorTask.colorOpen}`,
+          // backgroundColor: `${task.isCompleted ? color.colorTask.colorClosed : color.colorTask.colorOpen}`,
           
           boxShadow: `1px 2px 5px ${task.isCompleted ? color.colorProgressBar.colorClosed : color.colorProgressBar.colorOpen}`
         }}
@@ -32,17 +33,32 @@ export const CardTask = ({ task, setDeleteTaskOk }) => {
             <h3>{task.title}</h3>
         </div>
         <div className="task-info">
-          <span>{task?.assignedTo == user._id && user.email}</span>
-          <span>{task?.isCompleted ? "Completada" : "Abierta"}</span>
+          <div className="task-info-data">
+          <span
+          className="task-info-user"
+          >{project.users?.filter((userTask) => userTask._id == task.assignedTo).map((userTask) => userTask.email)}</span>
+            
+          </div>
+          <div className="task-info-data">
+          <span 
+          className="task-info-status"
+          style={{
+            backgroundColor: `${task.isCompleted ? color.colorTask.colorClosed : color.colorTask.colorOpen}`,
+          }}  
+          >{task?.isCompleted ? "Completada" : "Abierta"}</span>
+          </div>
+          <div className="task-info-btn">
           <button
-            disabled={task?.isCompleted}
-            onClick={(e) => {
-                e.stopPropagation();
-                useDeleteTaskError(task._id, setDeleteTaskOk)
-            }}
-          >
-            <i className="fa fa-trash fa-2xs"></i>
-          </button>
+          disabled={task?.isCompleted || rol == "user"}
+          onClick={(e) => {
+              e.stopPropagation();
+              useDeleteTaskError(task._id, setDeleteTaskOk)
+          }}
+        >
+          <i className="fa fa-trash fa-2xs"></i>
+        </button>
+        </div>
+          
         </div>
       </div>
     </>

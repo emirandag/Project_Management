@@ -105,6 +105,7 @@ export const MyTasks = () => {
                         <div
                           key={task._id}
                           className="mytask-main"
+                          onClick={() => renderToTaskById(task._id)}
                           // style={{
                           //   backgroundColor: `${task.isCompleted ? color.colorTask.colorClosed : color.colorTask.colorOpen }`
                           // }}

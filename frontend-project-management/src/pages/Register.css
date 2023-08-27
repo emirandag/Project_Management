@@ -1,127 +1,141 @@
 .form-wrap-register {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #DDDDDD;
-    box-shadow: 1px 5px 10px #999999;
-    gap: 1rem;
-    border-radius: 5px;
-    padding: 2rem;
-    width: 30%;
-    height: 40%;
-    font-family: 'Roboto', sans-serif;
-    /* background-image: linear-gradient(#b9c1cc, #DDDDDD); */
-  }
-  
-  .span-avatar {
-    width: 3rem;
-    height: 3rem;
-    background-image: none;
-    margin: 0 auto;
-    padding: 12px;
-    background-color: #478ac9;
-    text-align: center;
-    border-radius: 50%;
-    display: block;
-    line-height: 0;
-    border-width: 0px;
-    color: #ffffff !important;
-    object-fit: contain;
-  }
-  .span-avatar  img {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-    border-style: none;
-  }
-  
-  .form-wrap-register h2 {
-    color: #478ac9;
-  }
-  
-  .form-wrap-register form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 80%;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: left;
-    width: 100%;
-    gap: 0.5rem;
-  }
-  
-  .form-group input {
-    width: 100%;
-    height: 36px;
-    padding: 5px;
-    font-size: 16px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #DDDDDD;
+  box-shadow: 1px 5px 10px #999999;
+  gap: 1rem;
+  border-radius: 5px;
+  padding: 2rem;
+  width: 30%;
+  height: 40%;
+  font-family: 'Roboto', sans-serif;
+  /* background-image: linear-gradient(#b9c1cc, #DDDDDD); */
+}
 
-  .form-required {
-    color: #db545a;
-  }
-  
-  .btn_container {
-    display: flex;
-    width: 100%;
-    
-  }
-  
-  .btn_container button {
-    width: 100%;
-    height: 40px;
-    background-color: #478ac9;
-    color: #ffffff;
-    font-size: 14px;
-    transition: all 0.2s ease;
-    border-radius: 5px;
-  }
+.span-avatar {
+  width: 3rem;
+  height: 3rem;
+  background-image: none;
+  margin: 0 auto;
+  padding: 12px;
+  background-color: #478ac9;
+  text-align: center;
+  border-radius: 50%;
+  display: block;
+  line-height: 0;
+  border-width: 0px;
+  color: #ffffff !important;
+  object-fit: contain;
+}
 
-  .btn_container button:hover {
-    background-color: #adcce9;
-  }
-  
-  .footerForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  .footerForm a {
-    color: #478ac9 !important;
-    text-decoration: none;
-  }
-  
-  .input_sexo {
-    width: 100%;
-    display: flex;
-    gap: 1rem;
-  }
+.span-avatar img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  border-style: none;
+}
 
-  .input_sexo_male,  .input_sexo_female {
-    display: flex;
-    gap: 0.3rem;
-  }
+.form-wrap-register h2 {
+  color: #478ac9;
+}
 
-  .input_rol {
+.form-wrap-register form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 80%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  height: 36px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.form-required {
+  color: #db545a;
+}
+
+.btn_container {
+  display: flex;
+  width: 100%;
+
+}
+
+.btn_container button {
+  width: 100%;
+  height: 40px;
+  background-color: #478ac9;
+  color: #ffffff;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border-radius: 5px;
+}
+
+.btn_container button:hover {
+  background-color: #adcce9;
+}
+
+.footerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footerForm a {
+  color: #478ac9 !important;
+  text-decoration: none;
+}
+
+.input_sexo {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.input_sexo_male,
+.input_sexo_female {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.input_rol {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.input_rol_admin,
+.input_rol_manager,
+.input_rol_user {
+  display: flex;
+  gap: 0.3rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .form-wrap-register {
     width: 100%;
-    display: flex;
-    gap: 1rem;
+
+    && form {
+      width: 100%;
+    }
   }
-  
-  .input_rol_admin,  .input_rol_manager, .input_rol_user {
-    display: flex;
-    gap: 0.3rem;
-  }
+}

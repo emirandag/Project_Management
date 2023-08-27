@@ -13,12 +13,13 @@ import { colorPalette } from "../utils/colorPalette";
 
 export const Task = () => {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user, getRol } = useAuth();
   const [res, setRes] = useState({});
   const [updateTaskOk, setUpdateTaskOk] = useState(false);
   const [deleteTaskOk, setDeleteTaskOk] = useState(false);
   const [addUserOk, setAddUserOk] = useState(false);
   const color = colorPalette();
+  const rol = getRol()
 
   const loadPage = async (id) => {
     // console.log(id);
@@ -82,12 +83,15 @@ export const Task = () => {
                     </button>
                   )}
                 </div>
+                {rol != "user" &&
                 <button
-                  disabled={res?.data?.getTaskById?.isCompleted}
-                  onClick={() => useDeleteTaskError(id, setDeleteTaskOk)}
-                >
-                  Delete task
-                </button>
+                disabled={res?.data?.getTaskById?.isCompleted}
+                onClick={() => useDeleteTaskError(id, setDeleteTaskOk)}
+              >
+                Delete task
+              </button>
+                }
+                
                 {res?.data?.getTaskById?.isCompleted == false ? (
                   <button
                     onClick={() => useUpdateTaskError(id, setUpdateTaskOk)}

@@ -40,7 +40,10 @@ console.log(res);
   return (
     <>
       <div className="form-wrap-password">
-        <h1>Change your password 💱</h1>
+        <span className="span-avatar">
+            <img src="/images/reset_password.png" />
+          </span>
+        <h1>Change your password</h1>
 
         <form onSubmit={handleSubmit(formSubmit)}>
           <div className="user_container form-group">

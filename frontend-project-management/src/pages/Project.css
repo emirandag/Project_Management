@@ -41,7 +41,7 @@
             
 
             && .avatar-owner {
-                outline: 2px solid red;
+                outline: 3px solid #db545a;
             }
             
         }
