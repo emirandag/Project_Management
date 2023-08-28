@@ -49,7 +49,7 @@ export const Projects = () => {
     }
 
   return (
-    <>
+    <div className="container">
       <div className="form-wrap-projects">
         <span className="span-avatar">
           <img src="/images/project.png" />
@@ -96,6 +96,6 @@ export const Projects = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 }

@@ -81,7 +81,7 @@
 
             && .divider {
                 width: 100%;
-                border: 1px solid gainsboro;
+                border: 1px solid gray;
             }
 
             && button {

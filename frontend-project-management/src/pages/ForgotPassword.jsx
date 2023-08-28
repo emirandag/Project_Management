@@ -9,7 +9,7 @@ import { useForgotPassword } from "../hooks"
 export const ForgotPassword = () => {
     const [res, setRes] = useState({})
     const [send, setSend] = useState(false)
-    const { handleSubmit, register } = useForm()
+    const { handleSubmit, register, formState: { errors } } = useForm()
     const [forgotOk, setForgotOk] = useState(false)
 
     /**
@@ -38,7 +38,7 @@ console.log(res);
     
 
   return (
-    <>
+    <div className="container">
       <div className="form-wrap-password">
         <span className="span-avatar">
             <img src="/images/reset_password.png" />
@@ -58,6 +58,7 @@ console.log(res);
               autoComplete="false"
               {...register("email", { required: true })}
             />
+            {errors.email && <span className='form-required'>* This field is required</span>}
           </div>
 
           <div className="btn_container">
@@ -75,6 +76,6 @@ console.log(res);
           </p>
         </form>
       </div>
-    </>
+    </div>
   )
 }

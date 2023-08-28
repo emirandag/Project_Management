@@ -9,7 +9,7 @@ import { Uploadfile } from "./Uploadfile";
 import { FigureUser } from "./FigureUser";
 
 export const FormProfile = () => {
-  const { user, setUser, logout } = useAuth()
+  const { user, setUser, userLogout } = useAuth()
   const { register, handleSubmit } = useForm()
   const [res, setRes] = useState({})
   const [send, setSend] = useState(false)
@@ -32,10 +32,11 @@ export const FormProfile = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const inputFile = document.getElementById("file-upload").files;
-        console.log(inputFile.length);
+        console.log(inputFile[0]);
         let customFormData
 
         if (inputFile.length !== 0) {
+          console.log("entro");
           customFormData = {
             ...formData,
             photo: inputFile[0]
@@ -60,7 +61,7 @@ export const FormProfile = () => {
    */
   useEffect(() => {
     console.log(res);
-    useUpdateUserError(res,setRes, setUser)
+    useUpdateUserError(res,setRes, setUser, userLogout)
   }, [res])
 
   return (

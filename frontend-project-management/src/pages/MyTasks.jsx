@@ -4,6 +4,7 @@ import { showOpenTasks } from "../services/API/task.service";
 import { useAuth } from "../context/authContext";
 import { colorPalette } from "../utils/colorPalette";
 import { useNavigate, useParams } from "react-router-dom";
+import { useResize } from "../hooks";
 
 export const MyTasks = () => {
   const { id } = useParams()
@@ -12,6 +13,7 @@ export const MyTasks = () => {
   const [myTasks, setMyTasks] = useState(false)
   const navigate = useNavigate()
   const color = colorPalette();
+  const { ancho } = useResize()
 
   const loadPage = async () => {
     const dataOpenTask = await showOpenTasks();
@@ -31,8 +33,16 @@ export const MyTasks = () => {
 
   return (
     <div className="mytask-container">
+      <div className="mytask-head-info">
       <h2>{myTasks == false ? "Open tasks" : "My tasks"}</h2>
-    
+      <p>
+        {
+          myTasks == false ? 
+          res?.data?.openTasks?.length : 
+          res?.data?.openTasks?.filter((task) => task.assignedTo == user._id).length
+          }
+        </p>
+      </div>
       <div className="mytask-btn">
       <button onClick={() => setMyTasks(false)}>Open tasks</button>
       <button onClick={() => setMyTasks(true)}>My tasks</button>
@@ -47,8 +57,12 @@ export const MyTasks = () => {
               <h3>Task title</h3>
               <h3>Project</h3>
               <h3>User</h3>
+              {ancho > 600 && 
+              <>
               <h3>Status</h3>
               <h3>Comments</h3>
+              </>
+              }
             </div>
             <>
               {myTasks == false
@@ -61,6 +75,7 @@ export const MyTasks = () => {
                       //   backgroundColor: `${task.isCompleted ? color.colorTask.colorClosed : color.colorTask.colorOpen }`
                       // }}
                     >
+                      
                       <div className="task-field">
                         <p>{task.title}</p>
                       </div>
@@ -72,13 +87,18 @@ export const MyTasks = () => {
                         </p>
                       </div>
                       <div className="task-field">
-                        <p>
-                          {/* {task.assignedTo == user._id
-                            ? user.email
-                            : "No Assigned"} */}
+                      {
+                        
+                          
+                          ancho > 600 ? 
+                          <p>
                           {res?.data?.getUsers?.filter((userTask) => userTask._id == task.assignedTo).map((userTask) => userTask.email)}
-                        </p>
+                        </p> : 
+                        <img src={res?.data?.getUsers?.filter((userTask) => userTask._id == task.assignedTo).map((userTask) => userTask.photo)} alt="" />
+}
                       </div>
+                      {ancho > 600 &&
+                      <>
                       <div
                         className="task-field"
                         style={{
@@ -95,6 +115,8 @@ export const MyTasks = () => {
                       <div className="task-field">
                         <p>{task.comments.length}</p>
                       </div>
+                      </>
+                      }
                     </div>
                   ))
                 : 
@@ -123,12 +145,19 @@ export const MyTasks = () => {
                             </p>
                           </div>
                           <div className="task-field">
+                            {ancho > 600 ? 
+                            
                             <p>
                               {task.assignedTo == user._id
                                 ? user.email
                                 : "No Assigned"}
                             </p>
+                            :
+                            <img src={user.photo} alt={user.email} />
+                            }
                           </div>
+                          {ancho > 600 &&
+                          <>
                           <div
                             className="task-field"
                             style={{
@@ -145,6 +174,8 @@ export const MyTasks = () => {
                           <div className="task-field">
                             <p>{task.comments.length}</p>
                           </div>
+                          </>
+                          }
                         </div>
                       );
                     })}

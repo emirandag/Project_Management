@@ -1,3 +1,11 @@
+.container {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-wrap-login {
     display: flex;
     flex-direction: column;
@@ -9,7 +17,7 @@
     border-radius: 5px;
     padding: 2rem;
     width: 30%;
-    height: 40%;
+    height: 100%;
     font-family: 'Roboto', sans-serif;
   }
   
@@ -97,7 +105,16 @@
     text-decoration: none;
   }
 
-
+  @media only screen and (max-width: 920px) {
+    .form-wrap-login {
+      width: 50%;
+      height: 60%;
+  
+      /* && form {
+        width: 100%;
+      } */
+    }
+  }
 
 @media only screen and (max-width: 600px) {
     .form-wrap-login {

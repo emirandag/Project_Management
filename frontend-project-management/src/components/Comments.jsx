@@ -6,6 +6,7 @@ import { createComment, deleteComment, getCommentsByTask, updateComment } from "
 import { useAddCommentError, useFormattedDate } from "../hooks";
 import { useAuth } from "../context/authContext";
 import Modal from "./UI/Modal/Modal";
+import { colorPalette } from "../utils/colorPalette";
 
 
 export const Comments = () => {
@@ -22,6 +23,8 @@ export const Comments = () => {
     const [editCommentId, setEditCommentId] = useState({});
     const [commentText, setCommentText] = useState("");
     const [openModal, setOpenModal] = useState(false)
+    const color = colorPalette();
+
 
     const formSubmit = async (formData) => {
         const customFormData = {
@@ -64,6 +67,7 @@ export const Comments = () => {
 
     useEffect(() => {
         loadPage(id);
+        reset()
     }, [res, deleteCommentOk, updateCommentOk])
 
   return (

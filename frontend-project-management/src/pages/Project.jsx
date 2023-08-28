@@ -108,7 +108,7 @@ export const Project = () => {
                   Add task
                 </button>
                 <button
-                  disabled={res?.data?.isClosed}
+                  disabled={res?.data?.isClosed && rol != "admin" }
                   onClick={() => useDeleteProjectError(id, setDeleteProjectOk)}
                 >
                   <i className="fa fa-trash" aria-hidden="true"></i>

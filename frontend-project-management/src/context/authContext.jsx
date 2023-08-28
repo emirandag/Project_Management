@@ -67,7 +67,7 @@ export const AuthContextProvider = ({ children }) => {
     const userLogout = () => {
         sessionStorage.removeItem("user")
         setUser(null)
-        location.reload();
+        //location.reload();
         navigate("/login")
         
     }

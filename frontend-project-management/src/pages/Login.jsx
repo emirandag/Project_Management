@@ -49,10 +49,10 @@ export const Login = () => {
     }
   }
   return (
-    <>
+    <div className='container'>
       <div className="form-wrap-login">
         <span className="span-avatar">
-          <img src="/images/login_avatar_white.png" />
+          <img src="/images/login_avatar_black.png" />
         </span>
 
         <h2>Sign in</h2>
@@ -109,6 +109,6 @@ export const Login = () => {
         </form>
       </div>
 
-    </>
+    </div>
   );
 }

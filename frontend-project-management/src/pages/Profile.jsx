@@ -47,6 +47,7 @@ export const Profile = () => {
             </button>
           </div>
           <div className="containerProfile">
+           
             <div className="containerDataNoChange">
               <FigureUser user={user} />
             </div>

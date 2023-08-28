@@ -48,7 +48,7 @@ export const NewTasks = () => {
     }
 
   return (
-    <>
+    <div className="container">
     <div className="form-wrap-task">
         <span className="span-avatar">
           <img src="https://icons.veryicon.com/png/o/miscellaneous/standard/task-32.png" />
@@ -86,6 +86,6 @@ export const NewTasks = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 }

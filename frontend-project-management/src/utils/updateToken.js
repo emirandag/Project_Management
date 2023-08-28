@@ -3,7 +3,7 @@ export const updateToken = () => {
 
     if (user) {
         const parseUser = JSON.parse(user)
-        console.log(parseUser.token);
+        //console.log(parseUser.token);
         return parseUser.token
     }
 }

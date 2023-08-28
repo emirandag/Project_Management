@@ -44,9 +44,10 @@ export const changePasswordUser = async (formData) => {
 }
 
 export const updateUser = async (formData) => {
+  console.log(formData);
   return APIuser.patch("/users/update/update", formData, {
-    "Content-Type": "multipart/form-data",
     headers: {
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${updateToken()}`
     }
   })

@@ -38,26 +38,39 @@ export const Task = () => {
   return (
     <>
       <div className="task-dashboard">
+        
         {/* {console.log(res)} */}
         <h2>{res?.data?.getProject?.title}</h2>
         <div
           className="task-container"
-          style={{
-            backgroundColor: `${
-              res?.data?.getTaskById?.isCompleted
-                ? color.colorTask.colorClosed
-                : color.colorTask.colorOpen
-            }`,
+          // style={{
+          //   backgroundColor: `${
+          //     res?.data?.getTaskById?.isCompleted
+          //       ? color.colorTask.colorClosed
+          //       : color.colorTask.colorOpen
+          //   }`,
 
-            boxShadow: `1px 2px 5px ${
-              res?.data?.getTaskById?.isCompleted
-                ? color.colorProgressBar.colorClosed
-                : color.colorProgressBar.colorOpen
-            }`,
-          }}
+          //   boxShadow: `1px 2px 5px ${
+          //     res?.data?.getTaskById?.isCompleted
+          //       ? color.colorProgressBar.colorClosed
+          //       : color.colorProgressBar.colorOpen
+          //   }`,
+          // }}
         >
+          
           {res ? (
             <>
+            <div className="task-status"
+            style={{
+                backgroundColor: `${
+                  res?.data?.getTaskById?.isCompleted
+                    ? color.colorProgressBar.colorClosed
+                    : color.colorProgressBar.colorOpen
+                }`,
+            }}
+            >
+              {res?.data?.getTaskById?.isCompleted ? "Closed task" : "Open task"}
+            </div>
             {console.log(res.data)}
               <div className="task-top">
                 <div className="task-avatar">
@@ -97,6 +110,12 @@ export const Task = () => {
                     onClick={() => useUpdateTaskError(id, setUpdateTaskOk)}
                   >
                     Complete Task
+                  </button>
+                ) : rol != "user" ? (
+                  <button
+                  onClick={() => useUpdateTaskError(id, setUpdateTaskOk, open = res?.data?.getTaskById?.isCompleted)}
+                  >
+                    Open
                   </button>
                 ) : (
                   <button disabled>Completed</button>

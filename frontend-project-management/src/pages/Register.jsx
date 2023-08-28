@@ -55,11 +55,11 @@ export const Register = () => {
   }
 
   return (
-    <>
+    <div className='container'>
       
         <div className="form-wrap-register">
           <span className="span-avatar">
-            <img src="/images/login_avatar_white.png" />
+            <img src="https://cdn0.iconfinder.com/data/icons/cosmetic-store/25/Register-512.png" alt="user-register" />
           </span>
 
           <h2>Sign up</h2>
@@ -195,6 +195,6 @@ export const Register = () => {
             </div>
           </form>
         </div>
-    </>
+    </div>
   );
 };

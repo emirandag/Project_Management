@@ -1,6 +1,6 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
 
-export const useUpdateUserError = (res, setRes, logout) => {
+export const useUpdateUserError = (res,setRes, setUser, userLogout) => {
     console.log(res);
 
     // 200 : testUpdate - Comprobar que todo esté a true
@@ -25,7 +25,7 @@ export const useUpdateUserError = (res, setRes, logout) => {
                 }
             }
         });
-        logout()
+        userLogout()
         Swal.fire({
             icon: "success",
             title: `Update data user✅`,

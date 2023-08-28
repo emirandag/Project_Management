@@ -8,6 +8,16 @@
     gap: 2rem;
     padding: 2rem;
 
+    && .mytask-head-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        
+    }
+
     && .mytask-btn {
         width: 100%;
         display: flex;
@@ -120,6 +130,13 @@
                 justify-content: space-between;
             } */
 
+            && img {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 1rem;
+                outline: 1px solid gainsboro;
+            }
+
             && .task-field:nth-child(1) {
                 width: 30%;
                 display: flex;
@@ -153,5 +170,69 @@
             
             
         }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .mytask-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        padding: 2rem 0;
+
+        && .mytask-header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            && h3:nth-child(1) {
+                width: 30%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start !important;
+            }
+            && h3:nth-child(2) {
+                width: 30%;
+                display: flex;
+                align-items: center;
+                justify-content: center !important;
+            }
+            && h3:nth-child(3) {
+                width: 20%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end !important;
+            }
+        }
+
+        && .mytask-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between !important;
+            gap: 0.1rem !important;
+
+        && .task-field:nth-child(1) {
+            width: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start !important;
+        }
+        && .task-field:nth-child(2) {
+            width: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center !important;
+        }
+        && .task-field:nth-child(3) {
+            width: 10% !important;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end !important;
+        }
+    }
     }
 }

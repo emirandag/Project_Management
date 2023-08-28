@@ -19,3 +19,13 @@
         color: #478ac9;
     }
 }
+
+@media only screen and (max-width: 300px) {
+    .Home {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
