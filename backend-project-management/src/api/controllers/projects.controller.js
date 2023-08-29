@@ -144,14 +144,15 @@ const addMemberProject = async (req, res, next) => {
     const projectId = req.params.id
     const { email } = req.body
 
-    // console.log(projectId);
-    // console.log(email);
+    console.log(projectId);
+    console.log(typeof email.value);
+    const userEmail = email.value
 
     const foundProject = await Project.findById(projectId)
-    const foundUser = await User.findOne({ email })
+    const foundUser = await User.findOne({ email: userEmail })
 
-    // console.log(foundProject);
-    // console.log(foundUser);
+    //console.log(foundProject);
+    console.log(foundUser);
 
 
     if (foundUser) {

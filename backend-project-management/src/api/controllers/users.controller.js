@@ -217,6 +217,7 @@ const login = async (req, res, next) => {
       //Comparamos la contraseña introducida por el body y la existente en la base de datos
       if (bcrypt.compareSync(password, user.password)) {
         //Si es igual, generaos un token
+        console.log(user._id);
         const token = generateToken(user._id, email, user.rol)
 
         //devolvemos el usuario y el token
@@ -406,15 +407,18 @@ const modifyPassword = async (req, res, next) => {
  * ----------------------------- UPDATE USER ---------------------------------
  */
 const update = async (req, res, next) => {
+  console.log(req.file);
   let catchImg = req.file?.path;
-
+  
   try {
     // actualizamos los indexes de los elementos unicos por si han modificado
     await User.syncIndexes();
-
+    console.log(req.body);
+    
     //Instanciamos un nuevo modelo de usuario
     const patchUser = new User(req.body);
-
+    //console.log(req);
+    
     // si tenemos el file le metemos el path de cloudinary
     if (req.file) {
       patchUser.photo = req.file.path;

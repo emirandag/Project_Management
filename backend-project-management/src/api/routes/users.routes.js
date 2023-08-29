@@ -12,7 +12,6 @@ const {
     update, 
     deleteUser, 
     addUserProject, 
-    addUserTask,
     getAllUsers,
     getUser,
     changeEmail,
@@ -30,7 +29,7 @@ UserRoutes.post('/login', login);
 UserRoutes.post('/login/autologin', autoLogin);
 UserRoutes.post('/forgotpassword', forgotPassword);
 UserRoutes.patch('/changepassword', [isAuth], modifyPassword);
-UserRoutes.patch('/update/update', [isAuth], upload.single('image'), update);
+UserRoutes.patch('/update/update', [isAuth], upload.single('photo'), update);
 UserRoutes.delete('/', [isAuth], deleteUser);
 UserRoutes.patch('/adduserproject/:id&projectId=:projectId', [isAuthManager], addUserProject);
 //UserRoutes.patch('/addusertask/:id', [isAuth], addUserTask);

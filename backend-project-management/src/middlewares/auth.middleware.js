@@ -6,13 +6,14 @@ dotenv.config();
 const isAuth = async (req, res, next) => {
   // le quitamos el prefijo de bearer al token para que podamos pasarlo a verificarlo
   const token = req.headers.authorization?.replace('Bearer ', '');
-
+console.log(token);
   if (!token) {
     return next(new Error('Unauthorized'));
   }
   try {
     // ---> decodificamos el token y sacomos el id y email que es con lo que hemos creado el token
     const decoded = verifyToken(token, process.env.JWT_SECRET);
+    req.user = await {}
     req.user = await User.findById(decoded.id);
     next();
   } catch (error) {
@@ -25,13 +26,14 @@ const isAuth = async (req, res, next) => {
 const isAuthManager = async (req, res, next) => {
   // le quitamos el prefijo de bearer al token para que podamos pasarlo a verificarlo
   const token = req.headers.authorization?.replace('Bearer ', '');
-
+  console.log(token);
   if (!token) {
     return next(new Error('Unauthorized'));
   }
   try {
     // ---> decodificamos el token y sacomos el id y email que es con lo que hemos creado el token
     const decoded = verifyToken(token, process.env.JWT_SECRET);
+    req.user = await {}
     req.user = await User.findById(decoded.id);
     if (req.user.rol === 'user') {
       return next(new Error('Unauthorized, not manager or admin'));
@@ -47,13 +49,14 @@ const isAuthManager = async (req, res, next) => {
 const isAuthAdmin = async (req, res, next) => {
   // le quitamos el prefijo de bearer al token para que podamos pasarlo a verificarlo
   const token = req.headers.authorization?.replace('Bearer ', '');
-
+  console.log(token);
   if (!token) {
     return next(new Error('Unauthorized'));
   }
   try {
     // ---> decodificamos el token y sacomos el id y email que es con lo que hemos creado el token
     const decoded = verifyToken(token, process.env.JWT_SECRET);
+    req.user = await {}
     req.user = await User.findById(decoded.id);
     if (req.user.rol !== 'admin') {
       return next(new Error('Unauthorized, not admin'));

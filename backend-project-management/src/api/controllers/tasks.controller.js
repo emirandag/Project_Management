@@ -113,6 +113,7 @@ const updateTask = async (req, res, next) => {
  */
 const deleteTask = async (req, res, next) => {
     try {
+      await Task.syncIndexes();
         //Recuperamos el ID de la tarea que introducimos por parámetro
         const { id } = req.params
 
@@ -189,9 +190,22 @@ const getAllTasks = async (req, res, next) => {
     try {
       const { id } = req.params
       const getTaskById = await Task.findById(id).populate("comments")
-      console.log(getTaskById);
+      
+      //console.log(getTaskById);
+      
       if (getTaskById) {
-        res.status(200).json(getTaskById)
+        const getProject = await Project.findById(getTaskById.project)
+
+        
+          const getUser = await User.findById(getTaskById.assignedTo)
+          
+        
+        
+        res.status(200).json({
+          getTaskById,
+          getProject,
+          getUser
+        })
       } else {
         res.status(404).json('Error the task not exist')
       }
@@ -208,7 +222,9 @@ const getAllTasks = async (req, res, next) => {
       const openTasks = await Task.find({ isCompleted: false })
   
       if (openTasks) {
-        res.status(200).json(openTasks)
+        const getProjects = await Project.find()
+        const getUsers = await User.find()
+        res.status(200).json({openTasks, getProjects, getUsers})
       } else {
         res.status(404).json('There arent open projects')
       }
@@ -220,15 +236,16 @@ const getAllTasks = async (req, res, next) => {
 
   const addUserTask = async (req, res, next) => {
     try {
-      const { id, email } = req.params
-      //const { taskId } = req.body
-  
-      //const foundUser = await User.findById(id)
-      //const foundTask = await Task.findById({ _id: taskId})
+      await Task.syncIndexes();
+
+      const { id,  email } = req.params
+      //const { email } = req.user
+
+      //await console.log(req.user);
+
       const foundTask = await Task.findById(id)
       const foundUser = await User.findOne({email})
-      //console.log(foundTask);
-      //console.log(foundUser);
+
   
       if (!foundTask) { // Validamos si la tarea existe
         console.log("The task not exist");

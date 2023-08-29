@@ -10,6 +10,7 @@ TaskRoutes.delete("/deletetask/:id", [isAuthManager], deleteTask)
 TaskRoutes.get("/", [isAuth], getAllTasks)
 TaskRoutes.get("/:id", [isAuth], getTask)
 TaskRoutes.get("/opentasks/list", [isAuth], getOpenTasks)
+// TaskRoutes.patch('/addusertask/:id', [isAuth], addUserTask);
 TaskRoutes.patch('/addusertask/:id&email=:email', [isAuth], addUserTask);
 
 // TaskRoutes.post('/:id', [isAuth], createComment);
