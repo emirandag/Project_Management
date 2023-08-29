@@ -1,5 +1,5 @@
 import './Nav.css'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useAuth } from '../context/authContext';
 import { useState } from 'react';
 import { useResize } from '../hooks';
@@ -18,7 +18,9 @@ export const Nav = () => {
 
     
 <div className="navbar">
-      <div className="nav-logo">LOGO</div>
+      <div className="nav-logo">
+      <Link to='/'><img src="/images/taskprojit.png" alt="" /></Link>
+      </div>
       <nav className={`nav-items ${isOpen && 'open'}`}>
 
           <NavLink to='/'><button className='btn-nav' onClick={() => setIsOpen(!isOpen)}>HOME</button></NavLink>

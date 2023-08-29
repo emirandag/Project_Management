@@ -6,6 +6,7 @@ export const useAutoLogin = async (allUser, userLogin, setOkCheck) => {
   try {
     const { email, password } = allUser?.data?.user;
 
+    console.log(password);
     const customFormData = {
       email,
       password,

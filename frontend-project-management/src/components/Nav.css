@@ -4,7 +4,15 @@
     align-items: center;
     width: 90%;
 
-
+    && .nav-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        && img {
+            width: 8rem;
+        }
+    }
 
     && .btn-nav {
         background: none;

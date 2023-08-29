@@ -141,7 +141,7 @@
 @media only screen and (max-width: 920px) {
   .form-wrap-register {
     width: 50%;
-    height: 90%;
+    min-height: 90%;
 
     && form {
       width: 90%;

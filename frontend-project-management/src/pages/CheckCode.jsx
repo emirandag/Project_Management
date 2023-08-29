@@ -23,6 +23,7 @@ export const CheckCode = () => {
   const formSubmit = async (formData) => {
     //console.log(formData.confirmationCode);
     const userLocal = sessionStorage.getItem("user")
+    const parseUser = JSON.parse(userLocal)
 
     if (userLocal == null) {
       // Este usuario viene del registro por lo que no se ha logueado
@@ -38,8 +39,9 @@ export const CheckCode = () => {
       setSend(false)
     } else {
       // Este usuario viene del login, porque existe en el sessionStorage
+      console.log(userLocal);
       const customFormData = {
-        email: user.email,
+        email: parseUser.email,
         confirmationCode: parseInt(formData.confirmationCode)
       }
 

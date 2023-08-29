@@ -34,9 +34,10 @@ export const Login = () => {
   }, []);
 
   useEffect(() => {
-    //console.log("Respuesta: "+res);
+    console.log(res);
     useLoginError(res, setLoginOk, userLogin, setRes);
   }, [res]);
+
 
   /**
    * 3.- Estados de navegación o estados de funcionalidades OK

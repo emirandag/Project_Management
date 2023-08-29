@@ -55,7 +55,7 @@ const navigate = useNavigate()
   return (
     <>
       <>
-
+{console.log(user)}
       </>
       <div className="dashboard-container">
         <h2>Dashboard</h2>
@@ -125,6 +125,8 @@ const navigate = useNavigate()
           currentElements.map((project) => (
             <CardProject key={project._id} project={project} />
           ))
+        ) : res?.data?.length > 0 ? (
+          <h3>No tienes proyectos</h3>
         ) : (
           <h1>Loading ...</h1>
         )}

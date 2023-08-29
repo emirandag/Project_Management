@@ -108,7 +108,7 @@
   @media only screen and (max-width: 920px) {
     .form-wrap-login {
       width: 50%;
-      height: 60%;
+      min-height: 60%;
   
       /* && form {
         width: 100%;

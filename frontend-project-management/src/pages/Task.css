@@ -171,6 +171,10 @@
             justify-content: center;
             align-items: center;
 
+            && .task-status {
+                width: 100%;
+            }
+
             && .task-top {
                 width: 100%;
                 display: flex;

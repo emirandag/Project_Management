@@ -2,11 +2,12 @@ import "./Profile.css";
 import { useState } from "react";
 import { ChangeEmail, ChangePassword, FigureUser, FormProfile } from "../components";
 import { useAuth } from "../context/authContext";
-import { useDeleteUserError } from "../hooks";
+import { useDeleteUserError, useResize } from "../hooks";
 
 export const Profile = () => {
   const { user, userLogout } = useAuth()
   const [changeRender, setChangeRender] = useState("profile");
+  const { ancho } = useResize()
 
 
   const renderizarComponente = (componente) => {
@@ -23,21 +24,22 @@ export const Profile = () => {
             onClick={() => renderizarComponente("profile")}
           >
             <i className="fa fa-user" aria-hidden="true"></i>
-            <p>Profile</p>
+            {ancho > 450 && <p>Profile</p>}
+            
           </div>
           <div
             className={`profile-nav ${changeRender == "password" && "active"}`}
             onClick={() => renderizarComponente("password")}
           >
             <i className="fa fa-unlock-alt" aria-hidden="true"></i>
-            <p>Password</p>
+            {ancho > 450 && <p>Password</p>}
           </div>
           <div
             className={`profile-nav ${changeRender == "email" && "active"}`}
             onClick={() => renderizarComponente("email")}
           >
             <i className="fa fa-envelope" aria-hidden="true"></i>
-            <p>Email</p>
+            {ancho > 450 && <p>Email</p>}
           </div>
         </div>
         <div className="fluidContainerProfile">

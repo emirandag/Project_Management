@@ -94,7 +94,7 @@ export const MyTasks = () => {
                           <p>
                           {res?.data?.getUsers?.filter((userTask) => userTask._id == task.assignedTo).map((userTask) => userTask.email)}
                         </p> : 
-                        <img src={res?.data?.getUsers?.filter((userTask) => userTask._id == task.assignedTo).map((userTask) => userTask.photo)} alt="" />
+                        <img src={res?.data?.getUsers?.filter((userTask) => userTask._id == task.assignedTo)?.[0]?.photo || `https://ionicframework.com/docs/img/demos/avatar.svg`} alt="" />
 }
                       </div>
                       {ancho > 600 &&
@@ -120,6 +120,8 @@ export const MyTasks = () => {
                     </div>
                   ))
                 : 
+                // Filtramos las tareas abiertas por el usuario que está validado
+                // para que se muestren solo las suyas
                 res?.data?.openTasks
                     ?.filter((task) => task.assignedTo == user._id)
                     .map((task) => {
@@ -153,7 +155,7 @@ export const MyTasks = () => {
                                 : "No Assigned"}
                             </p>
                             :
-                            <img src={user.photo} alt={user.email} />
+                            <img src={!user.photo ? `https://ionicframework.com/docs/img/demos/avatar.svg` : `${user.photo}`} alt={user.email} />
                             }
                           </div>
                           {ancho > 600 &&

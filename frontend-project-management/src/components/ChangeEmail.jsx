@@ -38,6 +38,7 @@ export const ChangeEmail = () => {
       useValidateEmailError(resCheck, setResCheck, setValidateEmailOk, user, userLogin)
     }, [resCheck])
 
+    console.log(resCheck);
     if (validateEmailOk) {
 
     }
@@ -94,8 +95,8 @@ export const ChangeEmail = () => {
         </>
 ) : (
   <>
-  <h1>Validate your email and code <i className="fa fa-envelope" aria-hidden="true"></i></h1>
-        <p>Please, enter your code</p>
+  <h2>Validate your email and code <i className="fa fa-envelope" aria-hidden="true"></i></h2>
+        <p>Please, enter your confirmation code</p>
         <i className="fa fa-envelope-open" aria-hidden="true"></i>
         <form onSubmit={handleSubmit(formValidate)}>
           <div className="newEmail_container form-group">
@@ -123,7 +124,7 @@ export const ChangeEmail = () => {
               id="confirmationCode"
               name="confirmationCode"
               autoComplete="false"
-              placeholder="Enter your code"
+              placeholder="Enter your confirmation code"
               {...register("confirmationCode", { required: true })}
             />
           </div>

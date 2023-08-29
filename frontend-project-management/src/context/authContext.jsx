@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import jwtDecode from 'jwt-decode';
+import { APIHeaders } from "../services/API/serviceApi.config";
 /**
  * 1.- PRIMERO CREAMOS EL CONTEXTO
  */
@@ -55,7 +56,7 @@ export const AuthContextProvider = ({ children }) => {
     const userLogin = (data) => {
         // 1.- Meto la data del usuario en el sessionStorage
         sessionStorage.setItem("user", data)
-
+        APIHeaders()
         // 2.- Lo parseamos y lo metemos en el estado global que setea nuestro usuario logado
         const parseUserData = JSON.parse(data)
         setUser(() => parseUserData)
@@ -68,6 +69,7 @@ export const AuthContextProvider = ({ children }) => {
         sessionStorage.removeItem("user")
         setUser(null)
         //location.reload();
+        APIHeaders()
         navigate("/login")
         
     }
