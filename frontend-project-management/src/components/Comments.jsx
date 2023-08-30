@@ -135,7 +135,7 @@ export const Comments = ({commentsClosed}) => {
                 <div className="comment-btn">
                     <div className="divider"></div>
                     <button 
-                        disabled={resComments?.data?.foundTask?.isCompleted}
+                        disabled={resComments?.data?.foundTask?.isCompleted || comment.user != user._id}
                         className="edit-btn" 
                         onClick={(e) => {
                             e.stopPropagation();
@@ -147,7 +147,7 @@ export const Comments = ({commentsClosed}) => {
                         <i className="fa fa-pencil-square-o fa-2xs" aria-hidden="true"></i>
                     </button>
                     <button 
-                        disabled={resComments?.data?.foundTask?.isCompleted}
+                        disabled={resComments?.data?.foundTask?.isCompleted  || comment.user != user._id}
                         className="delete-btn" 
                         onClick={(e) => {
                             e.stopPropagation();

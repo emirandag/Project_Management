@@ -2,8 +2,8 @@ import Swal from "sweetalert2/dist/sweetalert2.all.js";
 
 export const useValidateEmailError = (resCheck, setResCheck, setValidateEmailOk, user, userLogin) => {
 
-    console.log(resCheck);
-    console.log(user);
+    // console.log(resCheck);
+    // console.log(user);
 
     // 200: true
     if (resCheck?.status == 200) {
