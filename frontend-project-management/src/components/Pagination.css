@@ -5,10 +5,31 @@
     gap: 0.3rem;
     padding: 1rem;
 
+    /* && h3.active {
+            width: 2rem;
+            height: 2rem;
+            background-color: #478ac9;
+            display: flex;
+            border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+        
+    } */
     && button {
         width: 1.5rem;
         height: 1.5rem;
+        border-radius: 1rem;
         border: none;
+        background-color: #ffffff;
+    }
+
+    && button.active {
+        width: 1.5rem;
+        height: 1.5rem;
+        border: none;
+        /* background-color: #ffffff; */
+        background-color: #478ac9;
+        border-radius: 1rem;
     }
 
     && :active {

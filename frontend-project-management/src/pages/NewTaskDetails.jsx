@@ -1,10 +1,11 @@
 import "./Task.css"
 import { useEffect, useState } from "react";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { showTaskById } from "../services/API/task.service";
 import { useAddUserTaskError, useDeleteTaskError, useUpdateTaskError } from "../hooks";
 import { useAuth } from "../context/authContext";
 import { Comments } from "../components";
+import { colorPalette } from "../utils/colorPalette";
 
 
 export const NewTaskDetails = () => {
@@ -14,7 +15,7 @@ export const NewTaskDetails = () => {
     const [updateTaskOk, setUpdateTaskOk] = useState(false)
     const [deleteTaskOk, setDeleteTaskOk] = useState(false)
     const [addUserOk, setAddUserOk] = useState(false)
-
+    const color = colorPalette();
 
     
     //console.log(location);
@@ -46,6 +47,17 @@ export const NewTaskDetails = () => {
         {console.log(res)}
         {res ? (
           <>
+          <div className="task-status"
+            style={{
+                backgroundColor: `${
+                  res?.data?.getTaskById?.isCompleted
+                    ? color.colorProgressBar.colorClosed
+                    : color.colorProgressBar.colorOpen
+                }`,
+            }}
+            >
+              {res?.data?.getTaskById?.isCompleted ? "Closed task" : "Open task"}
+            </div>
             <div className="task-top">
               <div className="task-avatar">
                 {res?.data?.getTaskById?.assignedTo ? (

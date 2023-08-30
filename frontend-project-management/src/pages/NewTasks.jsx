@@ -2,7 +2,7 @@ import "./Tasks.css"
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createTask } from "../services/API/task.service";
-import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useCreateTaskError } from "../hooks";
 import { useAuth } from "../context/authContext";
 import { openProjects } from "../services/API/project.service";
@@ -72,6 +72,7 @@ export const NewTasks = () => {
 
                 <label htmlFor="projectId">Choose a project:</label>
                 <select className="projects-select" {...register("projectId")}>
+                <option value="">-- Select Project --</option>
                   {resProjects?.data?.map((project) => (
                     <option key={project._id} value={project._id}>
                       {project.title}

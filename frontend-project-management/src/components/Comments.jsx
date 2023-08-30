@@ -9,7 +9,7 @@ import Modal from "./UI/Modal/Modal";
 import { colorPalette } from "../utils/colorPalette";
 
 
-export const Comments = () => {
+export const Comments = ({commentsClosed}) => {
     const { id } = useParams()
     const { register, handleSubmit, reset } = useForm();
     const { user } = useAuth()
@@ -42,7 +42,7 @@ export const Comments = () => {
 
         const dataComments = await getCommentsByTask(id);
         setResComments(dataComments);
-        console.log(res);
+        //console.log(commentsClosed);
       };
     
 
@@ -68,7 +68,7 @@ export const Comments = () => {
     useEffect(() => {
         loadPage(id);
         reset()
-    }, [res, deleteCommentOk, updateCommentOk])
+    }, [res, deleteCommentOk, updateCommentOk, commentsClosed])
 
   return (
     <>
@@ -84,7 +84,7 @@ export const Comments = () => {
 
         />
         {
-            resComments?.data?.foundTask?.isCompleted == true ? (
+            resComments?.data?.foundTask?.isCompleted == true || commentsClosed ? (
                 <button disabled={true}>Add comment</button>
             ) : (
                 <button disabled={send}>Add comment</button>
@@ -128,7 +128,8 @@ export const Comments = () => {
                     {/* <p>{comment.text}</p> */}
                 </div>
                 <div className="comment-info">
-                    <p>{comment.user == user._id && user.email}</p>
+                {/* {console.log(resComments?.data?.foundUser?.filter((userComment) =>  userComment._id == comment.user)).map((userComment) => userComment.email)} */}
+                    <p>{resComments?.data?.foundUser?.filter((userComment) =>  userComment._id == comment.user).map((userComment) => userComment.email)}</p>
                     <p>{formattedDate(comment.publishedDate)}</p>
                 </div>
                 <div className="comment-btn">

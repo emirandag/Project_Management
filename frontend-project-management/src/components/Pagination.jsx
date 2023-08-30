@@ -6,6 +6,7 @@ export const Pagination = ({ currentPage, totalPages, handlePageChange }) => {
   return (
     <div className="pagination">
       {pageNumbers.map((pageNumber) => (
+        <>
         <button
           key={pageNumber}
           onClick={() => handlePageChange(pageNumber)}
@@ -13,6 +14,13 @@ export const Pagination = ({ currentPage, totalPages, handlePageChange }) => {
         >
           {pageNumber}
         </button>
+        {/* <h3
+        className={currentPage === pageNumber ? "active" : ""}
+        >
+        {pageNumber}
+        </h3> */}
+        
+        </>
       ))}
     </div>
   );

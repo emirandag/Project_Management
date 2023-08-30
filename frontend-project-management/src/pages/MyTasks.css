@@ -18,6 +18,15 @@
         
     }
 
+   && .mytask-select-project {
+        width: 18rem;
+        height: 2rem;
+        border-radius: 0.2rem;
+        border: 1px solid #A1A2B5;
+        font-size: 16px;
+        padding: 0 0.2rem;
+   }
+
     && .mytask-btn {
         width: 100%;
         display: flex;

@@ -10,7 +10,8 @@ export const MyTasks = () => {
   const { id } = useParams()
   const { user } = useAuth();
   const [res, setRes] = useState({});
-  const [myTasks, setMyTasks] = useState(false)
+  const [myTasks, setMyTasks] = useState(false) // Escogemos por todas las tareas abiertas o por mis tareas abiertas
+  const [selectedProject, setSelectedProject] = useState(''); // Estado para seleccionar los proyectos
   const navigate = useNavigate()
   const color = colorPalette();
   const { ancho } = useResize()
@@ -21,11 +22,9 @@ export const MyTasks = () => {
   };
 
   const renderToTaskById = (idTask) => {
-
     return navigate(`/projects/${id}/tasks/${idTask}`);
-
   };
-  console.log(res);
+  //console.log(res);
 
   useEffect(() => {
     loadPage();
@@ -34,96 +33,127 @@ export const MyTasks = () => {
   return (
     <div className="mytask-container">
       <div className="mytask-head-info">
-      <h2>{myTasks == false ? "Open tasks" : "My tasks"}</h2>
-      <p>
-        {
-          myTasks == false ? 
-          res?.data?.openTasks?.length : 
-          res?.data?.openTasks?.filter((task) => task.assignedTo == user._id).length
-          }
+        <h2>{myTasks == false ? "Open tasks" : "My tasks"}</h2>
+        <p>
+          {/* Mostramos el total de tareas abiertas o las que están asignadas a mi*/}
+          {myTasks == false
+            ? res?.data?.openTasks?.length
+            : res?.data?.openTasks?.filter(
+                (task) => task.assignedTo == user._id
+              ).length}
         </p>
       </div>
-      <div className="mytask-btn">
-      <button onClick={() => setMyTasks(false)}>Open tasks</button>
-      <button onClick={() => setMyTasks(true)}>My tasks</button>
-      </div>
-      
-      <div className="mytask-dashboard"
-      
+      <select
+        className="mytask-select-project"
+        value={selectedProject}
+        onChange={(e) => setSelectedProject(e.target.value)}
       >
+        <option value="">All Projects</option>
+        {res?.data?.getProjects.map((project) => (
+          <option key={project._id} value={project._id}>
+            {project.title}
+          </option>
+        ))}
+      </select>
+      <div className="mytask-btn">
+        <button onClick={() => setMyTasks(false)}>Open tasks</button>
+        <button onClick={() => setMyTasks(true)}>My tasks</button>
+      </div>
+
+      <div className="mytask-dashboard">
         {res ? (
           <>
             <div className="mytask-header">
               <h3>Task title</h3>
               <h3>Project</h3>
               <h3>User</h3>
-              {ancho > 600 && 
-              <>
-              <h3>Status</h3>
-              <h3>Comments</h3>
-              </>
-              }
+              {ancho > 600 && (
+                <>
+                  <h3>Status</h3>
+                  <h3>Comments</h3>
+                </>
+              )}
             </div>
             <>
               {myTasks == false
-                ? res?.data?.openTasks?.map((task) => (
-                    <div
-                      key={task._id}
-                      className="mytask-main"
-                      onClick={() => renderToTaskById(task._id)}
-                      // style={{
-                      //   backgroundColor: `${task.isCompleted ? color.colorTask.colorClosed : color.colorTask.colorOpen }`
-                      // }}
-                    >
-                      
-                      <div className="task-field">
-                        <p>{task.title}</p>
-                      </div>
-                      <div className="task-field">
-                        <p>
-                          {res?.data?.getProjects
-                            ?.filter((project) => project._id === task.project)
-                            .map((project) => project.title)}
-                        </p>
-                      </div>
-                      <div className="task-field">
-                      {
-                        
-                          
-                          ancho > 600 ? 
-                          <p>
-                          {res?.data?.getUsers?.filter((userTask) => userTask._id == task.assignedTo).map((userTask) => userTask.email)}
-                        </p> : 
-                        <img src={res?.data?.getUsers?.filter((userTask) => userTask._id == task.assignedTo)?.[0]?.photo || `https://ionicframework.com/docs/img/demos/avatar.svg`} alt="" />
-}
-                      </div>
-                      {ancho > 600 &&
-                      <>
+                ? res?.data?.openTasks
+                    ?.filter((task) =>
+                      selectedProject ? task.project === selectedProject : true
+                    )
+                    .map((task) => (
                       <div
-                        className="task-field"
-                        style={{
-                          height: "100%",
-                          backgroundColor: `${
-                            task.isCompleted
-                              ? color.colorProgressBar.colorClosed
-                              : color.colorProgressBar.colorOpen
-                          }`,
-                        }}
+                        key={task._id}
+                        className="mytask-main"
+                        onClick={() => renderToTaskById(task._id)}
+                        // style={{
+                        //   backgroundColor: `${task.isCompleted ? color.colorTask.colorClosed : color.colorTask.colorOpen }`
+                        // }}
                       >
-                        <p>{task.isCompleted ? "Completed" : "Open"}</p>
+                        <div className="task-field">
+                          <p>{task.title}</p>
+                        </div>
+                        <div className="task-field">
+                          <p>
+                            {res?.data?.getProjects
+                              ?.filter(
+                                (project) => project._id === task.project
+                              )
+                              .map((project) => project.title)}
+                          </p>
+                        </div>
+                        <div className="task-field">
+                          {ancho > 600 ? (
+                            <p>
+                              {res?.data?.getUsers
+                                ?.filter(
+                                  (userTask) => userTask._id == task.assignedTo
+                                )
+                                .map((userTask) => userTask.email)}
+                            </p>
+                          ) : (
+                            <img
+                              src={
+                                res?.data?.getUsers?.filter(
+                                  (userTask) => userTask._id == task.assignedTo
+                                )?.[0]?.photo ||
+                                `https://ionicframework.com/docs/img/demos/avatar.svg`
+                              }
+                              alt=""
+                            />
+                          )}
+                        </div>
+                        {ancho > 600 && (
+                          <>
+                            <div
+                              className="task-field"
+                              style={{
+                                height: "100%",
+                                backgroundColor: `${
+                                  task.isCompleted
+                                    ? color.colorProgressBar.colorClosed
+                                    : color.colorProgressBar.colorOpen
+                                }`,
+                              }}
+                            >
+                              <p>{task.isCompleted ? "Completed" : "Open"}</p>
+                            </div>
+                            <div className="task-field">
+                              <p>{task.comments.length}</p>
+                            </div>
+                          </>
+                        )}
                       </div>
-                      <div className="task-field">
-                        <p>{task.comments.length}</p>
-                      </div>
-                      </>
-                      }
-                    </div>
-                  ))
-                : 
-                // Filtramos las tareas abiertas por el usuario que está validado
-                // para que se muestren solo las suyas
-                res?.data?.openTasks
-                    ?.filter((task) => task.assignedTo == user._id)
+                    ))
+                : // Filtramos las tareas abiertas por el usuario que está validado
+                  // para que se muestren solo las suyas
+                  res?.data?.openTasks
+                    ?.filter(
+                      (task) =>
+                        task.assignedTo == user._id &&
+                        (selectedProject
+                          ? task.project === selectedProject
+                          : true)
+                    )
                     .map((task) => {
                       return (
                         <div
@@ -147,37 +177,43 @@ export const MyTasks = () => {
                             </p>
                           </div>
                           <div className="task-field">
-                            {ancho > 600 ? 
-                            
-                            <p>
-                              {task.assignedTo == user._id
-                                ? user.email
-                                : "No Assigned"}
-                            </p>
-                            :
-                            <img src={!user.photo ? `https://ionicframework.com/docs/img/demos/avatar.svg` : `${user.photo}`} alt={user.email} />
-                            }
+                            {ancho > 600 ? (
+                              <p>
+                                {task.assignedTo == user._id
+                                  ? user.email
+                                  : "No Assigned"}
+                              </p>
+                            ) : (
+                              <img
+                                src={
+                                  !user.photo
+                                    ? `https://ionicframework.com/docs/img/demos/avatar.svg`
+                                    : `${user.photo}`
+                                }
+                                alt={user.email}
+                              />
+                            )}
                           </div>
-                          {ancho > 600 &&
-                          <>
-                          <div
-                            className="task-field"
-                            style={{
-                              height: "100%",
-                              backgroundColor: `${
-                                task.isCompleted
-                                  ? color.colorProgressBar.colorClosed
-                                  : color.colorProgressBar.colorOpen
-                              }`,
-                            }}
-                          >
-                            <p>{task.isCompleted ? "Completed" : "Open"}</p>
-                          </div>
-                          <div className="task-field">
-                            <p>{task.comments.length}</p>
-                          </div>
-                          </>
-                          }
+                          {ancho > 600 && (
+                            <>
+                              <div
+                                className="task-field"
+                                style={{
+                                  height: "100%",
+                                  backgroundColor: `${
+                                    task.isCompleted
+                                      ? color.colorProgressBar.colorClosed
+                                      : color.colorProgressBar.colorOpen
+                                  }`,
+                                }}
+                              >
+                                <p>{task.isCompleted ? "Completed" : "Open"}</p>
+                              </div>
+                              <div className="task-field">
+                                <p>{task.comments.length}</p>
+                              </div>
+                            </>
+                          )}
                         </div>
                       );
                     })}

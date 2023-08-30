@@ -1,6 +1,6 @@
 import "./Task.css";
 import { useEffect, useState } from "react";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { addUserTask, showTaskById } from "../services/API/task.service";
 import {
   useAddUserTaskError,
@@ -39,24 +39,8 @@ export const Task = () => {
     <>
       <div className="task-dashboard">
         
-        {/* {console.log(res)} */}
         <h2>{res?.data?.getProject?.title}</h2>
-        <div
-          className="task-container"
-          // style={{
-          //   backgroundColor: `${
-          //     res?.data?.getTaskById?.isCompleted
-          //       ? color.colorTask.colorClosed
-          //       : color.colorTask.colorOpen
-          //   }`,
-
-          //   boxShadow: `1px 2px 5px ${
-          //     res?.data?.getTaskById?.isCompleted
-          //       ? color.colorProgressBar.colorClosed
-          //       : color.colorProgressBar.colorOpen
-          //   }`,
-          // }}
-        >
+        <div className="task-container">
           
           {res ? (
             <>
@@ -71,7 +55,7 @@ export const Task = () => {
             >
               {res?.data?.getTaskById?.isCompleted ? "Closed task" : "Open task"}
             </div>
-            {console.log(res.data)}
+            {/* {console.log(res.data)} */}
               <div className="task-top">
                 <div className="task-avatar">
                   {res?.data?.getTaskById?.assignedTo ? (
@@ -125,7 +109,7 @@ export const Task = () => {
                 <h2>{res?.data?.getTaskById?.title}</h2>
               </div>
               <div className="task-bottom">
-                <Comments comments={res?.data?.getTaskById?.comments} />
+                <Comments commentsClosed={res?.data?.getTaskById?.isCompleted} />
               </div>
             </>
           ) : (
