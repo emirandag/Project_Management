@@ -9,7 +9,7 @@ import { Navigate } from 'react-router-dom'
 import { Profile } from '../pages/Profile'
 
 export const ChangeEmail = () => {
-    const { user, setUser, userLogin } = useAuth()
+    const { user, setUser, userLogin, userLogout } = useAuth()
     const { handleSubmit, register, reset } = useForm()
     const [res, setRes] = useState({})
     const [resCheck, setResCheck] = useState({})
@@ -38,9 +38,11 @@ export const ChangeEmail = () => {
       useValidateEmailError(resCheck, setResCheck, setValidateEmailOk, user, userLogin)
     }, [resCheck])
 
-    console.log(resCheck);
+    //console.log(resCheck);
     if (validateEmailOk) {
-
+      setResCheck({})
+      userLogout()
+return <Navigate to={"/login"} />
     }
     
   return (

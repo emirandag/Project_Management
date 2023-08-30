@@ -14,7 +14,7 @@ export const useValidateEmailError = (resCheck, setResCheck, setValidateEmailOk,
       
           const dataString = JSON.stringify(dataCustom)
           userLogin(dataString)
-        setValidateEmailOk(true)
+        setValidateEmailOk(() => true)
         Swal.fire({
             icon: "success",
             title: "Validate email and code ok ✅",
