@@ -28,7 +28,7 @@ export const Home = () => {
         <p>If you want to create a task. <Link to="/newtasks"><b>Go to Tasks</b></Link></p>
       </>
       : user && rol == "user" &&
-        <p>If you want to create a task. <Link to="/mytasks"><b>Go to Tasks</b></Link></p>
+        <p>If you want to work with a task. <Link to="/mytasks"><b>Go to Tasks</b></Link></p>
       } 
     </div>
   )

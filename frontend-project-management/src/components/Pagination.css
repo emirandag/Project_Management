@@ -30,6 +30,7 @@
         /* background-color: #ffffff; */
         background-color: #478ac9;
         border-radius: 1rem;
+        color: #ffffff;
     }
 
     && :active {

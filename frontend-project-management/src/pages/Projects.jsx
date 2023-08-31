@@ -23,6 +23,8 @@ export const Projects = () => {
 
             const newUserId = user._id
 
+            console.log(newUserId);
+
             const customFormData = {
                 ...formData,
                 //users: [newUserId],
